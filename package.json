@@ -1,7 +1,7 @@
 {
-  "name": "__BONES_NEEDS_A_NAME__",
+  "name": "dreamscape",
   "version": "0.0.1",
-  "description": "A happy little skeleton.",
+  "description": "3d dreams.",
   "main": "index.js",
   "scripts": {
     "validate": "check-node-version --node '>= 6.7.0'",
@@ -37,6 +37,8 @@
   },
   "homepage": "https://github.com/queerviolet/bones#readme",
   "dependencies": {
+    "aframe": "^0.5.0",
+    "aframe-react": "^3.5.0",
     "axios": "^0.15.2",
     "babel-preset-stage-2": "^6.18.0",
     "bcryptjs": "^2.4.0",
@@ -56,8 +58,8 @@
     "passport-local": "^1.0.0",
     "pg": "^6.1.0",
     "pretty-error": "^2.0.2",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
     "redux": "^3.6.0",
