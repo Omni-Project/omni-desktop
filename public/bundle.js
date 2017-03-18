@@ -13507,6 +13507,10 @@ var _reactDom = __webpack_require__(46);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _Sky = __webpack_require__(322);
+
+var _Sky2 = _interopRequireDefault(_Sky);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13530,7 +13534,44 @@ var VRScene = function (_React$Component) {
       return _react2.default.createElement(
         _aframeReact.Scene,
         null,
-        _react2.default.createElement(_aframeReact.Entity, { geometry: { primitive: 'box' }, material: 'color: red', position: [0, 0, -5] })
+        _react2.default.createElement(_Sky2.default, null),
+        _react2.default.createElement(
+          'a-assets',
+          null,
+          _react2.default.createElement('a-asset-item', { id: 'surprise', src: 'surprise.obj' }),
+          _react2.default.createElement('a-asset-item', { id: 'joy', src: 'Joy.obj' }),
+          _react2.default.createElement('a-asset-item', { id: 'sadness', src: 'sadness.obj' }),
+          _react2.default.createElement('a-asset-item', { id: 'anger', src: 'anger1.obj' }),
+          _react2.default.createElement('a-asset-item', { id: 'fear', src: 'Fear.obj' }),
+          _react2.default.createElement('a-mixin', { id: 'surpriseColor', material: 'color: #ff7afa' }),
+          _react2.default.createElement('a-mixin', { id: 'joyColor', material: 'color: #fff6a5' }),
+          _react2.default.createElement('a-mixin', { id: 'sadnessColor', material: 'color: #a5dcff' }),
+          _react2.default.createElement('a-mixin', { id: 'fearColor', material: 'color: black' }),
+          _react2.default.createElement('a-mixin', { id: 'angerColor', material: 'color: #ff7a7a' })
+        ),
+        _react2.default.createElement(
+          'a-obj-model',
+          { src: '#surprise', position: '0 -2 -7', mixin: 'surpriseColor', scale: '0 0 0' },
+          _react2.default.createElement('a-animation', { attribute: 'scale', to: '2 2 2', easing: 'ease-in-out', direction: 'alternate', dur: '2000',
+            repeat: 'indefinite' })
+        ),
+        _react2.default.createElement(
+          'a-obj-model',
+          { src: '#fear', position: '0 -0.5 -7', scale: '0.5 0.5 0.5', mixin: 'fearColor' },
+          _react2.default.createElement('a-animation', { attribute: 'position', from: '0 -0.5 -7', to: '0 -1.2 -7', easing: 'ease-in-out', direction: 'alternate', dur: '1500',
+            repeat: 'indefinite' })
+        ),
+        _react2.default.createElement(
+          'a-obj-model',
+          { src: '#joy', position: '0 -1 -7', mixin: 'joyColor' },
+          _react2.default.createElement('a-animation', { attribute: 'rotation', to: '360 0 0', easing: 'ease-in-out', direction: 'alternate', dur: '5000',
+            repeat: 'indefinite' })
+        ),
+        _react2.default.createElement('a-obj-model', { src: '#anger', position: '0 -3 -7', mixin: 'angerColor' }),
+        _react2.default.createElement('a-obj-model', { src: '#sadness', position: '0 -6 -7', scale: '0.5 0.5 0.5', mixin: 'sadnessColor' }),
+        _react2.default.createElement('a-entity', { light: 'color:#AFA; intensity: 5', position: '0 -2 -7' }),
+        _react2.default.createElement('a-entity', { light: 'type: ambient; color: #BBB' }),
+        _react2.default.createElement('a-entity', { light: 'type: directional; color: #FFF; intensity: 0', position: '-0.5 1 1' })
       );
     }
   }]);
@@ -113458,6 +113499,32 @@ var ExampleApp = (0, _reactRedux.connect)(function (_ref) {
     _react2.default.createElement(_reactRouter.Route, { path: '/', component: _SpriteScene2.default })
   )
 ), document.getElementById('main'));
+
+/***/ }),
+/* 322 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _aframeReact = __webpack_require__(138);
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  return _react2.default.createElement(_aframeReact.Entity, {
+    geometry: { primitive: 'sphere', radius: 100 },
+    material: { shader: 'flat', color: 'black' },
+    scale: '1 1 -1' });
+};
 
 /***/ })
 /******/ ]);
