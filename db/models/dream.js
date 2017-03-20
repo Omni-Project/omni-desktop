@@ -6,7 +6,7 @@ const user = require('./dream.js')
 
 const Dream = db.define('dreams', {
     title: {
-        type: Sequelize.STRING, 
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
             len: {
@@ -35,7 +35,7 @@ const Dream = db.define('dreams', {
     persona: {
         type: Sequelize.STRING
     },
-    /* logging user's sleep here */
+    /* logging user's sleep here */ // EI: what format are you going to store time in?
     sleepStartTime: {
         type: Sequelize.INTEGER
     },
@@ -45,7 +45,7 @@ const Dream = db.define('dreams', {
 
     /* emotions params here */
     angerVal: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER // EI: are you getting integers back from Indico? Or are you going to
     },
     sadnessVal: {
         type: Sequelize.INTEGER
@@ -60,7 +60,7 @@ const Dream = db.define('dreams', {
         type: Sequelize.INTEGER
     },
 
-    randomize: {
+    randomize: { // EI: "randomVal"?
         type: Sequelize.INTEGER
     }
 
@@ -70,6 +70,7 @@ const Dream = db.define('dreams', {
     }
 });
 
+// EI: what's this meant to do? documentation?
 function setHours(user) {
   user.averageSleep = user.email && user.email.toLowerCase()
   user.sleepDebt = user.email && user.email.toLowerCase()

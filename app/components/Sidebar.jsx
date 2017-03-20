@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router';
+// EI: what are these 3 things doing here? vv
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 import store from '../store'
 import Slider from 'react-slick';
@@ -13,6 +14,7 @@ export default class Sidebar extends Component {
   }
 
   render() {
+    // EI: this is a lot of jsx; could you create sub-components?
     return (
  <div id="wrapper">
 
@@ -47,7 +49,7 @@ export default class Sidebar extends Component {
 
             <div className ="collapse navbar-collapse navbar-ex1-collapse">
                 <ul className ="nav navbar-nav side-nav">
-
+                    {/* EI: could you make a NavItem component? and possibly an array of objects that you could map over to create the appropriate NavItem components? */}
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#dreams"><i className ="fa fa-fw fa-book"></i> Dreams <i className ="fa fa-fw fa-caret-down"></i></a>
                         <ul id="dreams" className ="collapse"> View past Dreams </ul>

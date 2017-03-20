@@ -49,7 +49,9 @@ export default class VRScene extends React.Component {
         <a-entity light="type: directional; color: #FFF; intensity: 0" position="-0.5 1 1"></a-entity>
 
 
-       {/* <Entity
+       {/*
+       // EI: let's get in the habit of not having commented-out code merged into master. look out for it (and console.logs!) when you review each other's PRs.
+       <Entity
 
           geometry='primitive: box'
           material={{color: this.state.color, opacity: 0.6}}
