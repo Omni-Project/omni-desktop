@@ -1,8 +1,12 @@
 'use strict'
 
+const {env} = require('APP')
 const Sequelize = require('sequelize')
 const db = require('APP/db')
 const user = require('./dream.js')
+const indico = require('indico.io');
+indico.apiKey =  env.INDICO_API_KEY;
+
 
 const Dream = db.define('dreams', {
     title: {
@@ -28,59 +32,57 @@ const Dream = db.define('dreams', {
         type: Sequelize.ARRAY(Sequelize.STRING)
     },
     /* tags from user when writing journal */
-    dreamType: {
-        type: Sequelize.STRING
-    },
+    dreamType: Sequelize.STRING,
     /* personas from indico */
-    persona: {
-        type: Sequelize.STRING
-    },
+    persona: Sequelize.STRING,
     /* logging user's sleep here */
-    sleepStartHour: {
-        type: Sequelize.INTEGER
-    },
-    sleepStartMinute: {
-        type: Sequelize.INTEGER
-    },
-    sleepEndHour: {
-        type: Sequelize.INTEGER
-    },
-    sleepEndMinute: {
-        type: Sequelize.INTEGER
-    },
+    sleepStartHour: Sequelize.INTEGER,
+    sleepStartMinute: Sequelize.INTEGER,
+    sleepEndHour: Sequelize.INTEGER,
+    sleepEndMinute: Sequelize.INTEGER,
 
     /* emotions params here */
-    angerVal: {
-        type: Sequelize.INTEGER
-    },
-    sadnessVal: {
-        type: Sequelize.INTEGER
-    },
-    joyVal: {
-        type: Sequelize.INTEGER
-    },
-    fearVal: {
-        type: Sequelize.INTEGER
-    },
-    disgustVal: {
-        type: Sequelize.INTEGER
-    },
+    angerVal: Sequelize.INTEGER,
+    sadnessVal: Sequelize.INTEGER,
+    joyVal: Sequelize.INTEGER,
+    fearVal: Sequelize.INTEGER,
+    surpriseVal: Sequelize.INTEGER,
+    randomizingFactor: Sequelize.INTEGER,
 
-    randomize: {
-        type: Sequelize.INTEGER
-    }
+    totalHoursSlept: Sequelize.INTEGER
 
 }, {
     hooks: {
-        beforeUpdate: setHours
+      beforeCreate: analyzeText
     }
 });
 
-function setHours(user) {
-  user.averageSleep = user.email && user.email.toLowerCase()
-  user.sleepDebt = user.email && user.email.toLowerCase()
+// function setHoursSlept(dream) {
+//   user.averageSleep = user.email && user.email.toLowerCase()
+//   user.sleepDebt = user.email && user.email.toLowerCase()
 
-  return new Promise((resolve, reject) => something )
+//   return new Promise((resolve, reject) => something )
+// }
+
+function analyzeText(dream) {
+    const content = dream.content;
+
+  return indico.keywords(content, {version: 2, top_n: 5})
+    .then((keywords) => dream.keywords = Object.keys(keywords))
+    .then(() => indico.emotion(content))
+    .then((emotions) => {
+        const { anger, joy, fear, sadness, surprise } = emotions;
+        dream.angerVal = Math.round(anger * 100);
+        dream.fearVal = Math.round(fear * 100);
+        dream.joyVal = Math.round(joy * 100);
+        dream.sadnessVal = Math.round(sadness * 100);
+        dream.surpriseVal = Math.round(surprise * 100);
+    })
+    .then(() => indico.personas(content, {top_n: 1}))
+    .then((persona) => dream.persona = Object.keys(persona)[0])
+    .catch(console.error)
 }
+
+
 
 module.exports = Dream;
