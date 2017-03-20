@@ -6,7 +6,19 @@
 
 const User = require('./user')
 const OAuth = require('./oauth')
+const Dream = require('./dream')
+
+User.hasMany(Dream)
+//dream has userId
+//User.getDreams
+//User.setDreams
+
+
+Dream.belongsTo(User)
+//Dream.getUser
+//Dream.setUser
 
 OAuth.belongsTo(User)
 User.hasOne(OAuth)
-module.exports = {User}
+
+module.exports = {User, Dream}
