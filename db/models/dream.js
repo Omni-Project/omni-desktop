@@ -12,8 +12,7 @@ const Dream = db.define('dreams', {
             len: {
                 args: [1, 150],
                 msg: "Please enter a title with at least 1 character but no more than 150."
-            },
-        unique: true
+            }
         }
     },
     content: {
@@ -22,43 +21,39 @@ const Dream = db.define('dreams', {
     },
     isPublic: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: false
     },
     keywords: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
-        defaultValue: null
+        type: Sequelize.ARRAY(Sequelize.STRING)
     },
     
     /* logging user's sleep here */
     sleepStartTime: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
     },
     sleepEndTime: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
     },
 
     /* emotions params here */
     angerVal: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
     },
     sadnessVal: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
     },
     joyVal: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
     },
     fearVal: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
     },
     disgustVal: {
-        type: Sequelize.INTEGER,
-        defaultValue: null
+        type: Sequelize.INTEGER
+    },
+
+    randomize: {
+        type: Sequelize.INTEGER
     }
 
 }, {
