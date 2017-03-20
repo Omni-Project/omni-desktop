@@ -8,7 +8,8 @@ import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
-import SpriteScene from './components/SpriteScene'
+import UserDashboard from './components/UserDashboard'
+import Sidebar from './components/Sidebar'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -25,7 +26,7 @@ const ExampleApp = connect(
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={SpriteScene} />
+      <Route path="/" component={Sidebar} />
     </Router>
   </Provider>,
   document.getElementById('main')
