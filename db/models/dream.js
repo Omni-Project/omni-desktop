@@ -6,7 +6,7 @@ const user = require('./dream.js')
 
 const Dream = db.define('dreams', {
     title: {
-        type: Sequelize.STRING, 
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
             len: {
@@ -28,18 +28,24 @@ const Dream = db.define('dreams', {
         type: Sequelize.ARRAY(Sequelize.STRING)
     },
     /* tags from user when writing journal */
-    tags: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+    dreamType: {
+        type: Sequelize.STRING
     },
     /* personas from indico */
     persona: {
         type: Sequelize.STRING
     },
     /* logging user's sleep here */
-    sleepStartTime: {
+    sleepStartHour: {
         type: Sequelize.INTEGER
     },
-    sleepEndTime: {
+    sleepStartMinute: {
+        type: Sequelize.INTEGER
+    },
+    sleepEndHour: {
+        type: Sequelize.INTEGER
+    },
+    sleepEndMinute: {
         type: Sequelize.INTEGER
     },
 
