@@ -21,23 +21,9 @@ body {
     body {
         margin-top: 50px;
     }
+
 }
 
-#wrapper {
-    align-items: 'left';
-    background: url(../images/nightsky.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
-    overflow: scroll
-}
-
-#page-wrapper {
-    width: 100%;
-    padding: 0;
-}
 
 
 .huge {
@@ -45,17 +31,22 @@ body {
     line-height: normal;
 }
 
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 225px;
-    }
 
-    #page-wrapper {
-        padding: 10px;
-    }
-}
 
 /* Top Navigation */
+
+.navbar-inverse {
+    background-color: #C0B4CA
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+    transition: 0.13s
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: black;
+}
 
 .top-nav {
     padding: 0 15px;
@@ -63,14 +54,14 @@ body {
 
 .top-nav>li {
     display: inline-block;
-    float: left;
 }
 
 .top-nav>li>a {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color:#C0B4CA;
+    color:#fff;
+    transition: 0.13s
 }
 
 .top-nav>li>a:hover,
@@ -78,8 +69,8 @@ body {
 .top-nav>.open>a,
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
-    color: #fff;
-    background-color: #000;
+    color: #000;
+    background-color: #C0B4CA;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -126,6 +117,7 @@ ul.alert-dropdown {
 /* Side Navigation */
 
 @media(min-width:600px) {
+
     .side-nav {
         position: fixed;
         top: 51px;
@@ -134,16 +126,14 @@ ul.alert-dropdown {
         margin-left: -225px;
         border: none;
         border-radius: 0;
-        overflow-y: auto;
-        background-color: #3A3A3A;
         bottom: 0;
-        overflow-x: hidden;
+        overflow: hidden;
+        padding: 1%;
         padding-bottom: 40px;
+        background: url(../images/nightsky.jpg) no-repeat center center fixed;
+        background-size: cover;
     }
 
-    .side-nav>li>a {
-        width: 225px;
-    }
 
     .side-nav li .chartOption:hover,
     .side-nav li .chartOption:active{
@@ -152,21 +142,23 @@ ul.alert-dropdown {
     }
 }
 
-.side-nav>li>ul {
+.side-nav>ul {
     padding: 0;
 }
 
-.side-nav>li>ul>li.chartOption {
+.side-nav a {
     display: block;
-    padding: 10px 15px 10px 38px;
+    padding: 15px 15px 15px 38px;
     text-decoration: none;
     color: #C0B4CA;
 }
 
-.side-nav>li>ul>li.chartOption:hover {
+.side-nav a:hover {
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
 }
+
 
 .logout {
     padding-left: 30px
@@ -191,7 +183,7 @@ ul.alert-dropdown {
     position: absolute;
 }
 
-#chartHeading {
+/*#chartHeading {
     text-align: center;
     margin-top: 5%;
     color: white;
@@ -209,5 +201,37 @@ ul.alert-dropdown {
     margin-top: -10%;
     margin-left: -5%;
 
+}*/
+
+#main-content {
+    margin-left: 225px;
+    padding: 3% 5%;
+    background-color: #242424;
+    height: 100vh;
+    width: 1040px;
 }
 
+#main-content h1 {
+    color: #a6a6a6
+}
+
+/* ALL DREAMS */
+.dream-grid {
+    width: 100%;
+}
+.dream-box {
+    height: 200px;
+    width: 400px;
+    background-color: #3A3A3A;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 15px;
+}
+
+.dream-box h3 {
+    color: #C0B4CA
+}
+
+.dream-box p {
+    color: #efefef
+}

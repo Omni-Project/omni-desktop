@@ -2,31 +2,28 @@
 import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
-import {connect, Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 
 import store from './store'
-import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
+import AddDreamForm from './components/AddDreamForm'
 import UserDashboard from './components/UserDashboard'
-import Sidebar from './components/Sidebar'
+import AppContainer from './components/AppContainer'
 
-const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-) (
-  ({ user, children }) =>
-    <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav>
-      {children}
-    </div>
-)
+import DreamsContainer from './containers/DreamsContainer'
+import AddDreamContainer from './containers/AddDreamContainer'
+
+
 
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Sidebar} />
+    <Route path="/" component={AppContainer} >
+      <Route path="dreams" component={DreamsContainer}/>
+      <Route path="add" component={AddDreamContainer} />
+
+    </Route>
     </Router>
   </Provider>,
   document.getElementById('main')
