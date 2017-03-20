@@ -47,23 +47,27 @@ const Dream = db.define('dreams', {
     joyVal: Sequelize.INTEGER,
     fearVal: Sequelize.INTEGER,
     surpriseVal: Sequelize.INTEGER,
-    randomizingFactor: Sequelize.INTEGER,
-
-    totalHoursSlept: Sequelize.INTEGER
+    randomizingFactor: Sequelize.INTEGER
 
 }, {
+    getterMethods: {
+        totalHoursSlept: function() {
+            const endHour = (this.sleepEndHour * 60) + this.sleepEndMinute;
+            const startHour = (this.sleepStartHour * 60) + this.sleepStartMinute;
+
+            let unformattedTime = startHour < endHour ? endHour - startHour : (24*60 - startHour) + endHour;
+            return Math.floor(unformattedTime / 60) + ":" + (unformattedTime % 60)
+        }
+    },
     hooks: {
       beforeCreate: analyzeText
     }
 });
 
-// function setHoursSlept(dream) {
-//   user.averageSleep = user.email && user.email.toLowerCase()
-//   user.sleepDebt = user.email && user.email.toLowerCase()
+Dream.findById(9)
+.then(dream => console.log(dream.totalHoursSlept))
 
-//   return new Promise((resolve, reject) => something )
-// }
-
+//call to indico API
 function analyzeText(dream) {
     const content = dream.content;
 
