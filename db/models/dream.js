@@ -23,10 +23,18 @@ const Dream = db.define('dreams', {
         type: Sequelize.BOOLEAN,
         defaultValue: false
     },
+    /* keywords from indico */
     keywords: {
         type: Sequelize.ARRAY(Sequelize.STRING)
     },
-    
+    /* tags from user when writing journal */
+    tags: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+    },
+    /* personas from indico */
+    persona: {
+        type: Sequelize.STRING
+    },
     /* logging user's sleep here */
     sleepStartTime: {
         type: Sequelize.INTEGER
