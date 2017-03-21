@@ -1,22 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router'
 
+const activeStyle = {backgroundColor:'rgba(225, 225, 225, 0.2)', color: '#fff', borderRadius: '4px'}
 
 export default function Sidebar () {
 
 return (
     <div className="side-nav">
+        <div className="side-nav-overlay">
         <ul>
             <li>
-                <span data-toggle="collapse" data-target="#dreams">
-                    <Link to="/dreams">Dreams</Link>
-                </span>
-                <ul id="dreams" className="collapse">View past dreams</ul>
+                <Link to="/dreams" activeStyle={activeStyle}>Dreams</Link>
             </li>
 
             <li>
                 <span data-toggle="collapse" data-target="#analytics">
-                    <Link to="">Analytics</Link>
+                    <Link to="/analytics">Analytics</Link>
                 </span>
                 <ul id="analytics" className="collapse">View different charts</ul>
             </li>
@@ -49,6 +48,7 @@ return (
                 </div>
             </li>
         </ul>
+        </div>
     </div>
 )
 

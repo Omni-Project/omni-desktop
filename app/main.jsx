@@ -8,11 +8,12 @@ import store from './store'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import AddDreamForm from './components/AddDreamForm'
+import AllDreams from './components/AllDreams'
 import UserDashboard from './components/UserDashboard'
-import AppContainer from './components/AppContainer'
 
+import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
-import AddDreamContainer from './containers/AddDreamContainer'
+
 
 
 
@@ -20,8 +21,11 @@ render (
   <Provider store={store}>
     <Router history={browserHistory}>
     <Route path="/" component={AppContainer} >
-      <Route path="dreams" component={DreamsContainer}/>
-      <Route path="add" component={AddDreamContainer} />
+      <Route path="dreams" component={DreamsContainer}>
+        <IndexRedirect to="/dreams/all" />
+        <Route path="all" component={AllDreams} />
+        <Route path="add" component={AddDreamForm} />
+      </Route>
 
     </Route>
     </Router>

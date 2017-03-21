@@ -1,16 +1,22 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import SelectField from 'material-ui/SelectField';
-import Checkbox from 'material-ui/Checkbox';
-import MenuItem from 'material-ui/MenuItem';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, MuiThemeProvider } from 'material-ui';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import TimePicker from 'material-ui/TimePicker'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+
+const muiTheme = getMuiTheme({
+   palette: {
+    primary1Color: '#a974d5',
+    accent1Color: '#a974d5',
+    textColor: '#fff',
+    canvasColor: 'rgb(48, 48, 48)',
+    borderColor: "#999",
+    disabledColor: '#999',
+    pickerHeaderColor: '#222',
+    clockCircleColor: '#222'
+  }
+})
 
 export default class AddDreamForm extends React.Component {
   constructor() {
@@ -23,37 +29,32 @@ export default class AddDreamForm extends React.Component {
       dreamType: null,
       isPublic: false
     }
-    this.handleTextChange = this.handleTextChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeTimePicker = this.handleChangeTimePicker.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
+    this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.handleCheckChange = this.handleCheckChange.bind(this);
   }
 
-  handleTextChange (e, field, v) {
-    this.setState({[field]: e.target.value})
+  handleChange (e, field, v) {
+    this.setState({[field]: e.target.value || v})
   }
 
-  handleChange(e, i, value) {
-    this.setState({dreamType: value})
-  }
-
-  handleCheck(e) {
+  handleCheckChange(e) {
     this.setState({isPublic: !this.state.isPublic})
   }
 
-  handleChangeTimePicker (e, date, time) {
+  handleTimeChange (e, date, time) {
     this.setState({[time]: date});
   }
 
 render () {
   return (
-  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-  <div>
+  <MuiThemeProvider muiTheme={muiTheme}>
+  <div style={{width: '600px'}}>
     <h1>Add a Dream</h1>
     <TextField
       floatingLabelText="Title"
       fullWidth={true}
-      onChange={(e) => this.handleTextChange(e, 'title')}
+      onChange={(e) => this.handleChange(e, 'title')}
     /><br />
 
     <TextField
@@ -61,12 +62,13 @@ render () {
       multiLine={true}
       fullWidth={true}
       rows={3}
-      onChange={(e) => this.handleTextChange(e, 'content')}
-    /><br />
+      onChange={(e) => this.handleChange(e, 'content')}
+    />
+    <br />
     <SelectField
       floatingLabelText="Type of Dream"
       value={this.state.dreamType}
-      onChange={this.handleChange}
+      onChange={(e, i, v) => this.handleChange(e, 'dreamType', v)}
     >
       <MenuItem value="Daydream" primaryText="Daydream" />
       <MenuItem value="Lucid Dream" primaryText="Lucid Dream" />
@@ -78,19 +80,19 @@ render () {
     <TimePicker
       format="ampm"
       hintText="Sleep Start"
-      onChange={(e, date) => this.handleChangeTimePicker(e, date, 'timeStart')}
+      onChange={(e, date) => this.handleTimeChange(e, date, 'timeStart')}
     />
     <br />
     <TimePicker
       format="ampm"
       hintText="Sleep End"
-      onChange={(e, date) => this.handleChangeTimePicker(e, date, 'timeEnd')}
+      onChange={(e, date) => this.handleTimeChange(e, date, 'timeEnd')}
     />
     <br />
     <Checkbox
       label="Make this public?"
       labelPosition="left"
-      onCheck={this.handleCheck}
+      onCheck={this.handleCheckChange}
     />
     <br />
     <RaisedButton label="Save" primary={true} onTouchTap={() => this.props.handleSubmit(this.state)} />
