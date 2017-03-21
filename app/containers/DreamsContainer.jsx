@@ -6,9 +6,9 @@ export default connect(null,
   (dispatch) => {
     return {
       handleSubmit: function(state) {
-        const { title, content, timeStart, timeEnd, dreamType, isPublic } = state
+        const { title, content, timeStart, timeEnd, dreamType, isPublic, date } = state
 
-        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic))
+        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date))
       }
     }
   }

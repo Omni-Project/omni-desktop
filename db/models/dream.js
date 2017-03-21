@@ -40,6 +40,7 @@ const Dream = db.define('dreams', {
     sleepStartMinute: Sequelize.INTEGER,
     sleepEndHour: Sequelize.INTEGER,
     sleepEndMinute: Sequelize.INTEGER,
+    date: Sequelize.DATEONLY,
 
     /* emotions params here */
     angerVal: Sequelize.INTEGER,

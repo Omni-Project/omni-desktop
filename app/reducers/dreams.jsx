@@ -14,19 +14,14 @@ export const authenticated = user => ({
   type: AUTHENTICATED, user
 })
 
-export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic) =>
+export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date) =>
   dispatch => {
     const sleepStartHour = timeStart.getHours()
     const sleepStartMinute = timeStart.getMinutes()
     const sleepEndHour = timeEnd.getHours()
     const sleepEndMinute = timeEnd.getMinutes()
-
-
-    axios.post('/api/dreams/', {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic})
-      // .then(() => dispatch(whoami()))
-      // .catch(() => dispatch(whoami()))
-
-
+    console.log('DATE', date)
+    axios.post('/api/dreams/', {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
   }
 
 
