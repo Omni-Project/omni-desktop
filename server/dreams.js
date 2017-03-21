@@ -11,7 +11,7 @@ We can use req.user.id inside these.
 */
 module.exports = require('express').Router()
   .get('/:id', (req, res, next) => {
-    Dream.findbyId(req.params.id)
+    Dream.findById(req.params.id)
     .then(data => res.send(data))
     .catch(next)
   })
