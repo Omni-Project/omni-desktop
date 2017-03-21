@@ -20,7 +20,7 @@ export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType,
     const sleepStartMinute = timeStart.getMinutes()
     const sleepEndHour = timeEnd.getHours()
     const sleepEndMinute = timeEnd.getMinutes()
-    console.log('DATE', date)
+
     axios.post('/api/dreams/', {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
   }
 

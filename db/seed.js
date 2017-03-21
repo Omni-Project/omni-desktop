@@ -18,6 +18,7 @@ const seedDreams = () => db.Promise.map([
   sleepStartMinute: 59,
   sleepEndHour: 7,
   sleepEndMinute: 59,
+  date: '2017-2-14',
   randomizingFactor: 60,
   user_id: 1},
   {title: 'Carnival of Terror',
@@ -28,6 +29,7 @@ const seedDreams = () => db.Promise.map([
   sleepStartMinute: 49,
   sleepEndHour: 8,
   sleepEndMinute: 8,
+  date: '2017-1-02',
   randomizingFactor: 60,
   user_id: 2},
   {title: 'Good Dream',
@@ -38,6 +40,7 @@ const seedDreams = () => db.Promise.map([
   sleepStartMinute: 39,
   sleepEndHour: 6,
   sleepEndMinute: 7,
+  date: '2017-3-01',
   randomizingFactor: 60,
   user_id: 3},
   {title: 'Honeybee Spinner',
@@ -49,6 +52,7 @@ const seedDreams = () => db.Promise.map([
   sleepEndHour: 7,
   sleepEndMinute: 18,
   randomizingFactor: 60,
+  date: '2017-1-30',
   user_id: 4},
   {title: 'Peach Creature',
   content: "The creature I am seeing has peach colored skin, is bald, and it’s back legs fold inward at the knees. It uses them as sort of a catapult which enables it to launch itself long distances in a single bound. It’s face is demonic looking with small eyes, a wide stretching mouth with big jagged looking teeth. The scenery is a glowing red in the night sky, I am in a village with no lights anywhere to be seen. The creature enters the village.. the next thing I remember is seeing a baby held within the creatures short front legs. The creature then continues going to every house in the village and repeating this till every baby in the village has perished, the creature stained blood red when finished. After this, I remember perceiving the village as if I were laying down on the ground outside, on my back staring into the red night sky. A woman walks into my view.",
@@ -59,6 +63,7 @@ const seedDreams = () => db.Promise.map([
   sleepEndHour: 8,
   sleepEndMinute: 31,
   randomizingFactor: 60,
+  date: '2016-12-14',
   user_id: 5}
 ], dream => db.model('dreams').create(dream))
 
