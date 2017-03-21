@@ -1,13 +1,18 @@
 'use strict'
 
 const db = require('APP/db')
-const Dreams = db.model('dreams')
+const Dream = db.model('dreams')
 
 
 // routes to api/dreams
 module.exports = require('express').Router()
+  .get('/', (req, res, next) => {
+    Dream.findAll()
+    .then(data => res.send(data))
+    .catch(next)
+  })
 	.post('/', (req, res, next) => {
-    Dreams.create(req.body)
+    Dream.create(req.body)
     .then(data => res.send(data))
     .catch(next)
   })
