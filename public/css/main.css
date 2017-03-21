@@ -5,31 +5,11 @@
  */
 
 /* Global Styles */
-
 body {
-    margin-top: 100px;
-    background: url(../images/background.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background-color: #242424;
+    padding-top: 51px
 }
 
-
-
-@media(min-width:768px) {
-    body {
-        margin-top: 50px;
-    }
-
-}
-
-
-
-.huge {
-    font-size: 50px;
-    line-height: normal;
-}
 
 
 
@@ -41,7 +21,7 @@ body {
 
 .navbar-inverse .navbar-brand {
     color: white;
-    transition: 0.13s
+    transition: 0.25s
 }
 
 .navbar-inverse .navbar-brand:hover {
@@ -52,16 +32,12 @@ body {
     padding: 0 15px;
 }
 
-.top-nav>li {
-    display: inline-block;
-}
-
 .top-nav>li>a {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
     color:#fff;
-    transition: 0.13s
+    transition: 0.25s
 }
 
 .top-nav>li>a:hover,
@@ -85,91 +61,50 @@ body {
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
-.top-nav>.open>.dropdown-menu>li>a {
-    white-space: normal;
-}
 
-ul.message-dropdown {
-    padding: 0;
-    max-height: 250px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-li.message-preview {
-    width: 275px;
-    border-bottom: 1px solid rgba(0,0,0,.15);
-}
-
-li.message-preview>a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-li.message-footer {
-    margin: 5px 0;
-}
-
-ul.alert-dropdown {
-    width: 200px;
-}
 
 /* Side Navigation */
 
-@media(min-width:600px) {
-
-    .side-nav {
-        position: fixed;
-        top: 51px;
-        left: 225px;
-        width: 225px;
-        margin-left: -225px;
-        border: none;
-        border-radius: 0;
-        bottom: 0;
-        overflow: hidden;
-        padding: 1%;
-        padding-bottom: 40px;
-        background: url(../images/nightsky.jpg) no-repeat center center fixed;
-        background-size: cover;
-    }
-
-
-    .side-nav li .chartOption:hover,
-    .side-nav li .chartOption:active{
-        outline: none;
-        background-color: #000 !important;
-    }
+.side-nav {
+    position: fixed;
+    width: 225px;
+    top: 51px;
+    border: none;
+    bottom: 0;
+    overflow: hidden;
+    background: url(../images/nightsky.jpg) center;
+    background-size: cover;
 }
 
-.side-nav>ul {
+.side-nav-overlay {
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.side-nav-overlay>ul {
     padding: 0;
+    list-style: none
 }
 
 .side-nav a {
     display: block;
-    padding: 15px 15px 15px 38px;
+    padding: 15px 15px;
     text-decoration: none;
     color: #C0B4CA;
+    transition: 0.25s
 }
 
-.side-nav a:hover {
+.side-nav a:hover, .side-nav a:active, .side-nav a:focus  {
     color: #fff;
-    cursor: pointer;
-    text-decoration: none;
+    background-color:rgba(225, 225, 225, 0.2);
+    border-radius: 4px
 }
 
 
-.logout {
-    padding-left: 30px
-}
 
-.logout:hover,
-.logout:focus {
-    cursor: pointer
-}
-
-.loginContainer {
+/*.loginContainer {
     opacity: 0.85;
     margin-top: 50%;
     -webkit-box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
@@ -181,7 +116,7 @@ ul.alert-dropdown {
     top: 250px;
     left: 50%;
     position: absolute;
-}
+}*/
 
 /*#chartHeading {
     text-align: center;
@@ -205,14 +140,11 @@ ul.alert-dropdown {
 
 #main-content {
     margin-left: 225px;
-    padding: 3% 5%;
-    background-color: #242424;
-    height: 100vh;
-    width: 1040px;
+    padding: 30px 55px;
 }
 
 #main-content h1 {
-    color: #a6a6a6
+    color: #b4d4ee
 }
 
 /* ALL DREAMS */

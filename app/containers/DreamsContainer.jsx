@@ -1,16 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import AllDreams from '../components/AllDreams'
+import { receiveDreamEntry } from '../reducers/dreams'
 
-export default connect()(function(props) {
+export default connect(null,
+  (dispatch) => {
+    return {
+      handleSubmit: function(state) {
+        const { title, content, timeStart, timeEnd, dreamType, isPublic } = state
 
-    return (
-      <div>
-        <h1>Dreams</h1>
-        <button><Link to="/add">Add a Dream</Link></button>
-        <AllDreams />
-      </div>
-      )
+        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic))
+      }
+    }
   }
-)
+)(function DreamsContainer(props) {
+  const propsToPass = {
+    handleSubmit: props.handleSubmit
+  }
+
+  return (
+    <div>
+      { props.children && React.cloneElement(props.children, propsToPass) }
+    </div>
+    )
+})

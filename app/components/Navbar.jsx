@@ -15,20 +15,20 @@ export default function Navbar() {
           </div>
 
           <div className ="collapse navbar-collapse navbar-ex1-collapse">
-          <ul className ="nav navbar-right top-nav">
-              <li className ="dropdown">
-                  <a href="#" className ="dropdown-toggle" data-toggle="dropdown">FIRST NAME <b className ="caret"></b></a>
-                  <ul className ="dropdown-menu">
-                      <li>
-                          <a href="#">Settings</a>
-                      </li>
-                      <li className ="divider"></li>
-                      <li>
-                          <p className="logout">Logout</p>
-                      </li>
-                  </ul>
-              </li>
-          </ul>
+            <ul className ="nav navbar-right top-nav">
+                <li className ="dropdown">
+                    <a href="#" className ="dropdown-toggle" data-toggle="dropdown">FIRST NAME <b className ="caret"></b></a>
+                    <ul className ="dropdown-menu">
+                        <li>
+                            <a href="#">Settings</a>
+                        </li>
+                        <li className ="divider"></li>
+                        <li>
+                            <a href="#">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
           </div>
 
       </nav>
