@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router'
 import { Grid, Row, Col } from 'react-bootstrap'
 
 export default function() {
   return (
+    <div>
+    <h1>Dreams</h1>
+    <Link to="/dreams/add">Add a Dream</Link>
     <Grid className="dream-grid">
     <Row className="show-grid">
       <Col xs={12} md={6} className="dream-box" >
@@ -20,5 +24,6 @@ export default function() {
     </Row>
 
   </Grid>
+  </div>
   )
 }

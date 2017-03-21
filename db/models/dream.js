@@ -64,8 +64,6 @@ const Dream = db.define('dreams', {
     }
 });
 
-Dream.findById(9)
-.then(dream => console.log(dream.totalHoursSlept))
 
 //call to indico API
 function analyzeText(dream) {
