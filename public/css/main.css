@@ -164,6 +164,16 @@ body {
     color: #C0B4CA
 }
 
+.dream-box h5 {
+    color: #9c9a9a
+}
+
 .dream-box p {
     color: #efefef
 }
+
+.dream-box .dream-type {
+    color: #9c9a9a;
+    font-style: italic
+}
+
