@@ -15,6 +15,7 @@ import UserDashboard from './components/UserDashboard'
 import SingleDream from './components/SingleDream'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
+import AnalyticsContainer from './containers/AnalyticsContainer'
 
 function onSingleDreamEnter(nextRouterState){
   const dreamId = nextRouterState.params.id
@@ -38,6 +39,7 @@ render (
         <Route path="add" component={AddDreamForm} />
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter}/>
       </Route>
+      <Route path="analytics" component={AnalyticsContainer} />
 
     </Route>
     </Router>
