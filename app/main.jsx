@@ -1,10 +1,11 @@
 'use strict'
 import React from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
+import {Router, Route, IndexRedirect, IndexRoute, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 
 import store from './store'
+
 import {fetchAllDreams, fetchSingleDream} from './reducers/dreams'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
@@ -21,14 +22,20 @@ function onSingleDreamEnter(nextRouterState){
   store.dispatch(fetchSingleDream(dreamId))
 }
 
+function onDreamsEnter(){
+  //load all dreams on enter
+  store.dispatch(fetchAllDreams())
+}
+
 
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
     <Route path="/" component={AppContainer} >
-      <Route path="dreams" component={DreamsContainer}>
+      <IndexRedirect to="/dreams" />
+      <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
-        <Route path="all" component={AllDreams} />
+        <Route path="all" component={AllDreams} onEnter={onDreamsEnter} />
         <Route path="add" component={AddDreamForm} />
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter}/>
       </Route>
