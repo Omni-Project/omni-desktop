@@ -5,12 +5,10 @@ import { Grid, Row, Col, bootstrapUtils } from 'react-bootstrap'
 import SpriteScene from './SpriteScene'
 
 export default (props) => {
-  console.log(props)
   const dream = props.selectedDream
   const date = new Date(dream.date)
   const locale = "en-us"
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-  console.log(dream)
   return (
     <div>
       <Grid className="dream-grid">

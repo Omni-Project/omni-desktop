@@ -48,18 +48,18 @@ export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType,
     }).catch(console.error)
   }
 
-export const fetchAllDreams = () =>
+export const fetchAllDreams = (userId) =>
   dispatch => {
-    axios.get('/api/dreams/')
+    axios.get(`/api/dreams/user/${userId}`)
     .then(res => res.data)
     .then(dreams => {
       dispatch(getDreams(dreams))
     }).catch(console.error)
   }
 
-export const fetchSingleDream = (id) =>
+export const fetchSingleDream = (userId, id) =>
   dispatch => {
-    axios.get(`/api/dreams/${id}`)
+    axios.get(`/api/dreams/user/${userId}/${id}`)
     .then(res => res.data)
     .then(dream => {
       dispatch(selectDream(dream))
