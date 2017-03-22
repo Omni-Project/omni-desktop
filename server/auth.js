@@ -1,7 +1,7 @@
 const app = require('APP'), {env} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
-
+const jwt = require('jsonwebtoken')
 const User = require('APP/db/models/user')
 const OAuth = require('APP/db/models/oauth')
 const auth = require('express').Router()
@@ -122,7 +122,37 @@ passport.use(new (require('passport-local').Strategy) (
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
-auth.post('/login/local', passport.authenticate('local', { successRedirect: '/', }))
+auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' }))
+
+//POST request for mobile authentication which does not user sessions.
+//Generates a JWT to be stored on the app and authenticate future requests.
+auth.post('/login/mobile', (req, res, next) => {
+  const email = req.body.username
+  const password = req.body.password
+  //find user
+   User.findOne({where: {email}})
+    .then(user => {
+      if (!user) {
+        res.status(401).send('Login incorrect')
+      }
+      //check password
+      return user.authenticate(password)
+        .then(ok => {
+          if (!ok) {
+            res.status(401).send('Login incorrect')
+          }
+          //once user is authenticated, issue a token.
+          const token = jwt.sign(user, env.JWT_SECRET, {
+            expiresIn: "30d" // expires in 30 days
+          });
+          //add token to found user
+          user.token = token;
+          //send user
+          res.send(user)
+        })
+    })
+    .catch(next)
+})
 
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider
