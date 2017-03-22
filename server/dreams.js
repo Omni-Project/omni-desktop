@@ -17,6 +17,8 @@ module.exports = require('express').Router()
   })
   .get('/:id', (req, res, next) => {
     Dream.findById(req.params.id)
+    .then(data => res.send(data))
+    .catch(next)
   })
 	.post('/', (req, res, next) => {
     Dream.create(req.body)

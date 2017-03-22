@@ -1,38 +1,38 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router'
-import { Grid, Row, Col, Panel } from 'react-bootstrap'
+import { Grid, Row, Col, bootstrapUtils } from 'react-bootstrap'
+import SpriteScene from './SpriteScene'
 
-
-const SingleDream = (props) => {
-  console.log('PROPS',props)
-  const dream = props.dream
-  const date = new Date(2017,3,21) //CHANGE TO dream.date after we merge the updated model.
+export default (props) => {
+  console.log(props)
+  const dream = props.selectedDream
+  const date = new Date(dream.date)
   const locale = "en-us"
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-  const footer = "Some footer"
-
+  console.log(dream)
   return (
     <div>
-    <Grid className="dream-grid">
-    <Row className="show-grid">
-      <Col xs={12} md={8} className="dream-box" >
-      {dream &&
-        <Panel
-        header={<h3>{date.toLocaleString(locale, options)} | {dream.title}</h3>}
-        footer={footer}>
-          {dream.content}
-        </Panel>
-      }
-      </Col>
-    </Row>
-  </Grid>
+      <Grid className="dream-grid">
+        <Row className="show-grid">
+          <Col xs={12} md={8} className="single-dream">
+            <h5>{date.toLocaleString(locale, options)}</h5>
+            <h3>{dream.title}</h3>
+            <p>{dream.content}</p>
+            <p className="dream-type">{dream.dreamType}</p>
+          </Col>
+          <Col xs={12} md={3} className="single-dream">
+            <h4>Dream Type</h4>
+            <p>{dream.dreamType}</p>
+            <h4>Keywords</h4>
+            <ul>
+              {dream.keywords && dream.keywords.map(word => <li key={word}>{word}</li>)}
+            </ul>
+            <h4>Dominant Persona</h4>
+            <p>{dream.persona}</p>
+          </Col>
+        </Row>
+    </Grid>
   </div>
   )
 }
-
-export default connect ((state) => {
-  return {
-    dream: state.dreams.selectedDream
-  }
-})(SingleDream)

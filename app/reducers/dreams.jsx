@@ -9,14 +9,14 @@ const GET_SINGLE_DREAM = 'GET_SINGLE_DREAM'
 //REDUCER
 
 const initialState={
-  dreams: [],
+  list: [],
   selectedDream: {}
 }
 const reducer = (state=initialState, action) => {
   const newState = Object.assign({}, state)
   switch(action.type) {
   case GET_DREAMS:
-    newState.dreams = action.dreams
+    newState.list = action.dreams
     return newState
   case GET_SINGLE_DREAM:
     newState.selectedDream = action.dream

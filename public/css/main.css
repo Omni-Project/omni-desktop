@@ -160,20 +160,42 @@ body {
     padding: 15px;
 }
 
-.dream-box h3 {
+.dream-box h3, .single-dream h3 {
     color: #C0B4CA
 }
 
-.dream-box h5 {
+.dream-box h5, .single-dream, h5 {
     color: #9c9a9a
 }
 
-.dream-box p {
+.dream-box p, .single-dream p {
     color: #efefef
 }
 
-.dream-box .dream-type {
+.dream-box .dream-type, .single-dream .dream-type {
     color: #9c9a9a;
     font-style: italic
 }
+
+.single-dream {
+    background-color: #3A3A3A;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 15px;
+}
+
+.single-dream h4 {
+    color: #b4d4ee
+}
+
+.sprite-view {
+    height: 300px;
+    width: 300px
+}
+
+.full-wh {
+    height: 100%;
+    width: 100%
+}
+
 

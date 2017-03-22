@@ -18,7 +18,6 @@ import DreamsContainer from './containers/DreamsContainer'
 
 function onSingleDreamEnter(nextRouterState){
   const dreamId = nextRouterState.params.id
-  console.log('dreamId', dreamId)
   store.dispatch(fetchSingleDream(dreamId))
 }
 
