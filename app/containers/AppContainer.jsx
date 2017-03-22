@@ -24,7 +24,7 @@ export default connect(
       { props.user ?
       <div>
         <Navbar user={props.user} handleLogout={props.handleLogout}/>
-        <Sidebar />
+        <Sidebar user={props.user} />
         <div id="main-content">
         { props.children && React.cloneElement(props.children, props) }
         </div>

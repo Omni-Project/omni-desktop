@@ -18,12 +18,8 @@ import DreamsContainer from './containers/DreamsContainer'
 
 function onSingleDreamEnter(nextRouterState){
   const dreamId = nextRouterState.params.id
-  store.dispatch(fetchSingleDream(dreamId))
-}
-
-function onDreamsEnter(){
-  //load all dreams on enter
-  store.dispatch(fetchAllDreams())
+  const user=store.getState().auth
+  store.dispatch(fetchSingleDream(user.id,dreamId))
 }
 
 
@@ -34,7 +30,7 @@ render (
       <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
-        <Route path="all" component={AllDreams} onEnter={onDreamsEnter} />
+        <Route path="all" component={AllDreams} />
         <Route path="add" component={AddDreamForm} />
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter}/>
       </Route>

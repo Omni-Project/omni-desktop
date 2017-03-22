@@ -7,7 +7,8 @@ import {browserHistory} from 'react-router'
 export default connect(
   (state) => {
     return {
-      dreams: state.dreams
+      dreams: state.dreams,
+      user: state.auth
     }
   },
   (dispatch) => {
@@ -23,7 +24,8 @@ export default connect(
   const propsToPass = {
     handleSubmit: props.handleSubmit,
     dreams: props.dreams.list,
-    selectedDream: props.dreams.selectedDream
+    selectedDream: props.dreams.selectedDream,
+    userId: props.user.id
   }
 
   return (
