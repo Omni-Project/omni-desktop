@@ -8,7 +8,7 @@ export default (props) => {
   const locale = "en-us"
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
   return (
-    <Link to={`/api/dreams/${dream.id}`}>
+    <Link to={`/dreams/${dream.id}`}>
       <Col xs={12} md={6} className="dream-box" >
           <h5>{date.toLocaleString(locale, options)}</h5>
           <h3>{dream.title}</h3>

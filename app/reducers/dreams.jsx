@@ -4,18 +4,33 @@ import {browserHistory} from 'react-router'
 
 //CONSTANTS
 const GET_DREAMS = 'GET_DREAMS'
+const GET_SINGLE_DREAM = 'GET_SINGLE_DREAM'
 
 //REDUCER
-const reducer = (state=[], action) => {
+
+const initialState={
+  list: [],
+  selectedDream: {}
+}
+const reducer = (state=initialState, action) => {
+  const newState = Object.assign({}, state)
   switch(action.type) {
   case GET_DREAMS:
-    return action.dreams
+    newState.list = action.dreams
+    return newState
+  case GET_SINGLE_DREAM:
+    newState.selectedDream = action.dream
+    return newState
   }
   return state
 }
 //ACTION CREATORS
 export const getDreams = dreams => ({
   type: GET_DREAMS, dreams
+})
+
+export const selectDream = dream => ({
+  type: GET_SINGLE_DREAM, dream
 })
 
 export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date) =>
@@ -28,7 +43,6 @@ export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType,
     .then(res => res.data)
     .then(dream => {
         const dreams = store.getState().dreams
-        console.log('NEW DREAMS',[...dreams, dream])
         dispatch(getDreams([...dreams, dream]))
         browserHistory.push('/dreams/all')
     }).catch(console.error)
@@ -43,5 +57,13 @@ export const fetchAllDreams = () =>
     }).catch(console.error)
   }
 
+export const fetchSingleDream = (id) =>
+  dispatch => {
+    axios.get(`/api/dreams/${id}`)
+    .then(res => res.data)
+    .then(dream => {
+      dispatch(selectDream(dream))
+    }).catch(console.error)
+  }
 
 export default reducer

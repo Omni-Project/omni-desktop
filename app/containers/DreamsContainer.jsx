@@ -22,7 +22,8 @@ export default connect(
 )(function DreamsContainer(props) {
   const propsToPass = {
     handleSubmit: props.handleSubmit,
-    dreams: props.dreams
+    dreams: props.dreams.list,
+    selectedDream: props.dreams.selectedDream
   }
 
   return (

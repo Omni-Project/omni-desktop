@@ -5,9 +5,18 @@ const Dream = db.model('dreams')
 
 
 // routes to api/dreams
+/*
+Need to add user ids and a self check on the get routes!
+We can use req.user.id inside these.
+*/
 module.exports = require('express').Router()
   .get('/', (req, res, next) => {
     Dream.findAll()
+    .then(data => res.send(data))
+    .catch(next)
+  })
+  .get('/:id', (req, res, next) => {
+    Dream.findById(req.params.id)
     .then(data => res.send(data))
     .catch(next)
   })
@@ -16,4 +25,5 @@ module.exports = require('express').Router()
     .then(data => res.send(data))
     .catch(next)
   })
+
 

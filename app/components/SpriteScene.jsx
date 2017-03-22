@@ -7,7 +7,7 @@ import Sky from './Sky'
 export default class VRScene extends React.Component {
   render () {
     return (
-      <Scene>
+      <Scene className="sprite-view">
         <Sky />
 
         <a-assets>
@@ -47,23 +47,6 @@ export default class VRScene extends React.Component {
 
         <a-entity light="type: ambient; color: #BBB"></a-entity>
         <a-entity light="type: directional; color: #FFF; intensity: 0" position="-0.5 1 1"></a-entity>
-
-
-       {/* <Entity
-
-          geometry='primitive: box'
-          material={{color: this.state.color, opacity: 0.6}}
-          position='0 -0.5 -3'
-          rotation="0 45 45"
-          onClick={this.changeColor.bind(this)}>
-          <a-animation attribute="position" to='0 0 -3' easing="ease-in-out" direction="alternate" dur="2000"
-      repeat="indefinite"></a-animation>
-      <a-animation attribute="rotation" to='360 0 0' easing="ease-in-out" direction="alternate" dur="5000"
-      repeat="indefinite"></a-animation>
-      <a-animation attribute="color" to='blue' easing="ease-in-out" direction="alternate" dur="5000"
-      repeat="indefinite"></a-animation>
-
-        </Entity> */}
       </Scene>
     );
   }
