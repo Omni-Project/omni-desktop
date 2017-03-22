@@ -193,9 +193,38 @@ body {
     width: 300px
 }
 
-.full-wh {
+.login-container {
     height: 100%;
-    width: 100%
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.login-container h5 {
+    color: #b4d4ee;
+    font-size: 1.5em;
+
+}
+
+.login-container input {
+    border-radius: 3px;
+    border: 1px solid #efefef;
+    background-color: #3A3A3A;
+    margin: 5px;
+    padding: 10px;
+    color: #FFFFFF
+}
+
+.login-container button {
+    background-color: #BD95AF;
+    border-width: 0;
+    border-radius: 3px;
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 10px;
+}
+
 
 

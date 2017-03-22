@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function Navbar() {
-
+export default function Navbar(props) {
+  const user = props.user
   return (
       <nav className ="navbar navbar-inverse navbar-fixed-top" role="navigation">
           <div className ="navbar-header">
@@ -17,23 +17,19 @@ export default function Navbar() {
           <div className ="collapse navbar-collapse navbar-ex1-collapse">
             <ul className ="nav navbar-right top-nav">
                 <li className ="dropdown">
-                    <a href="#" className ="dropdown-toggle" data-toggle="dropdown">FIRST NAME <b className ="caret"></b></a>
+                    <a href="#" className ="dropdown-toggle" data-toggle="dropdown">Welcome back, {user.name || user.email}<b className ="caret"></b></a>
                     <ul className ="dropdown-menu">
                         <li>
                             <a href="#">Settings</a>
                         </li>
                         <li className ="divider"></li>
                         <li>
-                            <a href="#">Logout</a>
+                            <a href="#" onClick={props.handleLogout}>Logout</a>
                         </li>
                     </ul>
                 </li>
             </ul>
           </div>
-
       </nav>
-
-
     )
-
 }
