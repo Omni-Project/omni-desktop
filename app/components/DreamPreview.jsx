@@ -9,7 +9,7 @@ export default (props) => {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
   return (
     <Link to={`/dreams/${dream.id}`}>
-      <Col xs={12} md={6} className="dream-box" >
+      <Col sm={12} md={6} className="dream-box" >
           <h5>{date.toLocaleString(locale, options)}</h5>
           <h3>{dream.title}</h3>
           <p>{dream.content.slice(0,140)}...</p>

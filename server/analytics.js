@@ -21,7 +21,8 @@ module.exports = require('express').Router()
         date: {
           $gt: lastWeek
         }
-      }
+      },
+      order: '"date" ASC'
     })
     .then(dream => res.send(dream))
     .catch(next)

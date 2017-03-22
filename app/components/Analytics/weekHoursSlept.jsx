@@ -1,55 +1,50 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart } from 'victory';
 
 export default function({ weekDreams }) {
 
-  const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+  let days = {},
+      last7Days = [],
+      today = new Date();
+
+  for (let i=1; i < 8; i++) {
+    let day = String(new Date(today.getFullYear(), today.getMonth(), today.getDate() - i)).slice(0,3);
+    last7Days.push(day)
+  }
 
   weekDreams.forEach(dream => {
-    const dayIndex = new Date(dream.date).getDay();
-    const dreamDay = daysOfWeek[dayIndex];
-    const dreamData = {day: dreamDay, hours: dream.totalHoursSlept}
-
-    daysOfWeek[dayIndex] = dreamData
+    const day = String(new Date(dream.date)).slice(0,3);
+    days[day] = {day, hours: +dream.totalHoursSlept}
   })
 
-  const data = daysOfWeek.map(day => {
-    if (typeof day !== 'object') {return {day, hours: 0}}
-    return day;
+  const data = last7Days.map(day => {
+    return days[day] ? days[day] : {day, hours: 0}
   })
 
 
   return (
     <Grid className="dream-grid">
-        <Row className="show-grid">
+      <Row className="show-grid">
           <Col xs={12} md={6} className="analytics-box" >
-            <h3>Hours Slept This Week</h3>
+            <h3>Hours Slept in Last 7 Days</h3>
               { data.length &&
                 <VictoryChart
                 animate={{ duration: 2000 }}
                 theme={theme}
                 domainPadding={20}
               >
-                <VictoryBar
-                  data={data}
-                  x="day"
-                  y={(datum) => +datum.hours}
-                />
-                {/*<VictoryAxis
-                  tickCount={7}
-                  tickFormat={daysOfWeek}
-                />
-                <VictoryAxis
-                  dependentAxis
-                  tickFormat={x => x}
-                />*/}
-              </VictoryChart>
-              }
+              <VictoryBar
+                data={data}
+                x="day"
+                y={(datum) => datum.hours}
+              />
+            </VictoryChart>
+            }
 
-              </Col>
-        </Row>
-      </Grid>
+        </Col>
+      </Row>
+    </Grid>
   )
 
 }
