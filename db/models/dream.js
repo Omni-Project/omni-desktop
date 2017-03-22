@@ -55,9 +55,9 @@ const Dream = db.define('dreams', {
         totalHoursSlept: function() {
             const endHour = (this.sleepEndHour * 60) + this.sleepEndMinute;
             const startHour = (this.sleepStartHour * 60) + this.sleepStartMinute;
-
             let unformattedTime = startHour < endHour ? endHour - startHour : (24*60 - startHour) + endHour;
-            return Math.floor(unformattedTime / 60) + ":" + (unformattedTime % 60)
+
+            return (Math.floor(unformattedTime / 60) + ((unformattedTime % 60) / 60)).toFixed(2)
         }
     },
     hooks: {

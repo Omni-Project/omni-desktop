@@ -7,14 +7,15 @@ import {browserHistory} from 'react-router'
 export default connect(
   (state) => {
     return {
-      dreams: state.dreams
+      dreams: state.dreams,
+      user: state.auth
     }
   },
-  (dispatch) => {
+  (dispatch, ownProps) => {
     return {
       handleSubmit: function(state) {
         const { title, content, timeStart, timeEnd, dreamType, isPublic, date } = state
-        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date))
+        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date, ownProps.userId))
         browserHistory.push('/dreams/all')
       }
     }
@@ -23,7 +24,8 @@ export default connect(
   const propsToPass = {
     handleSubmit: props.handleSubmit,
     dreams: props.dreams.list,
-    selectedDream: props.dreams.selectedDream
+    selectedDream: props.dreams.selectedDream,
+    userId: props.user.id
   }
 
   return (

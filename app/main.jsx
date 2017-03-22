@@ -5,8 +5,9 @@ import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 
 import store from './store'
-
 import {fetchAllDreams, fetchSingleDream} from './reducers/dreams'
+import {fetchWeekAnalytics} from './reducers/analytics'
+
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import AddDreamForm from './components/AddDreamForm'
@@ -19,12 +20,13 @@ import AnalyticsContainer from './containers/AnalyticsContainer'
 
 function onSingleDreamEnter(nextRouterState){
   const dreamId = nextRouterState.params.id
-  store.dispatch(fetchSingleDream(dreamId))
+  const user=store.getState().auth
+  store.dispatch(fetchSingleDream(user.id,dreamId))
 }
 
-function onDreamsEnter(){
-  //load all dreams on enter
-  store.dispatch(fetchAllDreams())
+function fetchAnalytics(nextRouterState){
+  const user = store.getState().auth
+  store.dispatch(fetchWeekAnalytics(user.id))
 }
 
 
@@ -35,11 +37,11 @@ render (
       <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
-        <Route path="all" component={AllDreams} onEnter={onDreamsEnter} />
+        <Route path="all" component={AllDreams} />
         <Route path="add" component={AddDreamForm} />
-        <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter}/>
+        <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
       </Route>
-      <Route path="analytics" component={AnalyticsContainer} />
+      <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
 
     </Route>
     </Router>

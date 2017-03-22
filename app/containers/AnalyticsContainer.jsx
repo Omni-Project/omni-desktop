@@ -1,68 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, Row, Col } from 'react-bootstrap'
-import { VictoryLine, VictoryChart, Curve, VictoryAxis, VictoryTheme } from 'victory';
 
-const data = [
-  {quarter: 1, earnings: 13000},
-  {quarter: 2, earnings: 16500},
-  {quarter: 3, earnings: 14250},
-  {quarter: 4, earnings: 19000}
-];
+import WeekHoursSleptChart from '../components/Analytics/weekHoursSlept';
 
-
-export default class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Analytics</h1>
-
-         <Grid className="dream-grid">
-          <Row className="show-grid">
-            <Col sm={12} md={6} className="analytics-box" >
-              <h3>Hours Slept This Week</h3>
-              <VictoryChart
-                animate={{ duration: 2000 }}
-                theme={theme}
-                domainPadding={20}
-              >
-
-                <VictoryLine
-                  data={[
-                    {day: "Sun", hours: 8},
-                    {day: "Mon", hours: 7},
-                    {day: "Tues", hours: 6},
-                    {day: "Wed", hours: 8},
-                    {day: "Thurs", hours: 5},
-                    {day: "Fri", hours: 8},
-                    {day: "Sat", hours: 7}
-                  ]}
-                  x="day"
-                  y={(datum) => datum.hours}
-                  labels={(datum) => datum.y}
-                  interpolation="catmullRom"
-                  domain={{x: [0, 7], y: [0, 9]}}
-                />
-
-                <VictoryAxis
-                  tickCount={7}
-                  tickFormat={['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']}
-                />
-                <VictoryAxis
-                  dependentAxis
-                  tickFormat={x => x}
-                />
-              </VictoryChart>
-            </Col>
-
-          </Row>
-        </Grid>
-
-      </div>
-    )
+export default connect(
+  (state) => {
+    return {
+      weekDreams: state.analytics.week
+    }
   }
-}
+)(function(props) {
+  return (
+    <div>
+      <h1>Analytics</h1>
 
+      {props && <WeekHoursSleptChart weekDreams={props.weekDreams} />}
+
+    </div>
+  )
+})
 
 
 
@@ -86,9 +42,9 @@ const colors = [
   teal700,
   cyan900
 ];
-const blueGrey50 = "#242424";
-const axisColor = "#999";
-const blueGrey700 = "#fff";
+const gridLinesColor = "#242424";
+const axisColor = "rgb(137, 137, 137)";
+const lineColor = "#a974d5";
 const grey900 = "#212121";
 // Typography
 const sansSerif = "'Helvetica Neue', Helvetica, sans-serif";
@@ -109,7 +65,7 @@ const baseLabelStyles = {
   fontSize,
   letterSpacing,
   padding,
-  fill: blueGrey700
+  fill: axisColor
 };
 
 const centeredLabelStyles = Object.assign({ textAnchor: "middle" }, baseLabelStyles);
@@ -144,7 +100,7 @@ const theme = {
       }),
       grid: {
         fill: "transparent",
-        stroke: blueGrey50,
+        stroke: gridLinesColor,
         strokeDasharray,
         strokeLinecap,
         strokeLinejoin
@@ -158,7 +114,7 @@ const theme = {
         strokeLinejoin
       },
       tickLabels: Object.assign({}, baseLabelStyles, {
-        fill: blueGrey700,
+        fill: axisColor,
         stroke: "transparent"
       })
     }
@@ -166,7 +122,7 @@ const theme = {
   bar: Object.assign({
     style: {
       data: {
-        fill: blueGrey700,
+        fill: lineColor,
         padding,
         stroke: "transparent",
         strokeWidth: 0,
@@ -178,13 +134,13 @@ const theme = {
   candlestick: Object.assign({
     style: {
       data: {
-        stroke: blueGrey700
+        stroke: lineColor
       },
       labels: centeredLabelStyles
     },
     candleColors: {
       positive: "#ffffff",
-      negative: blueGrey700
+      negative: lineColor
     }
   }, baseProps),
   chart: baseProps,
@@ -193,7 +149,7 @@ const theme = {
       data: {
         fill: "transparent",
         opacity: 1,
-        stroke: blueGrey700,
+        stroke: lineColor,
         strokeWidth: 2
       },
       labels: Object.assign({}, centeredLabelStyles, {
@@ -210,7 +166,7 @@ const theme = {
       data: {
         fill: "transparent",
         opacity: 1,
-        stroke: blueGrey700,
+        stroke: lineColor,
         strokeWidth: 2
       },
       labels: Object.assign({}, baseLabelStyles, {
@@ -225,7 +181,7 @@ const theme = {
     style: {
       data: {
         padding,
-        stroke: blueGrey50,
+        stroke: gridLinesColor,
         strokeWidth: 1
       },
       labels: Object.assign({}, baseLabelStyles, {
@@ -238,7 +194,7 @@ const theme = {
   scatter: Object.assign({
     style: {
       data: {
-        fill: blueGrey700,
+        fill: lineColor,
         opacity: 1,
         stroke: "transparent",
         strokeWidth: 0
@@ -260,7 +216,7 @@ const theme = {
       },
       labels: centeredLabelStyles,
       flyout: {
-        stroke: blueGrey700,
+        stroke: lineColor,
         strokeWidth: 1,
         fill: "#f0f0f0"
       }
