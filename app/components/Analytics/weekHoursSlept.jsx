@@ -1,16 +1,22 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { VictoryLine, VictoryChart, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 
 export default function({ weekDreams }) {
 
   const daysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
-  const data = weekDreams && weekDreams.map(day => {
-    const dayIndex = new Date(day.date).getDay();
+  weekDreams.forEach(dream => {
+    const dayIndex = new Date(dream.date).getDay();
     const dreamDay = daysOfWeek[dayIndex];
+    const dreamData = {day: dreamDay, hours: dream.totalHoursSlept}
 
-    return {day: dreamDay, hours: day.totalHoursSlept}
+    daysOfWeek[dayIndex] = dreamData
+  })
+
+  const data = daysOfWeek.map(day => {
+    if (typeof day !== 'object') {return {day, hours: 0}}
+    return day;
   })
 
 
@@ -25,12 +31,10 @@ export default function({ weekDreams }) {
                 theme={theme}
                 domainPadding={20}
               >
-                <VictoryLine
+                <VictoryBar
                   data={data}
                   x="day"
-                  y={(datum) => datum.hours}
-                  labels={(datum) => datum.y}
-                  interpolation="catmullRom"
+                  y={(datum) => +datum.hours}
                 />
                 {/*<VictoryAxis
                   tickCount={7}
