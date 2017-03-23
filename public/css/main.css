@@ -10,6 +10,16 @@ body {
     padding-top: 51px
 }
 
+* {
+    box-sizing: border-box
+}
+
+@media (min-width: 992px) {
+    .col-md-6 {
+        width: 48%;
+    }
+}
+
 
 
 
@@ -20,12 +30,12 @@ body {
 }
 
 .navbar-inverse .navbar-brand {
-    color: white;
+    color: #242424;
     transition: 0.25s
 }
 
 .navbar-inverse .navbar-brand:hover {
-    color: black;
+    color: white;
 }
 
 .top-nav {
@@ -36,7 +46,7 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color:#fff;
+    color:#242424;
     transition: 0.25s
 }
 
@@ -45,7 +55,7 @@ body {
 .top-nav>.open>a,
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
-    color: #000;
+    color: white;
     background-color: #C0B4CA;
 }
 
@@ -74,13 +84,14 @@ body {
     overflow: hidden;
     background: url(../images/nightsky.jpg) center;
     background-size: cover;
+    z-index: 20
 }
 
 .side-nav-overlay {
     height: 100%;
     width: 100%;
     padding: 40px;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .side-nav-overlay>ul {
@@ -93,12 +104,13 @@ body {
     padding: 15px 15px;
     text-decoration: none;
     color: #C0B4CA;
+    font-weight: 600;
     transition: 0.25s
 }
 
 .side-nav a:hover, .side-nav a:active, .side-nav a:focus  {
     color: #fff;
-    background-color:rgba(225, 225, 225, 0.2);
+    background-color:rgba(172, 146, 193, 0.2);
     border-radius: 4px
 }
 
@@ -139,8 +151,13 @@ body {
 }*/
 
 #main-content {
-    margin-left: 225px;
-    padding: 30px 55px;
+    padding: 75px 55px 30px 275px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100%;
+    overflow: overlay
 }
 
 #main-content h1 {
@@ -152,15 +169,15 @@ body {
     width: 100%;
 }
 .dream-box {
-    height: 200px;
-    width: 400px;
-    background-color: #3A3A3A;
-    border-radius: 4px;
-    margin: 5px;
+    min-height: 200px;
+    background-color: #383838;
+    border-radius: 2px;
+    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
+    margin: 8px;
     padding: 15px;
 }
 
-.dream-box h3, .single-dream h3 {
+.dream-box, .analytics-box h3, .single-dream h3 {
     color: #C0B4CA
 }
 
@@ -227,4 +244,31 @@ body {
 }
 
 
+
+/* ANALYTICS */
+
+
+.analytics-box {
+    height: 100%;
+    background-color: #383838;
+    border-radius: 2px;
+    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
+    margin: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+
+}
+
+#analytics-circle {
+    background-color: #242424;
+    border-radius: 100px;
+    padding: 15px;
+}
+
+#analytics-circle h1 {
+    margin: 20px 5px;
+    color: #a974d5
+}
 
