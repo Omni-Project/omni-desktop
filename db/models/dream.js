@@ -3,7 +3,7 @@
 const {env} = require('APP')
 const Sequelize = require('sequelize')
 const db = require('APP/db')
-const user = require('./dream.js')
+const User = require('./user.js')
 const indico = require('indico.io');
 indico.apiKey =  env.INDICO_API_KEY;
 
@@ -61,7 +61,16 @@ const Dream = db.define('dreams', {
         }
     },
     hooks: {
-      beforeCreate: analyzeText
+      beforeCreate: analyzeText,
+
+      afterUpdate: function(dream){
+        User.findById(dream.user_id)
+            .then(user => {
+              let average = ((+user.averageSleep + +dream.totalHoursSlept) / 2).toFixed(2)
+              return user.update({averageSleep: average})
+            })
+            .catch(console.error)
+        }
     }
 });
 

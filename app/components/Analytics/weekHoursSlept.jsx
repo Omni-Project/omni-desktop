@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import { VictoryBar, VictoryChart } from 'victory';
 
 export default function({ weekDreams }) {
@@ -24,29 +24,23 @@ export default function({ weekDreams }) {
 
 
   return (
-    <Grid className="dream-grid">
-      <Row className="show-grid">
-          <Col xs={12} md={6} className="analytics-box" >
-            <h3>Hours Slept in Last 7 Days</h3>
-              { data.length &&
-                <VictoryChart
-                animate={{ duration: 2000 }}
-                theme={theme}
-                domainPadding={20}
-              >
-              <VictoryBar
-                data={data}
-                x="day"
-                y={(datum) => datum.hours}
-              />
-            </VictoryChart>
-            }
-
-        </Col>
-      </Row>
-    </Grid>
+    <Col xs={12} md={6} className="analytics-box" >
+      <h3>Hours Slept in Last 7 Days</h3>
+        { data.length &&
+          <VictoryChart
+          animate={{ duration: 2000 }}
+          theme={theme}
+          domainPadding={20}
+        >
+        <VictoryBar
+          data={data}
+          x="day"
+          y={(datum) => datum.hours}
+        />
+      </VictoryChart>
+      }
+    </Col>
   )
-
 }
 
 
