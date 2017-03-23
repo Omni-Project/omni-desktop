@@ -118,8 +118,40 @@ passport.use(new (require('passport-local').Strategy) (
       .catch(done)
   }
 ))
-
+//desktop app - checks authenticated or not
 auth.get('/whoami', (req, res) => res.send(req.user))
+
+//mobile app - checks validity of token
+auth.get('/verify', (req, res, next) => {
+  //checks validity of token, sets req.user if token is valid
+  const token = req.query.token
+  if(token){
+    //token found
+    jwt.verify(token, env.JWT_SECRET, function(err, decoded) {
+      if (err) {
+        return res.send({success: false, error: 'Failed to verify token'});
+      } else {
+        // if everything is good, find user, save to req.user for use in other routes, send user info to app
+        User.findById(decoded.id)
+          .then(user => {
+            req.user = user;
+            //send updated user to app
+            const savedUser = {
+              name: user.name,
+              email: user.email,
+              id: user.id,
+              photoUrl: user.photoUrl,
+              sleepDebt: user.sleepDebt,
+              averageSleep: user.averageSleep,
+            }
+            res.send({success: true, user: savedUser})
+          }).catch(next)
+      }
+    });
+  } else {
+    res.send({success: false, error: 'No token'})
+  }
+})
 
 // POST requests for local login:
 auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' }))
@@ -142,13 +174,11 @@ auth.post('/login/mobile', (req, res, next) => {
             res.status(401).send('Login incorrect')
           }
           //once user is authenticated, issue a token.
-          const token = jwt.sign(user, env.JWT_SECRET, {
+          const token = jwt.sign({id:user.id}, env.JWT_SECRET, {
             expiresIn: "30d" // expires in 30 days
           });
-          //add token to found user
-          user.token = token;
-          //send user
-          res.send(user)
+          //send token
+          res.send(token)
         })
     })
     .catch(next)
