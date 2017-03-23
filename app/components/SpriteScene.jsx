@@ -1,5 +1,4 @@
 import 'aframe';
-import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Sky from './Sky'
@@ -7,7 +6,7 @@ import Sky from './Sky'
 export default class VRScene extends React.Component {
   render () {
     return (
-      <Scene className="sprite-view">
+      <a-scene>
         <Sky />
 
         <a-assets>
@@ -31,7 +30,9 @@ export default class VRScene extends React.Component {
             attribute="color"
             from="white"
             to="red"
-            dur="1000"
+            dur="500"
+            easing="ease-in"
+            direction="alternate"
             repeat="indefinite"
           />
         </a-obj-model>
@@ -42,21 +43,29 @@ export default class VRScene extends React.Component {
           <a-animation
             attribute="position"
             from="0 -0.5 -7"
-            to="0 -1.2 -7"
-            easing="ease-in-out"
+            to="0 -1.0 -7"
+            easing="ease-back"
             direction="alternate"
             dur="1500"
+            fill="forwards"
             repeat="indefinite" />
         </a-obj-model>
 
         {/** JOY **/}
-        <a-obj-model src="#joy" position="0 -1 -7" material="color: #fff6a5">
+        <a-obj-model src="#joy" position="0 -1 -7" material="color: #fff6a5" scale="0.6 0.6 0.6">
           <a-animation
             attribute="rotation"
             to='360 360 0'
-            easing="ease-in-out"
+            easing="ease"
             direction="alternate"
-            dur="5000"
+            dur="4000"
+            repeat="indefinite" />
+
+          <a-animation
+            attribute="scale"
+            to="1.1 1.1 1.1"
+            direction="alternate"
+            dur="4000"
             repeat="indefinite" />
         </a-obj-model>
 
@@ -67,7 +76,7 @@ export default class VRScene extends React.Component {
             to='0 0 -45'
             dur="1000"
             direction="alternate"
-            easing="ease-in-out"
+            easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
@@ -78,7 +87,7 @@ export default class VRScene extends React.Component {
             to='0 180 -45'
             dur="1000"
             direction="alternate"
-            easing="ease-in-out"
+            easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
@@ -96,7 +105,7 @@ export default class VRScene extends React.Component {
         <a-entity light ="color:#AFA; intensity: 5" position="0 -2 -7" ></a-entity>
         <a-entity light="type: ambient; color: #BBB"></a-entity>
         <a-entity light="type: directional; color: #FFF; intensity: 0" position="-0.5 1 1"></a-entity>
-      </Scene>
+      </a-scene>
     );
   }
 }
