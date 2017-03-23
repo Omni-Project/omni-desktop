@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router'
 
-const activeStyle = {backgroundColor:'rgba(225, 225, 225, 0.2)', color: '#fff', borderRadius: '4px'}
+const activeStyle = {backgroundColor:'rgba(172, 146, 193, 0.2)', color: '#fff', borderRadius: '4px'}
 
 export default function Sidebar () {
 

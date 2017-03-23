@@ -63,7 +63,7 @@ const Dream = db.define('dreams', {
     hooks: {
       beforeCreate: analyzeText,
 
-      afterUpdate: function(dream){
+      afterCreate: function(dream){
         User.findById(dream.user_id)
             .then(user => {
               let average = ((+user.averageSleep + +dream.totalHoursSlept) / 2).toFixed(2)

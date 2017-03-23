@@ -26,8 +26,9 @@ module.exports = require('express').Router()
     .catch(next)
   })
 	.post('/user/:id', (req, res, next) => {
+    req.body.user_id = req.params.id;
+
     Dream.create(req.body)
-    .then(dream => dream.setUser(req.params.id))
     .then(dream => res.send(dream))
     .catch(next)
   })
