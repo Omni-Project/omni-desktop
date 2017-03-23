@@ -4,6 +4,6 @@ import React from 'react';
 export default props => (
   <Entity
     geometry={{primitive: 'sphere', radius: 100}}
-    material={{shader: 'flat', color: 'black'}}
+    material={{shader: 'flat', color: '#242424'}}
     scale="1 1 -1"/>
 );
