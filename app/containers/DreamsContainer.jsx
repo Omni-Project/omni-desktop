@@ -11,11 +11,11 @@ export default connect(
       user: state.auth
     }
   },
-  (dispatch) => {
+  (dispatch, ownProps) => {
     return {
       handleSubmit: function(state) {
         const { title, content, timeStart, timeEnd, dreamType, isPublic, date } = state
-        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date))
+        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date, ownProps.userId))
         browserHistory.push('/dreams/all')
       }
     }

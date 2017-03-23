@@ -19,11 +19,11 @@ const User = db.define('users', {
     defaultValue: '../../public/defaultUser.png'
   },
   averageSleep: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     defaultValue: 0
   },
   sleepDebt: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     defaultValue: 0
   },
   // We support oauth, so users may or may not have passwords.

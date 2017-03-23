@@ -5,21 +5,26 @@ import {browserHistory} from 'react-router'
 //CONSTANTS
 const GET_DREAMS = 'GET_DREAMS'
 const GET_SINGLE_DREAM = 'GET_SINGLE_DREAM'
+const RECEIVE_DREAM = 'RECEIVE_DREAM'
 
 //REDUCER
 
-const initialState={
+const initialState = {
   list: [],
   selectedDream: {}
 }
-const reducer = (state=initialState, action) => {
+
+const reducer = (state = initialState, action) => {
   const newState = Object.assign({}, state)
-  switch(action.type) {
+  switch (action.type) {
   case GET_DREAMS:
     newState.list = action.dreams
     return newState
   case GET_SINGLE_DREAM:
     newState.selectedDream = action.dream
+    return newState
+  case RECEIVE_DREAM:
+    newState.list = [...newState.list, action.dream]
     return newState
   }
   return state
@@ -33,19 +38,22 @@ export const selectDream = dream => ({
   type: GET_SINGLE_DREAM, dream
 })
 
-export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date) =>
+export const receiveDream = dream => ({
+  type: RECEIVE_DREAM, dream
+})
+
+export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId) =>
   dispatch => {
     const sleepStartHour = timeStart.getHours()
     const sleepStartMinute = timeStart.getMinutes()
     const sleepEndHour = timeEnd.getHours()
     const sleepEndMinute = timeEnd.getMinutes()
-    axios.post('/api/dreams/', {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
-    .then(res => res.data)
-    .then(dream => {
-        const dreams = store.getState().dreams
-        dispatch(getDreams([...dreams, dream]))
-        browserHistory.push('/dreams/all')
-    }).catch(console.error)
+
+    axios.post(`/api/dreams/user/${userId}`, {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
+        .then(res => res.data)
+        .then(dream => dispatch(receiveDream(dream)))
+        .then(() => browserHistory.push('/dreams/all'))
+        .catch(console.error)
   }
 
 export const fetchAllDreams = (userId) =>

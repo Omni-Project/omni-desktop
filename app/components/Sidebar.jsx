@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router'
 
-const activeStyle = {backgroundColor:'rgba(225, 225, 225, 0.2)', color: '#fff', borderRadius: '4px'}
+const activeStyle = {backgroundColor:'rgba(172, 146, 193, 0.2)', color: '#fff', borderRadius: '4px'}
 
 export default function Sidebar () {
 
@@ -14,17 +14,11 @@ return (
             </li>
 
             <li>
-                <span data-toggle="collapse" data-target="#analytics">
-                    <Link to="/analytics">Analytics</Link>
-                </span>
-                <ul id="analytics" className="collapse">View different charts</ul>
+                <Link to="/analytics">Analytics</Link>
             </li>
 
             <li>
-                <span data-toggle="collapse" data-target="#sprites">
-                    <Link to="">Dream Sprites</Link>
-                </span>
-                <ul id="sprites" className="collapse">View your sprites</ul>
+                <Link to="">Dream Sprites</Link>
             </li>
 
             <li>
@@ -32,9 +26,7 @@ return (
             </li>
 
             <li>
-                <span data-toggle="collapse" data-target="#search">
-                    <Link to="">Tags</Link>
-                </span>
+                <Link to="">Tags</Link>
 
                 <div className="row">
                     <div className="col-md-1"></div>
