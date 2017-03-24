@@ -5,20 +5,29 @@ export class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
-      signup: false
+      signup: false,
+      error: false
     }
   }
   render (){
     const signupBool = this.state.signup
     const signupHandler = (evt) => {
-      console.log('sign up!')
       evt.preventDefault()
-      this.props.signup(evt.target.name.value, evt.target.username.value, evt.target.password.value)
+      if(!evt.target.username.value || evt.target.password.value || !evt.target.name.value) {
+        this.setState({error: true})
+      }
+      else {
+        this.props.signup(evt.target.name.value, evt.target.username.value, evt.target.password.value)
+      }
     }
     const loginHandler = (evt) => {
-      console.log('login!')
-      evt.preventDefault()
-      this.props.login(evt.target.username.value, evt.target.password.value)
+     evt.preventDefault()
+      if(!evt.target.username.value || evt.target.password.value) {
+        this.setState({error: true})
+      }
+      else {
+        this.props.login(evt.target.username.value, evt.target.password.value)
+      }
     }
     return (
       <div className="login-container">
@@ -29,7 +38,8 @@ export class Login extends Component {
           <input name="password" type="password" placeholder="Password"/>
           <button type="submit" value="Login">{signupBool? "Sign Up" : "Login"}</button>
         </form>
-        {signupBool? null : <button type="submit" value="Signup" onClick={() => {this.setState({signup: true})}}>Sign Up!</button>}
+        {this.state.error? <span className="error-message">Please fill out all fields!</span> : null }
+        {signupBool? null : <button type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
       </div>
     )
   }
