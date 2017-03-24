@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Sky from './Sky'
 
-const dummyData = {surpriseVal: 20}
+const dummyData = {surpriseVal: 20, fearVal: 56, joyVal: 30}
 
 export default class VRScene extends React.Component {
   constructor(props){
@@ -40,8 +40,29 @@ export default class VRScene extends React.Component {
     }
   }
 
+  fearScale(eVal){
+    const val = (eVal/100).toFixed(2)
+    return (val*.7) + .3
+  }
+  fearOpacity(eVal){
+    const val = (eVal/100).toFixed(2)
+    return (val*.9) + .1
+  }
+
+  joyScale(eVal){
+    const val = (eVal/100).toFixed(2)
+    return (val*2.8) + .7
+  }
+
+  joyLight(eVal){
+    const val = (eVal/100).toFixed(2)
+    return (val*20) + 1
+  }
+
   render () {
     const surpriseVal = dummyData.surpriseVal;
+    const fearVal = dummyData.fearVal;
+    const joyVal = dummyData.joyVal;
     return (
       <a-scene fog="type: linear; color: #AAA">
         <Sky />
@@ -89,7 +110,7 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** FEAR **/}
-        <a-obj-model src="#fear" position="0 -0.5 -7" scale="0.5 0.5 0.5" material="color: black">
+        <a-obj-model src="#fear" position="0 -0.5 -7" scale={this.renderScale(this.fearScale(fearVal))} material={`color: black; opacity:${this.fearOpacity(fearVal)}`}>
           {/*bobs up and down*/}
           <a-animation
             attribute="position"
@@ -103,7 +124,7 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** JOY **/}
-        <a-obj-model src="#joy" position="0 -1 -7" material="src: #rust; color: #696969; roughness: 0; metalness: 0.3" >
+        <a-obj-model src="#joy" position="0 -1 -7" scale={this.renderScale(this.joyScale(joyVal))} material="src: #rust; color: #9b8b65; roughness: 0; metalness: 0.3" >
           {/*rotates*/}
           <a-animation
             attribute="rotation"
@@ -195,7 +216,7 @@ export default class VRScene extends React.Component {
         <a-entity light="color: white; type: ambient;"></a-entity>
 
         {/*light inside of joy*/}
-        <a-entity light="color: #94c6ff; distance: 15; intensity: 7; type: point" position="0 -1 -7"></a-entity>
+        <a-entity light={`color: #94c6ff; distance: 15; intensity: ${this.joyLight(joyVal)}; type: point`} position="0 -1 -7"></a-entity>
 
 
       </a-scene>
