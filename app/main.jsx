@@ -34,7 +34,7 @@ render (
   <Provider store={store}>
     <Router history={browserHistory}>
     <Route path="/" component={AppContainer} >
-      <IndexRedirect to="/dreams" />z
+      <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
         <Route path="all" component={AllDreams} />
