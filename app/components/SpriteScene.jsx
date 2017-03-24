@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Sky from './Sky'
 
-const dummyData = {surpriseVal: 20, fearVal: 56, joyVal: 30}
+const dummyData = {surpriseVal: 7, fearVal: 6, joyVal: 60, angerVal: 21, sadnessVal: 6}
+const dummyData2 =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
 
 export default class VRScene extends React.Component {
   constructor(props){
@@ -59,10 +60,32 @@ export default class VRScene extends React.Component {
     return (val*20) + 1
   }
 
+  angerScale(eVal){
+    const val = (eVal/100).toFixed(2)
+    return (val*1.5) + .5
+  }
+
+  angerAnimDuration(eVal) {
+    const val = (eVal/100).toFixed(2)
+    return (val*1650) + 350
+  }
+
+  angerClawDegree(eVal) {
+    const val = (eVal/100).toFixed(2)
+    return -((val*25) + 40)
+  }
+
+  sadnessScale(eVal){
+    const val = (eVal/100).toFixed(2)
+    return (val*2.5) + .4
+  }
+
   render () {
     const surpriseVal = dummyData.surpriseVal;
     const fearVal = dummyData.fearVal;
     const joyVal = dummyData.joyVal;
+    const angerVal = dummyData.angerVal;
+    const sadnessVal = dummyData.sadnessVal
     return (
       <a-scene fog="type: linear; color: #AAA">
         <Sky />
@@ -110,12 +133,12 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** FEAR **/}
-        <a-obj-model src="#fear" position="0 -0.5 -7" scale={this.renderScale(this.fearScale(fearVal))} material={`color: black; opacity:${this.fearOpacity(fearVal)}`}>
+        <a-obj-model src="#fear" position="0 0 -7" scale={this.renderScale(this.fearScale(fearVal))} material={`color: black; opacity:${this.fearOpacity(fearVal)}`}>
           {/*bobs up and down*/}
           <a-animation
             attribute="position"
-            from="0 -0.5 -7"
-            to="0 -1.0 -7"
+            from="0 0 -7"
+            to="0 -0.5 -7"
             easing="ease-back"
             direction="alternate"
             dur="1500"
@@ -143,43 +166,43 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** ANGER **/}
-        <a-obj-model src="#anger" position="0 -3.5 -7" scale="0.8 0.8 0.8" material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           {/*clawing thing*/}
           <a-animation
             attribute="rotation"
-            to='0 0 -45'
-            dur="1000"
+            to={`0 0 ${this.angerClawDegree(angerVal)}`}
+            dur={this.angerAnimDuration(angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
-         <a-obj-model src="#anger" rotation="0 45 0" position="0 -3.5 -7" scale="0.8 0.8 0.8" material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+         <a-obj-model src="#anger" rotation="0 45 0" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to='0 45 -45'
-            dur="1000"
+            to={`0 45 ${this.angerClawDegree(angerVal)}`}
+            dur={this.angerAnimDuration(angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
 
-        <a-obj-model src="#anger" rotation="0 180 0" position="0 -3.5 -7" scale="0.8 0.8 0.8" material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" rotation="0 180 0" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to='0 180 -45'
-            dur="1000"
+            to={`0 180 ${this.angerClawDegree(angerVal)}`}
+            dur={this.angerAnimDuration(angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
-        <a-obj-model src="#anger" rotation="0 225 0" position="0 -3.5 -7" scale="0.8 0.8 0.8" material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" rotation="0 225 0" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to='0 225 -45'
-            dur="1000"
+            to={`0 225 ${this.angerClawDegree(angerVal)}`}
+            dur={this.angerAnimDuration(angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
@@ -187,7 +210,7 @@ export default class VRScene extends React.Component {
 
 
         {/** SADNESS **/}
-        <a-obj-model src="#sadness" position="0 -3 -7" material="src: #plastic; color: rgb(159, 190, 221);">
+        <a-obj-model src="#sadness" scale={this.renderScale(this.sadnessScale(sadnessVal))} position="0 -2 -7" material="color: rgb(41, 52, 68)">
           {/*rotates*/}
           <a-animation
             easing="linear"
@@ -198,8 +221,8 @@ export default class VRScene extends React.Component {
             {/*changes opacity*/}
           <a-animation
             attribute="opacity"
-            from="0.8"
-            to="0.5"
+            from="0.5"
+            to="0.251"
             dur="2000"
             easing="ease-in-out"
             direction="alternate"
