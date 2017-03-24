@@ -6,10 +6,11 @@ import { Provider } from 'react-redux'
 
 import store from './store'
 import {fetchAllDreams, fetchSingleDream} from './reducers/dreams'
-import {fetchWeekAnalytics} from './reducers/analytics'
+import { fetchWeekAnalytics, fetchUser } from './reducers/analytics'
 
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
+import SpriteScene from './components/SpriteScene'
 import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
 import UserDashboard from './components/UserDashboard'
@@ -27,12 +28,14 @@ function onSingleDreamEnter(nextRouterState){
 function fetchAnalytics(nextRouterState){
   const user = store.getState().auth
   store.dispatch(fetchWeekAnalytics(user.id))
+  store.dispatch(fetchUser(user.id))
 }
 
 
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
+      <Route path="/test" component={SpriteScene} />
     <Route path="/" component={AppContainer} >
       <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
@@ -42,6 +45,7 @@ render (
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
       </Route>
       <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
+
 
     </Route>
     </Router>

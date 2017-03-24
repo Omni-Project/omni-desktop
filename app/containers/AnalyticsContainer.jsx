@@ -9,7 +9,7 @@ export default connect(
   (state) => {
     return {
       weekDreams: state.analytics.week,
-      user: state.auth
+      user: state.analytics.user
     }
   }
 )(function(props) {
