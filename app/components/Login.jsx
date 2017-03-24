@@ -13,7 +13,7 @@ export class Login extends Component {
     const signupBool = this.state.signup
     const signupHandler = (evt) => {
       evt.preventDefault()
-      if(!evt.target.username.value || evt.target.password.value || !evt.target.name.value) {
+      if(!evt.target.username.value || !evt.target.password.value || !evt.target.name.value) {
         this.setState({error: true})
       }
       else {
@@ -22,7 +22,7 @@ export class Login extends Component {
     }
     const loginHandler = (evt) => {
      evt.preventDefault()
-      if(!evt.target.username.value || evt.target.password.value) {
+      if(!evt.target.username.value || !evt.target.password.value) {
         this.setState({error: true})
       }
       else {
