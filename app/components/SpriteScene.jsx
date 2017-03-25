@@ -2,120 +2,60 @@ import 'aframe';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Sky from './Sky'
+import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAnimDuration,
+  fearScale, fearOpacity, joyScale, joyLight, angerScale, angerAnimDuration, angerClawDegree,
+  sadnessScale, chooseBg, getDominant } from '../utils'
 
-const dummyData = {surpriseVal: 7, fearVal: 6, joyVal: 60, angerVal: 21, sadnessVal: 6}
-const dummyData2 =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
+const dummyData = {surpriseVal: 12, fearVal: 15, joyVal: 20, angerVal: 22, sadnessVal: 31}
+const majorSurprise =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
+const majorAnger =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 47, sadnessVal: 15}
+const majorFear =  {surpriseVal: 21, fearVal: 47, joyVal: 7, angerVal: 10, sadnessVal: 15}
+const majorJoy =  {surpriseVal: 21, fearVal: 10, joyVal: 47, angerVal: 15, sadnessVal: 7}
+const majorSadness =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 15, sadnessVal: 47}
 
 export default class VRScene extends React.Component {
   constructor(props){
     super(props)
   }
 
-  supriseAnimColor(eVal){
-    const g = 100 - eVal;
-    const b = 180 - eVal;
-    console.log('G', g)
-    console.log('B', b)
-    return `rgb(255,${g},${b})`
-  }
-
-  metalness(eVal) {
-    return (eVal/100).toFixed(2)
-  }
-
-  surpiseAnimScale(eVal) {
-    return (eVal/20).toFixed(1)
-  }
-
-  renderScale(scale) {
-    return `${scale} ${scale} ${scale}`
-  }
-
-  surpiseAnimDuration(eVal) {
-    const val = eVal * 100
-    const diff = 700 - val
-    if (diff < 0) {
-        return 300;
-    } else {
-        return (300 + diff);
-    }
-  }
-
-  fearScale(eVal){
-    const val = (eVal/100).toFixed(2)
-    return (val*.7) + .3
-  }
-  fearOpacity(eVal){
-    const val = (eVal/100).toFixed(2)
-    return (val*.9) + .1
-  }
-
-  joyScale(eVal){
-    const val = (eVal/100).toFixed(2)
-    return (val*2.8) + .7
-  }
-
-  joyLight(eVal){
-    const val = (eVal/100).toFixed(2)
-    return (val*20) + 1
-  }
-
-  angerScale(eVal){
-    const val = (eVal/100).toFixed(2)
-    return (val*1.5) + .5
-  }
-
-  angerAnimDuration(eVal) {
-    const val = (eVal/100).toFixed(2)
-    return (val*1650) + 350
-  }
-
-  angerClawDegree(eVal) {
-    const val = (eVal/100).toFixed(2)
-    return -((val*25) + 40)
-  }
-
-  sadnessScale(eVal){
-    const val = (eVal/100).toFixed(2)
-    return (val*2.5) + .4
-  }
-
   render () {
-    const surpriseVal = dummyData.surpriseVal;
-    const fearVal = dummyData.fearVal;
-    const joyVal = dummyData.joyVal;
-    const angerVal = dummyData.angerVal;
-    const sadnessVal = dummyData.sadnessVal
+    const dream = majorJoy;
+    const emotions = {"surprise": dream.surpriseVal,
+      "fear": dream.fearVal,
+      "joy": dream.joyVal,
+      "anger": dream.angerVal,
+      "sadness": dream.sadnessVal }
+    const skyTexture = chooseBg(getDominant(emotions))
     return (
-      <a-scene fog="type: linear; color: #AAA">
-        <Sky />
+
+      <div id="embedded">
+      <a-scene embedded>
+
+        {/*SKY*/}
+        <a-sky src="#sky" rotation="0 0 0" />
+
 
         <a-assets>
           {/* MODELS */}
-          <a-asset-item id="surprise" src="./objects/surprise.obj"></a-asset-item>
-          <a-asset-item id="joy" src="./objects/joy.obj"></a-asset-item>
-          <a-asset-item id="sadness" src="./objects/sadness.obj"></a-asset-item>
-          <a-asset-item id="anger" src="./objects/anger.obj"></a-asset-item>
-          <a-asset-item id="fear" src="./objects/fear.obj"></a-asset-item>
-
+          <a-asset-item id="surprise" src="/objects/surprise.obj"></a-asset-item>
+          <a-asset-item id="joy" src="/objects/joy.obj"></a-asset-item>
+          <a-asset-item id="sadness" src="/objects/sadness.obj"></a-asset-item>
+          <a-asset-item id="anger" src="/objects/anger.obj"></a-asset-item>
+          <a-asset-item id="fear" src="/objects/fear.obj"></a-asset-item>
           {/*SKY/ENV*/}
-          <img id="sky" src="/env-images/1.jpg" />
-
+          <img id="sky" src={`/env-images/${skyTexture}.jpg`} />
           {/** TEXTURES **/}
           <img id="plastic" src="/textures/plastic.jpg" />
-          <img id="rust" src="/textures/yellow-009.jpg" />
-
-          <a-asset-item id="floor-obj" src="./objects/floor.obj"></a-asset-item>
         </a-assets>
 
-{/*<a-entity obj-model="obj: #sadness;" material="src: #plastic; metalness: 0.6" id="floor"></a-entity>*/}
+
 
         {/** SURPRISE **/}
-        <a-obj-model src="#surprise" material={`src: #plastic; metalness: ${this.metalness(surpriseVal)}`} position="0 -2 -7" scale="0 0 0">
+        <a-obj-model src="#surprise" material={`src: #plastic; metalness: ${metalness(emotions.surprise)}`} position="0 -2 -7" scale="0 0 0">
           {/*change size (pulsate)*/}
           <a-animation
             attribute="scale"
-            to={this.renderScale(this.surpiseAnimScale(surpriseVal))}
+            to={renderScale(surpiseAnimScale(emotions.surprise))}
             easing="ease-in-out"
             direction="alternate"
             dur="2000"
@@ -124,8 +64,8 @@ export default class VRScene extends React.Component {
           <a-animation
             attribute="color"
             from="#ff7da7"
-            to={this.supriseAnimColor(surpriseVal)}
-            dur={this.surpiseAnimDuration(surpriseVal)}
+            to={supriseAnimColor(emotions.surprise)}
+            dur={surpiseAnimDuration(emotions.surprise)}
             easing="ease-in"
             direction="alternate"
             repeat="indefinite"
@@ -133,7 +73,7 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** FEAR **/}
-        <a-obj-model src="#fear" position="0 0 -7" scale={this.renderScale(this.fearScale(fearVal))} material={`color: black; opacity:${this.fearOpacity(fearVal)}`}>
+        <a-obj-model src="#fear" position="0 0 -7" scale={renderScale(fearScale(emotions.fear))} material={`color: black; opacity:${fearOpacity(emotions.fear)}`}>
           {/*bobs up and down*/}
           <a-animation
             attribute="position"
@@ -147,7 +87,7 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** JOY **/}
-        <a-obj-model src="#joy" position="0 -1 -7" scale={this.renderScale(this.joyScale(joyVal))} material="src: #rust; color: #9b8b65; roughness: 0; metalness: 0.3" >
+        <a-obj-model src="#joy" position="0 -1 -7" scale={renderScale(joyScale(emotions.joy))} material="color: rgb(196, 145, 51); roughness: 0; metalness: 0.3" >
           {/*rotates*/}
           <a-animation
             attribute="rotation"
@@ -166,43 +106,43 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** ANGER **/}
-        <a-obj-model src="#anger" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           {/*clawing thing*/}
           <a-animation
             attribute="rotation"
-            to={`0 0 ${this.angerClawDegree(angerVal)}`}
-            dur={this.angerAnimDuration(angerVal)}
+            to={`0 0 ${angerClawDegree(emotions.anger)}`}
+            dur={angerAnimDuration(emotions.anger)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
-         <a-obj-model src="#anger" rotation="0 45 0" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+         <a-obj-model src="#anger" rotation="0 45 0" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to={`0 45 ${this.angerClawDegree(angerVal)}`}
-            dur={this.angerAnimDuration(angerVal)}
+            to={`0 45 ${angerClawDegree(emotions.anger)}`}
+            dur={angerAnimDuration(emotions.anger)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
 
-        <a-obj-model src="#anger" rotation="0 180 0" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" rotation="0 180 0" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to={`0 180 ${this.angerClawDegree(angerVal)}`}
-            dur={this.angerAnimDuration(angerVal)}
+            to={`0 180 ${angerClawDegree(emotions.anger)}`}
+            dur={angerAnimDuration(emotions.anger)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
-        <a-obj-model src="#anger" rotation="0 225 0" position="0 -4 -7" scale={this.renderScale(this.angerScale(angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" rotation="0 225 0" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to={`0 225 ${this.angerClawDegree(angerVal)}`}
-            dur={this.angerAnimDuration(angerVal)}
+            to={`0 225 ${angerClawDegree(emotions.anger)}`}
+            dur={angerAnimDuration(emotions.anger)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
@@ -210,7 +150,7 @@ export default class VRScene extends React.Component {
 
 
         {/** SADNESS **/}
-        <a-obj-model src="#sadness" scale={this.renderScale(this.sadnessScale(sadnessVal))} position="0 -2 -7" material="color: rgb(41, 52, 68)">
+        <a-obj-model src="#sadness" scale={renderScale(sadnessScale(emotions.sadness))} position="0 -2 -7" material="color: rgb(41, 52, 68)">
           {/*rotates*/}
           <a-animation
             easing="linear"
@@ -239,10 +179,14 @@ export default class VRScene extends React.Component {
         <a-entity light="color: white; type: ambient;"></a-entity>
 
         {/*light inside of joy*/}
-        <a-entity light={`color: #94c6ff; distance: 15; intensity: ${this.joyLight(joyVal)}; type: point`} position="0 -1 -7"></a-entity>
+        <a-entity light={`color: #94c6ff; distance: 15; intensity: ${joyLight(emotions.joy)}; type: point`} position="0 -1 -7"></a-entity>
 
+        <a-camera position="0 -3 7">
+
+        </a-camera>
 
       </a-scene>
+      </div>
     );
   }
 }
