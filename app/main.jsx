@@ -13,7 +13,7 @@ import WhoAmI from './components/WhoAmI'
 import SpriteScene from './components/SpriteScene'
 import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
-import UserDashboard from './components/UserDashboard'
+import AllSpritesView from './components/AllSpritesView'
 import SingleDream from './components/SingleDream'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
@@ -35,8 +35,9 @@ function fetchAnalytics(nextRouterState){
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/test" component={SpriteScene} />
+
     <Route path="/" component={AppContainer} >
+    <Route path="public" component={AllSpritesView} />
       <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
