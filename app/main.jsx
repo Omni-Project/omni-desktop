@@ -1,16 +1,16 @@
 'use strict'
 import React from 'react'
-import {Router, Route, IndexRedirect, IndexRoute, browserHistory} from 'react-router'
+import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import { Provider } from 'react-redux'
+import axios from 'axios'
 
 import store from './store'
-import {fetchAllDreams, fetchSingleDream} from './reducers/dreams'
+import { selectDream } from './reducers/dreams'
 import { fetchWeekAnalytics, fetchUser } from './reducers/analytics'
 
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
-import SpriteScene from './components/SpriteScene'
 import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
 import AllSpritesView from './components/AllSpritesView'
@@ -19,10 +19,16 @@ import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
 
-function onSingleDreamEnter(nextRouterState){
+function onSingleDreamEnter(nextRouterState, replace, done){
   const dreamId = nextRouterState.params.id
-  const user=store.getState().auth
-  store.dispatch(fetchSingleDream(user.id,dreamId))
+  const user = store.getState().auth
+
+  //had to put axios call here so we can use the done function that comes with onEnter hooks. So the hook knows to not mount the component until this entire fn is done running.
+  axios.get(`/api/dreams/user/${user.id}/${dreamId}`)
+    .then(res => res.data)
+    .then(dream => store.dispatch(selectDream(dream)))
+    .then(() => done())
+    .catch(console.error)
 }
 
 function fetchAnalytics(nextRouterState){
