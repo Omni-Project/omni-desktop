@@ -70,25 +70,6 @@ export const sadnessScale = (eVal) => {
   return (val*2.5) + .4
 }
 
-export const getDominant = (emotionsObj) => {
-  const dominant = _.reduce(emotionsObj, (result, value, key) => {
-    if (result.value < value) {
-      result.value = value;
-      result.emotion = key
-    }
-    return result
-  }, {emotion: '', value: 0})
-  return dominant.emotion
-}
-
-export const chooseBg = (dominant) => {
-  if(dominant === 'joy' || dominant === 'surprise'){
-    return `pos-${((Math.floor(Math.random() * 11)) + 1)}`
-  } else {
-    return `neg-${((Math.floor(Math.random() * 6)) + 1)}`
-  }
-}
-
 export const getSkyAngle = (bg) => {
   const [emotion, num] =  bg.split('-')
   if (emotion==='pos'){

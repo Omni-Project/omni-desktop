@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Sky from './Sky'
 import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAnimDuration,
   fearScale, fearOpacity, joyScale, joyLight, angerScale, angerAnimDuration, angerClawDegree,
-  sadnessScale, chooseBg, getDominant, getSkyAngle } from '../utils'
+  sadnessScale, getSkyAngle } from '../utils'
 
 // const dummyData = {surpriseVal: 12, fearVal: 15, joyVal: 20, angerVal: 22, sadnessVal: 31}
 // const majorSurprise =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
@@ -20,22 +20,15 @@ export default class VRScene extends React.Component {
 
   render () {
     const dream = this.props.dream
-    const emotions = {"surprise": dream.surpriseVal,
-      "fear": dream.fearVal,
-      "joy": dream.joyVal,
-      "anger": dream.angerVal,
-      "sadness": dream.sadnessVal }
-    const dominant = getDominant(emotions)
-    const skyTexture = chooseBg(dominant)
-    const skyAngle = getSkyAngle(skyTexture)
-    console.log(skyTexture, skyAngle)
+    const bgAngle = getSkyAngle(dream.background)
+    console.log(dream.background, bgAngle)
     return (
 
       <div id="embedded">
       <a-scene embedded>
 
         {/*SKY*/}
-        <a-sky src="#sky" rotation={skyAngle} />
+        <a-sky src="#sky" rotation={bgAngle} />
 
 
         <a-assets>
@@ -46,7 +39,7 @@ export default class VRScene extends React.Component {
           <a-asset-item id="anger" src="/objects/anger.obj"></a-asset-item>
           <a-asset-item id="fear" src="/objects/fear.obj"></a-asset-item>
           {/*SKY/ENV*/}
-          <img id="sky" src={`/env-images/${skyTexture}.jpg`} />
+          <img id="sky" src={`/env-images/${dream.background}.jpg`} />
           {/** TEXTURES **/}
           <img id="plastic" src="/textures/plastic.jpg" />
         </a-assets>
@@ -54,11 +47,11 @@ export default class VRScene extends React.Component {
 
 
         {/** SURPRISE **/}
-        <a-obj-model src="#surprise" material={`src: #plastic; metalness: ${metalness(emotions.surprise)}`} position="0 -2 -7" scale="0 0 0">
+        <a-obj-model src="#surprise" material={`src: #plastic; metalness: ${metalness(dream.surpriseVal)}`} position="0 -2 -7" scale="0 0 0">
           {/*change size (pulsate)*/}
           <a-animation
             attribute="scale"
-            to={renderScale(surpiseAnimScale(emotions.surprise))}
+            to={renderScale(surpiseAnimScale(dream.surpriseVal))}
             easing="ease-in-out"
             direction="alternate"
             dur="2000"
@@ -67,8 +60,8 @@ export default class VRScene extends React.Component {
           <a-animation
             attribute="color"
             from="#ff7da7"
-            to={supriseAnimColor(emotions.surprise)}
-            dur={surpiseAnimDuration(emotions.surprise)}
+            to={supriseAnimColor(dream.surpriseVal)}
+            dur={surpiseAnimDuration(dream.surpriseVal)}
             easing="ease-in"
             direction="alternate"
             repeat="indefinite"
@@ -76,7 +69,7 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** FEAR **/}
-        <a-obj-model src="#fear" position="0 0 -7" scale={renderScale(fearScale(emotions.fear))} material={`color: black; opacity:${fearOpacity(emotions.fear)}`}>
+        <a-obj-model src="#fear" position="0 0 -7" scale={renderScale(fearScale(dream.fearVal))} material={`color: black; opacity:${fearOpacity(dream.fearVal)}`}>
           {/*bobs up and down*/}
           <a-animation
             attribute="position"
@@ -90,7 +83,7 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** JOY **/}
-        <a-obj-model src="#joy" position="0 -1 -7" scale={renderScale(joyScale(emotions.joy))} material="color: rgb(196, 145, 51); roughness: 0; metalness: 0.3" >
+        <a-obj-model src="#joy" position="0 -1 -7" scale={renderScale(joyScale(dream.joyVal))} material="color: rgb(196, 145, 51); roughness: 0; metalness: 0.3" >
           {/*rotates*/}
           <a-animation
             attribute="rotation"
@@ -109,43 +102,43 @@ export default class VRScene extends React.Component {
         </a-obj-model>
 
         {/** ANGER **/}
-        <a-obj-model src="#anger" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" position="0 -4 -7" scale={renderScale(angerScale(dream.angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           {/*clawing thing*/}
           <a-animation
             attribute="rotation"
-            to={`0 0 ${angerClawDegree(emotions.anger)}`}
-            dur={angerAnimDuration(emotions.anger)}
+            to={`0 0 ${angerClawDegree(dream.angerVal)}`}
+            dur={angerAnimDuration(dream.angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
-         <a-obj-model src="#anger" rotation="0 45 0" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+         <a-obj-model src="#anger" rotation="0 45 0" position="0 -4 -7" scale={renderScale(angerScale(dream.angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to={`0 45 ${angerClawDegree(emotions.anger)}`}
-            dur={angerAnimDuration(emotions.anger)}
+            to={`0 45 ${angerClawDegree(dream.angerVal)}`}
+            dur={angerAnimDuration(dream.angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
 
-        <a-obj-model src="#anger" rotation="0 180 0" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" rotation="0 180 0" position="0 -4 -7" scale={renderScale(angerScale(dream.angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to={`0 180 ${angerClawDegree(emotions.anger)}`}
-            dur={angerAnimDuration(emotions.anger)}
+            to={`0 180 ${angerClawDegree(dream.angerVal)}`}
+            dur={angerAnimDuration(dream.angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
         </a-obj-model>
 
-        <a-obj-model src="#anger" rotation="0 225 0" position="0 -4 -7" scale={renderScale(angerScale(emotions.anger))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
+        <a-obj-model src="#anger" rotation="0 225 0" position="0 -4 -7" scale={renderScale(angerScale(dream.angerVal))} material="color: #a80500;  metalness:1; roughness: 0; sphericalEnvMap: #sky;">
           <a-animation
             attribute="rotation"
-            to={`0 225 ${angerClawDegree(emotions.anger)}`}
-            dur={angerAnimDuration(emotions.anger)}
+            to={`0 225 ${angerClawDegree(dream.angerVal)}`}
+            dur={angerAnimDuration(dream.angerVal)}
             direction="alternate"
             easing="ease-out-back"
             repeat="indefinite" />
@@ -153,7 +146,7 @@ export default class VRScene extends React.Component {
 
 
         {/** SADNESS **/}
-        <a-obj-model src="#sadness" scale={renderScale(sadnessScale(emotions.sadness))} position="0 -2 -7" material="color: rgb(41, 52, 68)">
+        <a-obj-model src="#sadness" scale={renderScale(sadnessScale(dream.sadnessVal))} position="0 -2 -7" material="color: rgb(41, 52, 68)">
           {/*rotates*/}
           <a-animation
             easing="linear"
@@ -182,7 +175,7 @@ export default class VRScene extends React.Component {
         <a-entity light="color: white; type: ambient;"></a-entity>
 
         {/*light inside of joy*/}
-        <a-entity light={`color: #94c6ff; distance: 15; intensity: ${joyLight(emotions.joy)}; type: point`} position="0 -1 -7"></a-entity>
+        <a-entity light={`color: #94c6ff; distance: 15; intensity: ${joyLight(dream.joyVal)}; type: point`} position="0 -1 -7"></a-entity>
 
         <a-camera position="0 -3 7"></a-camera>
 
