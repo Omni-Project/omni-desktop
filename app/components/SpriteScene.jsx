@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom';
 import Sky from './Sky'
 import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAnimDuration,
   fearScale, fearOpacity, joyScale, joyLight, angerScale, angerAnimDuration, angerClawDegree,
-  sadnessScale, chooseBg, getDominant } from '../utils'
+  sadnessScale, chooseBg, getDominant, getSkyAngle } from '../utils'
 
-const dummyData = {surpriseVal: 12, fearVal: 15, joyVal: 20, angerVal: 22, sadnessVal: 31}
-const majorSurprise =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
-const majorAnger =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 47, sadnessVal: 15}
-const majorFear =  {surpriseVal: 21, fearVal: 47, joyVal: 7, angerVal: 10, sadnessVal: 15}
-const majorJoy =  {surpriseVal: 21, fearVal: 10, joyVal: 47, angerVal: 15, sadnessVal: 7}
-const majorSadness =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 15, sadnessVal: 47}
+// const dummyData = {surpriseVal: 12, fearVal: 15, joyVal: 20, angerVal: 22, sadnessVal: 31}
+// const majorSurprise =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
+// const majorAnger =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 47, sadnessVal: 15}
+// const majorFear =  {surpriseVal: 21, fearVal: 47, joyVal: 7, angerVal: 10, sadnessVal: 15}
+// const majorJoy =  {surpriseVal: 21, fearVal: 10, joyVal: 47, angerVal: 15, sadnessVal: 7}
+// const majorSadness =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 15, sadnessVal: 47}
 
 export default class VRScene extends React.Component {
   constructor(props){
@@ -19,20 +19,23 @@ export default class VRScene extends React.Component {
   }
 
   render () {
-    const dream = majorJoy;
+    const dream = this.props.dream
     const emotions = {"surprise": dream.surpriseVal,
       "fear": dream.fearVal,
       "joy": dream.joyVal,
       "anger": dream.angerVal,
       "sadness": dream.sadnessVal }
-    const skyTexture = chooseBg(getDominant(emotions))
+    const dominant = getDominant(emotions)
+    const skyTexture = chooseBg(dominant)
+    const skyAngle = getSkyAngle(skyTexture)
+    console.log(skyTexture, skyAngle)
     return (
 
       <div id="embedded">
       <a-scene embedded>
 
         {/*SKY*/}
-        <a-sky src="#sky" rotation="0 0 0" />
+        <a-sky src="#sky" rotation={skyAngle} />
 
 
         <a-assets>
@@ -181,9 +184,7 @@ export default class VRScene extends React.Component {
         {/*light inside of joy*/}
         <a-entity light={`color: #94c6ff; distance: 15; intensity: ${joyLight(emotions.joy)}; type: point`} position="0 -1 -7"></a-entity>
 
-        <a-camera position="0 -3 7">
-
-        </a-camera>
+        <a-camera position="0 -3 7"></a-camera>
 
       </a-scene>
       </div>
