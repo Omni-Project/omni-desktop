@@ -6,12 +6,6 @@ import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAni
   fearScale, fearOpacity, joyScale, joyLight, angerScale, angerAnimDuration, angerClawDegree,
   sadnessScale, getSkyAngle } from '../utils'
 
-// const dummyData = {surpriseVal: 12, fearVal: 15, joyVal: 20, angerVal: 22, sadnessVal: 31}
-// const majorSurprise =  {surpriseVal: 60, fearVal: 6, joyVal: 21, angerVal: 7, sadnessVal: 6}
-// const majorAnger =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 47, sadnessVal: 15}
-// const majorFear =  {surpriseVal: 21, fearVal: 47, joyVal: 7, angerVal: 10, sadnessVal: 15}
-// const majorJoy =  {surpriseVal: 21, fearVal: 10, joyVal: 47, angerVal: 15, sadnessVal: 7}
-// const majorSadness =  {surpriseVal: 10, fearVal: 21, joyVal: 7, angerVal: 15, sadnessVal: 47}
 
 export default class VRScene extends React.Component {
   constructor(props){
@@ -21,7 +15,6 @@ export default class VRScene extends React.Component {
   render () {
     const dream = this.props.dream
     const bgAngle = getSkyAngle(dream.background)
-    console.log(dream.background, bgAngle)
     return (
 
       <div id="embedded">
