@@ -14,7 +14,7 @@ export default (props) => {
       <Grid className="dream-grid">
         <Row className="show-grid">
           <Col md={12} style={{height: "500px"}}>
-            <SpriteScene dream={dream} />
+            {props.selectedDream.id && <SpriteScene dream={dream} />}
           </Col>
         </Row>
         <Row className="show-grid">
