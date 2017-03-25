@@ -53,6 +53,7 @@
     "finalhandler": "^1.0.0",
     "indico.io": "^0.10.5",
     "jsonwebtoken": "^7.3.0",
+    "lodash": "^4.17.4",
     "material-ui": "^0.17.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",

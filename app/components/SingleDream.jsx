@@ -13,6 +13,11 @@ export default (props) => {
     <div>
       <Grid className="dream-grid">
         <Row className="show-grid">
+          <Col md={12} style={{height: "500px"}}>
+            <SpriteScene dream={dream} />
+          </Col>
+        </Row>
+        <Row className="show-grid">
           <Col xs={12} md={8} className="single-dream">
             <h5>{date.toLocaleString(locale, options)}</h5>
             <h3>{dream.title}</h3>
