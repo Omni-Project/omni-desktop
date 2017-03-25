@@ -14,6 +14,7 @@ import SpriteScene from './components/SpriteScene'
 import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
 import UserDashboard from './components/UserDashboard'
+import SpriteGrid from './components/SpriteGrid'
 import SingleDream from './components/SingleDream'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
@@ -45,6 +46,7 @@ render (
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
       </Route>
       <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
+      <Route path="dream-sprites" component={SpriteGrid} />
 
 
     </Route>

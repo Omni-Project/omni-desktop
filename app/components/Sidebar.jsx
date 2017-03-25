@@ -18,7 +18,7 @@ return (
             </li>
 
             <li>
-                <Link to="/test">Dream Sprites</Link>
+                <Link to="/dream-sprites">Dream Sprites</Link>
             </li>
 
             <li>

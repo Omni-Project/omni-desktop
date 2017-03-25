@@ -10,8 +10,12 @@ export default (props) => {
   const locale = "en-us"
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
   return (
-    <div>
       <Grid className="dream-grid">
+        <Row className="show-grid">
+          <Col md={12} style={{height: "500px"}}>
+            <SpriteScene dream={dream} />
+          </Col>
+        </Row>
         <Row className="show-grid">
           <Col md={12} style={{height: "500px"}}>
             <SpriteScene dream={dream} />
@@ -36,6 +40,5 @@ export default (props) => {
           </Col>
         </Row>
     </Grid>
-  </div>
   )
 }
