@@ -37,8 +37,7 @@ export default class VRScene extends React.Component {
 
         {/*ambient light*/}
         <a-entity light="color: white; type: ambient;"></a-entity>
-
-        <a-camera position="0 -3 7"></a-camera>
+        <a-entity position="0 -3 7" camera wasd-controls="fly: true; acceleration: 150" look-controls></a-entity>
 
       </a-scene>
     );
