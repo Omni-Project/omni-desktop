@@ -36,6 +36,15 @@ module.exports = require('express').Router()
       }
     }
   })
+  .get('/public/', (req, res, next ) => {
+    Dream.findAll({
+      where : {
+        isPublic: true
+      }
+    })
+    .then(data => res.send(data))
+    .catch(next)
+  })
   .get('/user/:id/:dreamId', selfOnly('get dreams'), (req, res, next) => {
     Dream.findById(req.params.dreamId)
     .then(data => res.send(data))
