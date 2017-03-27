@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default function Navbar(props) {
   const user = props.user
@@ -17,14 +18,14 @@ export default function Navbar(props) {
           <div className ="collapse navbar-collapse navbar-ex1-collapse">
             <ul className ="nav navbar-right top-nav">
                 <li className ="dropdown">
-                    <a href="#" className ="dropdown-toggle" data-toggle="dropdown">Welcome back, {user.name || user.email}<b className ="caret"></b></a>
+                    <Link to={'#'} className ="dropdown-toggle" data-toggle="dropdown">Welcome back, {user.name || user.email}<b className ="caret"></b></Link>
                     <ul className ="dropdown-menu">
                         <li>
-                            <a href="#">Settings</a>
+                            <Link to={'/settings'}>Settings</Link>
                         </li>
                         <li className ="divider"></li>
                         <li>
-                            <a href="#" onClick={props.handleLogout}>Logout</a>
+                            <Link to={'#'} onClick={props.handleLogout}>Logout</Link>
                         </li>
                     </ul>
                 </li>

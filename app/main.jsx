@@ -15,6 +15,7 @@ import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
 import UserDashboard from './components/UserDashboard'
 import SingleDream from './components/SingleDream'
+import Settings from './components/Settings'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
@@ -45,7 +46,7 @@ render (
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
       </Route>
       <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
-
+      <Route path="/settings" component={Settings} />
 
     </Route>
     </Router>
