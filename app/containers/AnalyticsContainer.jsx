@@ -26,10 +26,13 @@ export default connect(
 
       <Grid className="dream-grid">
         <Row className="show-grid">
-          <WeekHoursSleptChart weekDreams={props.weekDreams} />
+
           <AverageHoursSlept user={props.user} />
-          <DreamTypesPie dreams={props.dreams}/>
           <SleepDebt user={props.user} />
+
+          <WeekHoursSleptChart weekDreams={props.weekDreams} />
+          <DreamTypesPie dreams={props.dreams}/>
+
           <EmotionAverages dreams={props.dreams} />
           {
             props.user && props.user.dreams &&
