@@ -69,8 +69,14 @@ const Dream = db.define('dreams', {
       afterCreate: function(dream){
         return User.findById(dream.user_id)
             .then(user => {
-              let average = ((+user.averageSleep + +dream.totalHoursSlept) / 2).toFixed(2)
-              return user.update({averageSleep: average})
+              let totalHours = +dream.totalHoursSlept;
+              let averageSleep = ((+user.averageSleep + totalHours) / 2).toFixed(2);
+              let sleepDebt = totalHours < 8 ? user.sleepDebt + (8 - totalHours)
+                                             : user.sleepDebt - (totalHours - 8);
+
+              sleepDebt = sleepDebt < 0 ? 0 : sleepDebt;
+
+              return user.update({averageSleep, sleepDebt})
             })
             .catch(console.error)
         }

@@ -44,6 +44,11 @@ const User = db.define('users', {
             err ? reject(err) : resolve(result))
         )
     }
+  },
+  scopes: {
+    dreams: {
+      include: [{all: true}]
+    }
   }
 })
 

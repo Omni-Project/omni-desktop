@@ -20,6 +20,27 @@ import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
 
+//MATERIAL UI THEME FOR COMPONENTS
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider } from 'material-ui';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+const muiTheme = getMuiTheme({
+   palette: {
+    primary1Color: '#a974d5',
+    accent1Color: '#a974d5',
+    textColor: '#fff',
+    canvasColor: 'rgb(48, 48, 48)',
+    borderColor: "#bfbfbf",
+    disabledColor: '#bfbfbf',
+    pickerHeaderColor: '#222',
+    clockCircleColor: '#222'
+  },
+  datePicker: { selectColor: '#a974d5' }
+})
+
+//ON ENTER HOOKS
 function onAppEnter (nextRouterState, replace, done){
 //do not enter app until you get user - making async call here to use the done()
 //fixes id errors we were having in other onEnter hooks (user not on state yet, but hook being called with store.getState().auth)
@@ -70,21 +91,26 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
 
 
 render (
+  <MuiThemeProvider muiTheme={muiTheme}>
   <Provider store={store}>
     <Router history={browserHistory}>
-    <Route path="/" component={AppContainer} onEnter={onAppEnter}>
-      <Route path="public" component={AllSpritesView} onEnter={onPublicDreamsEnter} />
-      <IndexRedirect to="/dreams" />
-      <Route path="dreams" component={DreamsContainer} onEnter={onDreamsEnter}>
-        <IndexRedirect to="/dreams/all" />
-        <Route path="all" component={AllDreams} />
-        <Route path="add" component={AddDreamForm} />
-        <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
+      <Route path="/" component={AppContainer} onEnter={onAppEnter}>
+        <IndexRedirect to="/analytics" />
+        <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
+        <Route path="public" component={AllSpritesView} onEnter={onPublicDreamsEnter} />
+        <Route path="dreams" component={DreamsContainer} onEnter={onDreamsEnter}>
+          <IndexRedirect to="/dreams/all" />
+          <Route path="all" component={AllDreams} />
+          <Route path="add" component={AddDreamForm} />
+          <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
+        </Route>
+
       </Route>
-      <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
-    </Route>
-    <Route path="/login" component={Login} />
     </Router>
-  </Provider>,
+  </Provider>
+  </MuiThemeProvider>,
   document.getElementById('main')
 )
+
+
+
