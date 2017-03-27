@@ -8,6 +8,8 @@ export default class VRScene extends React.Component {
 
   render () {
     const bgAngle = getSkyAngle(this.props.background)
+    const publicView = this.props.publicView;
+
     return (
 
       <a-scene embedded>
@@ -38,10 +40,16 @@ export default class VRScene extends React.Component {
         {/*ambient light*/}
         <a-entity light="color: white; type: ambient;"></a-entity>
         <a-entity position="0 -3 7" camera wasd-controls="fly: true; acceleration: 150" look-controls>
-          <a-entity cursor="fuse: false"
-            position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.026"
-            material="color: rgb(169, 116, 213); shader: flat"/>
+          {
+            /* CURSOR */
+            publicView &&
+            <a-entity
+              cursor="fuse: false"
+              position="0 0 -1"
+              geometry="primitive: ring; radiusInner: 0.03; radiusOuter: 0.036"
+              material="color: rgb(169, 116, 213); shader: flat" />
+          }
+
         </a-entity>
 
       </a-scene>

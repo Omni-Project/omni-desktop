@@ -9,6 +9,7 @@ export default ({ selectedDream, privateView }) => {
   const date = new Date(selectedDream.date)
   const locale = "en-us"
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+
   return (
     <div>
       <Grid className="dream-grid">

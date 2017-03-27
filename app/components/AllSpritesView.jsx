@@ -18,7 +18,6 @@ export default connect(
   }
 
   handleClick (dream) {
-    console.log(dream)
     this.setState({selectedDream: dream})
   }
 
@@ -32,19 +31,18 @@ export default connect(
       randomizePosition={true}
       handleClick={this.handleClick}
     />
-
   ))
 
   return (
- <span>
-    <Environment background="pos-2">
-      { sprites }
-    </Environment>
+    <span>
+      <Environment background="pos-2" publicView={true}>
+        { sprites }
+      </Environment>
 
     {
       this.state.selectedDream && <SingleDream selectedDream={this.state.selectedDream} />
     }
-     </span>
+    </span>
   )
   }
 })
