@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import axios from 'axios'
 
 import store from './store'
-import { selectDream } from './reducers/dreams'
+import { selectDream, getPublicDreams } from './reducers/dreams'
 import { fetchWeekAnalytics, fetchUser } from './reducers/analytics'
 
 import Login from './components/Login'
@@ -37,13 +37,22 @@ function fetchAnalytics(nextRouterState){
   store.dispatch(fetchUser(user.id))
 }
 
+function onPublicDreamsEnter(nextRouterState, replace, done){
+  //had to put axios call here so we can use the done function that comes with onEnter hooks.
+  axios.get(`/api/dreams/public/`)
+    .then(res => res.data)
+    .then(dreams => store.dispatch(getPublicDreams(dreams)))
+    .then(() => done())
+    .catch(console.error)
+}
+
 
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
 
     <Route path="/" component={AppContainer} >
-    <Route path="public" component={AllSpritesView} />
+    <Route path="public" component={AllSpritesView} onEnter={onPublicDreamsEnter} />
       <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />

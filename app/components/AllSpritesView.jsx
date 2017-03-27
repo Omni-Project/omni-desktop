@@ -6,15 +6,14 @@ import Environment from './Environment'
 export default connect(
   (state) => {
     return {
-      dreams: state.dreams.list
+      publicDreams: state.dreams.publicDreams
     }
   }
-)(({ dreams }) => {
+)(({ publicDreams }) => {
 
-  const sprites = dreams && dreams.map(dream => (
-    <SingleSprite dream={dream} key={dream.id} randomizePosition={true}/>
+  const sprites = publicDreams && publicDreams.map(dream => (
+    <SingleSprite dream={dream} key={dream.id} />
   ))
-
 
   return (
     <Environment background="pos-1">
