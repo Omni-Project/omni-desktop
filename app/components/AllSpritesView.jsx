@@ -15,7 +15,6 @@ export default connect(
     <SingleSprite dream={dream} key={dream.id} />
   ))
 
-
   return (
     <Environment background="pos-1">
       { sprites }

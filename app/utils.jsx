@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 export const positiveBgs = ['0 -90 9','0 -90 30', '0 45 0', '0 170 0', '0 -90 0', '0 -60 0', '0 -150 0', '0 -105 0', '0 0 0', '0 -60 15', '-10 0 10']
 export const negativeBgs = ['0 170 0','0 262 0', '0 0 0', '0 -45 -15', '0 -60 0', '0 -160 0', '0 -90 0']
 
@@ -29,6 +27,11 @@ export const surpiseAnimDuration = (eVal) => {
   } else {
       return (300 + diff);
   }
+}
+
+export const generateValue = (eVal, delta, lowerBound) => {
+  const val = (eVal/100).toFixed(2)
+  return (val*delta) + lowerBound
 }
 
 export const fearScale = (eVal) => {
@@ -78,3 +81,19 @@ export const getSkyAngle = (bg) => {
     return negativeBgs[num-1]
   }
 }
+
+export const generateRandom = () => {
+  const negative = Math.random() > 0.5 ? -1 : 1
+  return (Math.random() * 50).toFixed(2) * negative
+}
+
+export const generateDisplacement = (randomize) => {
+  return randomize? [+generateRandom(), +generateRandom(), +generateRandom()] : [0,0,0]
+}
+
+export const generatePosition = (initialPos, displacement) => {
+  const [oldX, oldY, oldZ] = initialPos;
+  const [moveX, moveY, moveZ] = displacement
+  return `${oldX + moveX} ${oldY + moveY} ${oldZ + moveZ}`
+}
+

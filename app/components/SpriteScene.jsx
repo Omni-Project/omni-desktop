@@ -11,7 +11,7 @@ export default class VRScene extends React.Component {
 
       <div id="embedded">
         <Environment background={dream.background}>
-          <SingleSprite dream={dream} />
+          <SingleSprite dream={dream} randomizePosition={false}/>
         </Environment>
       </div>
     );
