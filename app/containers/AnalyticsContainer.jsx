@@ -4,7 +4,9 @@ import { Grid, Row } from 'react-bootstrap'
 
 import WeekHoursSleptChart from '../components/Analytics/weekHoursSlept';
 import AverageHoursSlept from '../components/Analytics/averageHoursSlept';
+import SleepDebt from '../components/Analytics/sleepDebt';
 import EmotionAverages from '../components/Analytics/emotionAverages'
+
 
 export default connect(
   (state) => {
@@ -23,6 +25,7 @@ export default connect(
         <Row className="show-grid">
           <WeekHoursSleptChart weekDreams={props.weekDreams} />
           <AverageHoursSlept user={props.user} />
+          <SleepDebt user={props.user} />
           <EmotionAverages dreams={props.dreams} />
         </Row>
       </Grid>
