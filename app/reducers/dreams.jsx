@@ -6,12 +6,13 @@ import {browserHistory} from 'react-router'
 const GET_DREAMS = 'GET_DREAMS'
 const GET_SINGLE_DREAM = 'GET_SINGLE_DREAM'
 const RECEIVE_DREAM = 'RECEIVE_DREAM'
+const GET_PUBLIC_DREAMS = 'GET_PUBLIC_DREAMS'
 
 //REDUCER
-
 const initialState = {
   list: [],
-  selectedDream: {}
+  selectedDream: {},
+  publicDreams: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +26,9 @@ const reducer = (state = initialState, action) => {
     return newState
   case RECEIVE_DREAM:
     newState.list = [...newState.list, action.dream]
+    return newState
+  case GET_PUBLIC_DREAMS:
+    newState.publicDreams = action.publicDreams
     return newState
   }
   return state
@@ -40,6 +44,10 @@ export const selectDream = dream => ({
 
 export const receiveDream = dream => ({
   type: RECEIVE_DREAM, dream
+})
+
+export const getPublicDreams = publicDreams => ({
+  type: GET_PUBLIC_DREAMS, publicDreams
 })
 
 export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId) =>
