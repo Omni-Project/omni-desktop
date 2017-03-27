@@ -144,7 +144,7 @@ const theme = {
         padding,
         stroke: "transparent",
         strokeWidth: 0,
-        width: 5
+        width: 10
       },
       labels: baseLabelStyles
     }

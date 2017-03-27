@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
-import { VictoryChart, VictoryBar } from 'victory';
+import { VictoryChart, VictoryBar, VictoryTooltip, VictoryAxis } from 'victory';
 
 // Colors
 const gridLinesColor = "#242424";
@@ -15,8 +15,8 @@ const fontSize = 12;
 const padding = 5;
 const baseProps = {
   width: 350,
-  height: 275,
-  padding: 65
+  height: 200,
+  padding: {left: 65, right: 65, top: 20, bottom: 20}
 };
 // Labels
 const baseLabelStyles = {
@@ -74,7 +74,7 @@ const theme = {
         padding: 2,
         stroke: "transparent",
         strokeWidth: 0,
-        width: 5
+        width: 10
       },
       labels: baseLabelStyles
     }
@@ -93,12 +93,10 @@ export default function(props) {
     emotionAvgs.Sadness += dream.sadnessVal
     return emotionAvgs
   }, {Surprise: 0, Anger: 0, Fear: 0, Sadness: 0, Joy: 0})
-  console.log('emotion totals', emotionTotals)
   //transform data into array that VictoryPie can reference, getting the average for each emotion
   const data = Object.keys(emotionTotals).map(emotion => {
-    return {emotion, avg: Math.round(emotionTotals[emotion]/props.dreams.length)}
+    return {emotion, avg: Math.round(emotionTotals[emotion]/props.dreams.length), label: Math.round(emotionTotals[emotion]/props.dreams.length) }
   })
-  console.log('data', data)
 
   return (
      <Col xs={12} md={6} className="analytics-box" >
@@ -109,11 +107,14 @@ export default function(props) {
           theme={theme}
           domainPadding={10}
           >
+          <VictoryAxis dependentAxis
+            orientation="left"/>
             <VictoryBar
               horizontal={true}
               data={data}
               x="emotion"
               y={(datum) => datum.avg}
+              labelComponent={<VictoryTooltip style={{fill: '#a974d5'}} flyoutStyle={{fill: "#242424", stroke: '#C0B4CA'}}/>}
             />
         </VictoryChart>
       }
