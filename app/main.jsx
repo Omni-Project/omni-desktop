@@ -19,6 +19,27 @@ import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider } from 'material-ui';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+
+
+const muiTheme = getMuiTheme({
+   palette: {
+    primary1Color: '#a974d5',
+    accent1Color: '#a974d5',
+    textColor: '#fff',
+    canvasColor: 'rgb(48, 48, 48)',
+    borderColor: "#bfbfbf",
+    disabledColor: '#bfbfbf',
+    pickerHeaderColor: '#222',
+    clockCircleColor: '#222'
+  },
+  datePicker: { selectColor: '#a974d5' }
+})
+
 function onSingleDreamEnter(nextRouterState, replace, done){
   const dreamId = nextRouterState.params.id
   const user = store.getState().auth
@@ -48,6 +69,7 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
 
 
 render (
+  <MuiThemeProvider muiTheme={muiTheme}>
   <Provider store={store}>
     <Router history={browserHistory}>
 
@@ -62,9 +84,12 @@ render (
       </Route>
       <Route path="analytics" component={AnalyticsContainer} onEnter={fetchAnalytics} />
 
-
     </Route>
     </Router>
-  </Provider>,
+  </Provider>
+  </MuiThemeProvider>,
   document.getElementById('main')
 )
+
+
+

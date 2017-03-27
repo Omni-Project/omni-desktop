@@ -1,23 +1,7 @@
 import React from 'react';
-import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, MuiThemeProvider, DatePicker } from 'material-ui';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, DatePicker } from 'material-ui';
 
 
-const muiTheme = getMuiTheme({
-   palette: {
-    primary1Color: '#a974d5',
-    accent1Color: '#a974d5',
-    textColor: '#fff',
-    canvasColor: 'rgb(48, 48, 48)',
-    borderColor: "#999",
-    disabledColor: '#999',
-    pickerHeaderColor: '#222',
-    clockCircleColor: '#222'
-  },
-  datePicker: { selectColor: '#a974d5' }
-})
 
 export default class AddDreamForm extends React.Component {
   constructor() {
@@ -50,7 +34,7 @@ export default class AddDreamForm extends React.Component {
 
 render () {
   return (
-  <MuiThemeProvider muiTheme={muiTheme}>
+
   <div style={{width: '600px'}}>
     <h1>Add a Dream</h1>
     <DatePicker
@@ -105,7 +89,7 @@ render () {
     <br />
     <RaisedButton label="Save" primary={true} onTouchTap={() => this.props.handleSubmit(this.state)} />
   </div>
-  </MuiThemeProvider>
+
   )
 }
 }
