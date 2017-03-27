@@ -50,9 +50,9 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-
+    <Route path='/mobile' component={AllSpritesView} onEnter={onPublicDreamsEnter} />
     <Route path="/" component={AppContainer} >
-    <Route path="public" component={AllSpritesView} onEnter={onPublicDreamsEnter} />
+      <Route path="public" component={AllSpritesView} onEnter={onPublicDreamsEnter} />
       <IndexRedirect to="/dreams" />
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
