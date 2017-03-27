@@ -5,8 +5,10 @@ import { Grid, Row } from 'react-bootstrap'
 import WordCloud from '../components/Analytics/wordCloud';
 import WeekHoursSleptChart from '../components/Analytics/weekHoursSlept';
 import AverageHoursSlept from '../components/Analytics/averageHoursSlept';
+import DreamTypesPie from '../components/Analytics/dreamTypesPie'
 import SleepDebt from '../components/Analytics/sleepDebt';
 import EmotionAverages from '../components/Analytics/emotionAverages'
+
 
 
 export default connect(
@@ -26,6 +28,7 @@ export default connect(
         <Row className="show-grid">
           <WeekHoursSleptChart weekDreams={props.weekDreams} />
           <AverageHoursSlept user={props.user} />
+          <DreamTypesPie dreams={props.dreams}/>
           <SleepDebt user={props.user} />
           <EmotionAverages dreams={props.dreams} />
           {
@@ -33,6 +36,7 @@ export default connect(
             <WordCloud dreams={props.user.dreams} />
 
           }
+
         </Row>
       </Grid>
     </div>
