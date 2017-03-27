@@ -12,7 +12,7 @@ export default connect(
 )(({ publicDreams }) => {
 
   const sprites = publicDreams && publicDreams.map(dream => (
-    <SingleSprite dream={dream} key={dream.id} />
+    <SingleSprite dream={dream} key={dream.id} randomizePosition={true} />
   ))
 
   return (
