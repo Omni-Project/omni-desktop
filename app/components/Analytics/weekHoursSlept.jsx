@@ -118,7 +118,7 @@ const theme = {
       }),
       grid: {
         fill: "transparent",
-        stroke: gridLinesColor,
+        stroke: "none",
         strokeDasharray,
         strokeLinecap,
         strokeLinejoin
