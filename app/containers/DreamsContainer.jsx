@@ -14,8 +14,8 @@ export default connect(
   (dispatch, ownProps) => {
     return {
       handleSubmit: function(state) {
-        const { title, content, timeStart, timeEnd, dreamType, isPublic, date } = state
-        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date, ownProps.userId))
+        const { title, content, timeStart, timeEnd, dreamType, isPublic, date, dreamId } = state
+        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date, ownProps.userId, dreamId))
         browserHistory.push('/dreams/all')
       },
       handleDreamDelete: function(evt, dreamId) {
@@ -34,7 +34,8 @@ export default connect(
     dreams: props.dreams.list,
     selectedDream: props.dreams.selectedDream,
     userId: props.user.id,
-    handleDreamDelete: props.handleDreamDelete
+    handleDreamDelete: props.handleDreamDelete,
+    handleEdit: props.handleEdit
   }
 
   return (

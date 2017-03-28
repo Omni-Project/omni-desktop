@@ -10,11 +10,9 @@ export default connect (
       dreamToUpdate: state.dreams.selectedDream
     }
   },
-  (dispatch) => {
+  (dispatch, ownProps) => {
     return {
-      handleSubmit(dream){
-        dispatch(updateDreamAsync(dream, props.user.id))
-      }
+      handleSubmit: ownProps.handleSubmit
     }
   }
 )(AddDreamForm)

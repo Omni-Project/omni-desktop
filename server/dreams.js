@@ -54,15 +54,10 @@ module.exports = require('express').Router()
      Dream.findAll({
        where: {
          user_id: req.params.id
-        }
+        },
+      order: 'date DESC'
       })
     .then(data => res.send(data))
-    .catch(next)
-  })
-  .put('/user/:id/:dreamId', selfOnly('updated dreams'), (req, res, next) => {
-    Dream.findById(req.params.dreamId)
-    .then(dream => dream.update(req.body))
-    .then(updatedDream => res.send(updatedDream))
     .catch(next)
   })
   .delete('/user/:id/:dreamId', selfOnly('delete dreams'), (req, res, next) => {
@@ -73,10 +68,16 @@ module.exports = require('express').Router()
   })
 	.post('/user/:id', (req, res, next) => {
     req.body.user_id = req.params.id;
-
-    Dream.create(req.body)
-    .then(dream => res.send(dream))
-    .catch(next)
+    if(req.body.dreamId){
+      Dream.findById(req.body.dreamId)
+      .then(dream => dream.update(req.body))
+      .then(dream => res.send(dream))
+      .catch(next)
+    } else {
+      Dream.create(req.body)
+      .then(dream => res.send(dream))
+      .catch(next)
+    }
   })
 
 

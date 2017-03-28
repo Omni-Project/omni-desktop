@@ -71,16 +71,19 @@ export const getPublicDreams = publicDreams => ({
   type: UPDATE_DREAMS, publicDreams
 })
 
-export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId) =>
+export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId, dreamId) =>
   dispatch => {
     const sleepStartHour = timeStart.getHours()
     const sleepStartMinute = timeStart.getMinutes()
     const sleepEndHour = timeEnd.getHours()
     const sleepEndMinute = timeEnd.getMinutes()
-
-    axios.post(`/api/dreams/user/${userId}`, {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
+    //UPDATE AND CREATE NEW DREAM BOTH USE SAME ROUTE
+    axios.post(`/api/dreams/user/${userId}`, {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date, dreamId})
         .then(res => res.data)
-        .then(dream => dispatch(receiveDream(dream)))
+        .then(dream => {
+          if(dreamId) return dispatch(updateDream(dream))
+          return dispatch(receiveDream(dream))
+        })
         .then(() => browserHistory.push('/dreams/all'))
         .catch(console.error)
   }

@@ -6,15 +6,17 @@ import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, D
 export default class AddDreamForm extends React.Component {
   constructor(props) {
     super(props)
-    existingDream = props.dreamToUpdate
+    //ADD DREAM FORM IS USED FOR EDITING AS WELL.
+    //IF SELECTED DREAM IS PICKED FOR EDITING, THAT DREAM'S DATA PRE-POPULATES THE FORM
     this.state = {
-      title: existingDream.title || '',
-      content: existingDream.content || '',
-      timeStart: null,
-      timeEnd: null,
-      dreamType: existingDream.dreamType || null,
-      isPublic: existingDream.isPublic || false,
-      date: null
+      title: props.dreamToUpdate? props.dreamToUpdate.title : '',
+      content: props.dreamToUpdate? props.dreamToUpdate.content : '',
+      timeStart: props.dreamToUpdate? new Date(2017, 4, 3, props.dreamToUpdate.sleepStartHour, props.dreamToUpdate.sleepStartMinute) : null,
+      timeEnd: props.dreamToUpdate? new Date(2017, 4, 3, props.dreamToUpdate.sleepEndHour, props.dreamToUpdate.sleepEndMinute) : null,
+      dreamType: props.dreamToUpdate? props.dreamToUpdate.dreamType : null,
+      isPublic: props.dreamToUpdate? props.dreamToUpdate.isPublic : false,
+      date: props.dreamToUpdate? new Date(props.dreamToUpdate.date) : null,
+      dreamId: props.dreamToUpdate? props.dreamToUpdate.id : null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,6 +33,7 @@ export default class AddDreamForm extends React.Component {
   }
 
   handleTimeChange (e, date, time) {
+    console.log(date)
     this.setState({[time]: date});
   }
 
@@ -40,6 +43,7 @@ render () {
   <div style={{width: '600px'}}>
     <h1>Add a Dream</h1>
     <DatePicker
+      floatingLabelText="Dream Date"
       hintText="Dream Date"
       value={this.state.date}
       onChange={(e, date) => this.handleTimeChange(e,date,'date')}
@@ -47,12 +51,14 @@ render () {
     />
     <TextField
       floatingLabelText="Title"
+      value={this.state.title}
       fullWidth={true}
       onChange={(e) => this.handleChange(e, 'title')}
     /><br />
 
     <TextField
       floatingLabelText="Content"
+      value={this.state.content}
       multiLine={true}
       fullWidth={true}
       rows={3}
@@ -72,12 +78,16 @@ render () {
     </SelectField>
     <br />
     <TimePicker
+      floatingLabelText="Sleep Start"
+      value={this.state.timeStart}
       format="ampm"
       hintText="Sleep Start"
       onChange={(e, date) => this.handleTimeChange(e, date, 'timeStart')}
     />
     <br />
     <TimePicker
+      floatingLabelText="Sleep End"
+      value={this.state.timeEnd}
       format="ampm"
       hintText="Sleep End"
       onChange={(e, date) => this.handleTimeChange(e, date, 'timeEnd')}
@@ -85,6 +95,7 @@ render () {
     <br />
     <Checkbox
       label="Make this public?"
+      checked={this.state.isPublic}
       labelPosition="left"
       onCheck={this.handleCheckChange}
     />

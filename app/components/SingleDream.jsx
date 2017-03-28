@@ -25,7 +25,7 @@ export default (props) => {
             <p className="dream-type">{dream.dreamType}</p>
 
             {/*UPDATE AND DELETE LINKS*/}
-            <a href="#" onClick={(evt) => props.handleEdit(evt, dream.id)}>Edit</a> |
+            <a href="#" onClick={(evt) => props.handleEdit(evt)}>Edit</a> |
             <a href="#" onClick={(evt) => props.handleDreamDelete(evt, dream.id)}>Delete</a>
           </Col>
 
