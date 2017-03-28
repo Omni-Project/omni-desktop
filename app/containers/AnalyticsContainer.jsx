@@ -20,24 +20,21 @@ export default connect(
     }
   }
 )(function(props) {
+  console.log('hi', props)
   return (
     <div>
-      <h1>Analytics</h1>
-
+      <h1>Dream and Sleep Stats</h1>
       <Grid className="dream-grid">
+        {props.user && props.user.dreams &&
         <Row className="show-grid">
-          <WeekHoursSleptChart weekDreams={props.weekDreams} />
-          <AverageHoursSlept user={props.user} />
-          <DreamTypesPie dreams={props.dreams}/>
-          <SleepDebt user={props.user} />
-          <EmotionAverages dreams={props.dreams} />
-          {
-            props.user && props.user.dreams &&
+            <WeekHoursSleptChart weekDreams={props.weekDreams} />
+            <AverageHoursSlept user={props.user} />
+            <DreamTypesPie dreams={props.dreams}/>
+            <SleepDebt user={props.user} />
+            <EmotionAverages dreams={props.dreams} />
             <WordCloud dreams={props.user.dreams} />
-
-          }
-
         </Row>
+            }
       </Grid>
     </div>
   )
