@@ -15,6 +15,7 @@ import AllDreams from './components/AllDreams'
 import AllSpritesView from './components/AllSpritesView'
 import SingleDream from './components/SingleDream'
 import Settings from './components/Settings'
+import MobileSprite from './components/MobileSprite'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
@@ -81,6 +82,20 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
     .then(() => done())
     .catch(console.error)
 }
+function onMobileVREnter(nextRouterState, replace, done){
+  const dreamId = nextRouterState.params.dreamId
+  const userId = nextRouterState.params.userId
+  const token = nextRouterState.params.token
+  //had to put axios call here so we can use the done function that comes with onEnter hooks. So the hook knows to not mount the component until this entire fn is done running.
+  axios.get(`/api/dreams/user/${userId}/${dreamId}?token=${token}`)
+    .then(res => res.data)
+    .then(dream => store.dispatch(selectDream(dream)))
+    .then(() => done())
+    .catch(console.error)
+}
+
+
+
 render (
   <MuiThemeProvider muiTheme={muiTheme}>
   <Provider store={store}>
@@ -98,6 +113,7 @@ render (
         </Route>
         <Route path="/settings" component={Settings} />
       </Route>
+    <Route path="/mobile-vr/:userId/:dreamId/:token" component={MobileSprite} onEnter={onMobileVREnter}/>
     </Router>
   </Provider>
   </MuiThemeProvider>,
