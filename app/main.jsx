@@ -19,6 +19,7 @@ import SingleDream from './components/SingleDream'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
+import EditDreamContainer from './containers/EditDreamContainer'
 
 //MATERIAL UI THEME FOR COMPONENTS
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -102,9 +103,9 @@ render (
           <IndexRedirect to="/dreams/all" />
           <Route path="all" component={AllDreams} />
           <Route path="add" component={AddDreamForm} />
+          <Route path="edit" component={EditDreamContainer} />
           <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
         </Route>
-
       </Route>
     </Router>
   </Provider>

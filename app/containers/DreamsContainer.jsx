@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { receiveDreamEntry } from '../reducers/dreams'
+import { receiveDreamEntry, updateDream, deleteDream } from '../reducers/dreams'
 import {browserHistory} from 'react-router'
 
 
@@ -14,9 +14,17 @@ export default connect(
   (dispatch, ownProps) => {
     return {
       handleSubmit: function(state) {
-        const { title, content, timeStart, timeEnd, dreamType, isPublic, date } = state
-        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date, ownProps.userId))
+        const { title, content, timeStart, timeEnd, dreamType, isPublic, date, dreamId } = state
+        dispatch(receiveDreamEntry(title, content, timeStart, timeEnd, dreamType, isPublic, date, ownProps.userId, dreamId))
         browserHistory.push('/dreams/all')
+      },
+      handleDreamDelete: function(evt, dreamId) {
+        evt.preventDefault()
+        dispatch(deleteDream(dreamId, ownProps.userId))
+      },
+      handleEdit: function(evt) {
+        evt.preventDefault()
+        browserHistory.push('/dreams/edit')
       }
     }
   }
@@ -25,7 +33,9 @@ export default connect(
     handleSubmit: props.handleSubmit,
     dreams: props.dreams.list,
     selectedDream: props.dreams.selectedDream,
-    userId: props.user.id
+    userId: props.user.id,
+    handleDreamDelete: props.handleDreamDelete,
+    handleEdit: props.handleEdit
   }
 
   return (
