@@ -317,6 +317,12 @@ a {
     margin-bottom: 8px
 }
 
+.save-button {
+    position: relative;
+    right: -3%;
+    margin-bottom: 8px;
+    margin-top: 8px
+}
 
 /*WORD CLOUD*/
 
@@ -348,5 +354,4 @@ a {
 .node.active circle, .node.active.hover circle {
     opacity:1.0;
 }
-
 
