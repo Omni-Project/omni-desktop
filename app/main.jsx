@@ -18,6 +18,7 @@ import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
 import EditDreamContainer from './containers/EditDreamContainer'
+
 //MATERIAL UI THEME FOR COMPONENTS
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { MuiThemeProvider } from 'material-ui';
