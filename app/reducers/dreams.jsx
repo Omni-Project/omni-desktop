@@ -7,6 +7,8 @@ const GET_DREAMS = 'GET_DREAMS'
 const GET_SINGLE_DREAM = 'GET_SINGLE_DREAM'
 const RECEIVE_DREAM = 'RECEIVE_DREAM'
 const GET_PUBLIC_DREAMS = 'GET_PUBLIC_DREAMS'
+const UPDATE_DREAMS = 'UPDATE_DREAMS'
+const UPDATE_DREAM = 'UPDATE_DREAM'
 
 //REDUCER
 const initialState = {
@@ -30,6 +32,17 @@ const reducer = (state = initialState, action) => {
   case GET_PUBLIC_DREAMS:
     newState.publicDreams = action.publicDreams
     return newState
+  case UPDATE_DREAMS:
+    newState.list = state.list.filter(dream => {
+      return dream.id !== action.deletedDreamId
+    })
+    return newState
+  case UPDATE_DREAM:
+    newState.list = state.list.map(dream => {
+      if(dream.id === action.updatedDream.id) return action.updatedDream
+      return dream
+    })
+    return newState
   }
   return state
 }
@@ -46,8 +59,16 @@ export const receiveDream = dream => ({
   type: RECEIVE_DREAM, dream
 })
 
+export const updateDream = updatedDream => ({
+  type: UPDATE_DREAM, updatedDream
+})
+
+export const updateDreamsList = deletedDreamId => ({
+  type: UPDATE_DREAMS, deletedDreamId
+})
+
 export const getPublicDreams = publicDreams => ({
-  type: GET_PUBLIC_DREAMS, publicDreams
+  type: UPDATE_DREAMS, publicDreams
 })
 
 export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId) =>
@@ -81,5 +102,27 @@ export const fetchSingleDream = (userId, id) =>
       dispatch(selectDream(dream))
     }).catch(console.error)
   }
+
+export const deleteDream = (dreamId, userId) =>
+  dispatch => {
+    axios.delete(`/api/dreams/user/${userId}/${dreamId}`)
+    .then(res => res.data)
+    .then(() => {
+      dispatch(updateDreamsList(dreamId))
+      browserHistory.push('/dreams/all')
+    }).catch(console.error)
+  }
+
+export const updateDreamAsync = (dream, userId) =>
+  dispatch => {
+
+    axios.put(`/api/dreams/user/${userId}/${dreamId}`, dream)
+    .then(res => res.data)
+    .then(updatedDream => {
+      dispatch(updateDream(updateDream))
+      browserHistory.push('/dreams/all')
+    }).catch(console.error)
+  }
+
 
 export default reducer

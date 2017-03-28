@@ -59,6 +59,18 @@ module.exports = require('express').Router()
     .then(data => res.send(data))
     .catch(next)
   })
+  .put('/user/:id/:dreamId', selfOnly('updated dreams'), (req, res, next) => {
+    Dream.findById(req.params.dreamId)
+    .then(dream => dream.update(req.body))
+    .then(updatedDream => res.send(updatedDream))
+    .catch(next)
+  })
+  .delete('/user/:id/:dreamId', selfOnly('delete dreams'), (req, res, next) => {
+    Dream.findById(req.params.dreamId)
+    .then(dream => dream.destroy())
+    .then(result => res.send(result))
+    .catch(next)
+  })
 	.post('/user/:id', (req, res, next) => {
     req.body.user_id = req.params.id;
 

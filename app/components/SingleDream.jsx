@@ -1,7 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import { Link } from 'react-router'
-import { Grid, Row, Col, bootstrapUtils } from 'react-bootstrap'
+import { Grid, Row, Col} from 'react-bootstrap'
+import {Link} from 'react-router'
 import SpriteScene from './SpriteScene'
 
 export default (props) => {
@@ -18,12 +17,19 @@ export default (props) => {
           </Col>
         </Row>
         <Row className="show-grid">
+          {/*DREAM TITLE AND CONTENT*/}
           <Col xs={12} md={8} className="single-dream">
             <h5>{date.toLocaleString(locale, options)}</h5>
             <h3>{dream.title}</h3>
             <p>{dream.content}</p>
             <p className="dream-type">{dream.dreamType}</p>
+
+            {/*UPDATE AND DELETE LINKS*/}
+            <a href="#" onClick={(evt) => props.handleEdit(evt, dream.id)}>Edit</a> |
+            <a href="#" onClick={(evt) => props.handleDreamDelete(evt, dream.id)}>Delete</a>
           </Col>
+
+          {/*DREAM KEYWORDS*/}
           <Col xs={12} md={3} className="single-dream">
             <h4>Dream Type</h4>
             <p>{dream.dreamType}</p>

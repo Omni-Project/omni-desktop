@@ -4,17 +4,19 @@ import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, D
 
 
 export default class AddDreamForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props)
+    existingDream = props.dreamToUpdate
     this.state = {
-      title: '',
-      content: '',
+      title: existingDream.title || '',
+      content: existingDream.content || '',
       timeStart: null,
       timeEnd: null,
-      dreamType: null,
-      isPublic: false,
+      dreamType: existingDream.dreamType || null,
+      isPublic: existingDream.isPublic || false,
       date: null
     }
+
     this.handleChange = this.handleChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleCheckChange = this.handleCheckChange.bind(this);

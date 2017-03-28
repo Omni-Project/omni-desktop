@@ -18,6 +18,7 @@ import SingleDream from './components/SingleDream'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
+import EditDreamContainer from './containers/EditDreamContainer'
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { MuiThemeProvider } from 'material-ui';
@@ -79,6 +80,7 @@ render (
       <Route path="dreams" component={DreamsContainer} >
         <IndexRedirect to="/dreams/all" />
         <Route path="all" component={AllDreams} />
+        <Route path="edit" component={EditDreamContainer} />
         <Route path="add" component={AddDreamForm} />
         <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
       </Route>

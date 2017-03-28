@@ -243,6 +243,14 @@ body {
     padding: 10px;
 }
 
+.single-dream button {
+    background-color: #BD95AF;
+    border-width: 0;
+    border-radius: 3px;
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 10px;
+}
 
 
 /* ANALYTICS */
