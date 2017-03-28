@@ -99,7 +99,7 @@ export default function(props) {
   })
 
   return (
-     <Col xs={12} md={6} className="analytics-box" >
+     <Col xs={12} md={12} className="analytics-box" style={{height: '350px'}}>
       <h3>Emotion Averages For All Dreams</h3>
         { data.length &&
           <VictoryChart

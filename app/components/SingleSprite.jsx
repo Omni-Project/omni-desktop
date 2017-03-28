@@ -6,11 +6,11 @@ import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAni
   sadnessScale, generateDisplacement, generatePosition } from '../utils'
 
 
-export default (props) => {
-    const dream = props.dream;
-    const displacement = generateDisplacement(props.randomizePosition)
+export default ({ dream, handleClick, randomizePosition }) => {
+
+    const displacement = generateDisplacement(randomizePosition)
     return (
-      <a-entity>
+      <a-entity onClick={() => handleClick(dream)}>
 
         {/** SURPRISE **/}
         <a-obj-model src="#surprise" material={`src: #plastic; metalness: ${metalness(dream.surpriseVal)}`} position={generatePosition([0,-2,-7],displacement)} scale="0 0 0">

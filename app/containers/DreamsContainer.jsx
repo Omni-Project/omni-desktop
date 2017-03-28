@@ -25,7 +25,8 @@ export default connect(
     handleSubmit: props.handleSubmit,
     dreams: props.dreams.list,
     selectedDream: props.dreams.selectedDream,
-    userId: props.user.id
+    userId: props.user.id,
+    privateView: true
   }
 
   return (
