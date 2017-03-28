@@ -33,7 +33,6 @@ export default class AddDreamForm extends React.Component {
   }
 
   handleTimeChange (e, date, time) {
-    console.log(date)
     this.setState({[time]: date});
   }
 

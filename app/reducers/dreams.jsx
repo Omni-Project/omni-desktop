@@ -68,7 +68,7 @@ export const updateDreamsList = deletedDreamId => ({
 })
 
 export const getPublicDreams = publicDreams => ({
-  type: UPDATE_DREAMS, publicDreams
+  type: GET_PUBLIC_DREAMS, publicDreams
 })
 
 export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId, dreamId) =>
@@ -112,17 +112,6 @@ export const deleteDream = (dreamId, userId) =>
     .then(res => res.data)
     .then(() => {
       dispatch(updateDreamsList(dreamId))
-      browserHistory.push('/dreams/all')
-    }).catch(console.error)
-  }
-
-export const updateDreamAsync = (dream, userId) =>
-  dispatch => {
-
-    axios.put(`/api/dreams/user/${userId}/${dreamId}`, dream)
-    .then(res => res.data)
-    .then(updatedDream => {
-      dispatch(updateDream(updateDream))
       browserHistory.push('/dreams/all')
     }).catch(console.error)
   }
