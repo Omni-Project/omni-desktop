@@ -5,6 +5,7 @@ const Sequelize = require('sequelize')
 const db = require('APP/db')
 const User = require('./user.js')
 const indico = require('indico.io');
+const _ = require('lodash');
 indico.apiKey =  env.INDICO_API_KEY;
 
 
@@ -48,7 +49,9 @@ const Dream = db.define('dreams', {
     joyVal: Sequelize.INTEGER,
     fearVal: Sequelize.INTEGER,
     surpriseVal: Sequelize.INTEGER,
-    randomizingFactor: Sequelize.INTEGER
+    dominant: Sequelize.STRING,
+    background: Sequelize.STRING,
+    randomVal: Sequelize.INTEGER
 
 }, {
     getterMethods: {
@@ -64,10 +67,16 @@ const Dream = db.define('dreams', {
       beforeCreate: analyzeText,
 
       afterCreate: function(dream){
-        User.findById(dream.user_id)
+        return User.findById(dream.user_id)
             .then(user => {
-              let average = ((+user.averageSleep + +dream.totalHoursSlept) / 2).toFixed(2)
-              return user.update({averageSleep: average})
+              let totalHours = +dream.totalHoursSlept;
+              let averageSleep = ((+user.averageSleep + totalHours) / 2).toFixed(2);
+              let sleepDebt = totalHours < 8 ? user.sleepDebt + (8 - totalHours)
+                                             : user.sleepDebt - (totalHours - 8);
+
+              sleepDebt = sleepDebt < 0 ? 0 : sleepDebt;
+
+              return user.update({averageSleep, sleepDebt})
             })
             .catch(console.error)
         }
@@ -77,8 +86,7 @@ const Dream = db.define('dreams', {
 
 //call to indico API
 function analyzeText(dream) {
-    const content = dream.content;
-
+  const content = dream.content;
   return indico.keywords(content, {version: 2, top_n: 5})
     .then((keywords) => dream.keywords = Object.keys(keywords))
     .then(() => indico.emotion(content))
@@ -89,12 +97,47 @@ function analyzeText(dream) {
         dream.joyVal = Math.round(joy * 100);
         dream.sadnessVal = Math.round(sadness * 100);
         dream.surpriseVal = Math.round(surprise * 100);
+        dream.dominant = getDominant(buildEmotionObj(dream))
+        dream.background = chooseBg(dream.dominant)
+        dream.randomVal = Math.round(Math.random() * 100)
     })
     .then(() => indico.personas(content, {top_n: 1}))
     .then((persona) => dream.persona = Object.keys(persona)[0])
     .catch(console.error)
 }
 
+//builds emotion obj that getDominant will loop over
+function buildEmotionObj (dream){
+    return {"surprise": dream.surpriseVal,
+      "fear": dream.fearVal,
+      "joy": dream.joyVal,
+      "anger": dream.angerVal,
+      "sadness": dream.sadnessVal }
+}
 
+//gets dominant emotion in dream
+function getDominant (emotionsObj) {
+  const dominant = _.reduce(emotionsObj, (result, value, key) => {
+    if (result.value < value) {
+      result.value = value;
+      result.emotion = key
+    }
+    return result
+  }, {emotion: '', value: 0})
+  return dominant.emotion
+}
+
+const numOfPosBg = 11
+const numOfNegBg = 7
+//selects a random background image filename for sprite.
+//Doing this on the backend because front-end was selecting multple background but loading the first one
+//causing a conflict with the background image angle (selected on SpriteScene.jsx)
+function chooseBg (dominant) {
+  if(dominant === 'joy' || dominant === 'surprise'){
+    return `pos-${((Math.floor(Math.random() * numOfPosBg)) + 1)}`
+  } else {
+    return `neg-${((Math.floor(Math.random() * numOfNegBg)) + 1)}`
+  }
+}
 
 module.exports = Dream;
