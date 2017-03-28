@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router'
 import { Grid, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
-import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, MuiThemeProvider, DatePicker } from 'material-ui';
+
 // all forms with NAME/PW and the placeholder with a button called edit
 // when edit is clicked, placeholder becomes a text field
 //         old pw, new pw, email, photos(later)--> type in old and new pw

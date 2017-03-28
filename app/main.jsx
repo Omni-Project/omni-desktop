@@ -19,6 +19,7 @@ import Settings from './components/Settings'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
+import UserEmail from './components/Settings/UserEmail'
 
 function onSingleDreamEnter(nextRouterState){
   const dreamId = nextRouterState.params.id
