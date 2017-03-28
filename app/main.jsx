@@ -14,7 +14,7 @@ import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
 import AllSpritesView from './components/AllSpritesView'
 import SingleDream from './components/SingleDream'
-import Settings from './components/Settings'
+import SettingsContainer from './containers/SettingsContainer'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
 import AnalyticsContainer from './containers/AnalyticsContainer'
@@ -81,6 +81,8 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
     .then(() => done())
     .catch(console.error)
 }
+
+//REACTDOM.RENDER
 render (
   <MuiThemeProvider muiTheme={muiTheme}>
   <Provider store={store}>
@@ -96,7 +98,7 @@ render (
           <Route path="edit" component={EditDreamContainer} />
           <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
         </Route>
-        <Route path="/settings" component={Settings} />
+        <Route path="/settings" component={SettingsContainer} />
       </Route>
     </Router>
   </Provider>

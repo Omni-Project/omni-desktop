@@ -287,6 +287,10 @@ a {
     color: #a974d5
 }
 
+.error-form {
+    border-color: #a974d5;
+    border-width: 2px
+}
 
 #embedded {
     height: 100%;

@@ -1,51 +1,64 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router'
-import { Grid, Row, Col, Button, ButtonToolbar, FormControl, FormGroup } from 'react-bootstrap'
+import { Grid, Row, Col, Button, ButtonToolbar, FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 
-export class UserEmail extends Component {
+export default class UserPassword extends Component {
   constructor(props){
     super(props)
     this.state = {
-      password: props.user.password
+      oldPassword: '',
+      newPassword: '',
+      error: null
     }
-    this.getValidationState = this.getValidationState.bind(this);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    const newState = { [e.target.name]: e.target.value }
+    if (e.target.value.length < 1) {newState.error = 'Please enter an email'}
+    else {newState.error = null}
+    this.setState(Object.assign({}, newState))
   }
 
-  render() {
-    return (
-    <div style={{width: 500}}>
-    <h1>Change your password</h1>
-      <div className="settings-container">  
-      <form>
+  handleSubmit(){
+    if (this.state.oldPassword < 1 || this.state.newPassword < 1) {
+      this.setState({error: 'Please enter a password'})
+      return;
+    } else {
+      this.props.onSave("editPass", "password", this.state.newPassword, this.state.oldPassword)
+    }
+  }
 
-        <div>
-            <label className="settings-labels"><h4>Current password: </h4></label>
-                <div className="settings-userinfo">
-                    {this.state.password}
-                </div>
-        </div>
+ render() {
+   const error = this.props.serverError || this.state.error
+    return (
+    <div style={{width: 450}}>
+    <h4>Change your password</h4>
+      <div className="settings-container">
+        <form>
         <FormGroup
-            controlId="formControlsPassword"
-            validationState={this.getValidationState()}>
-        <label className="settings-labels"><h4>New password: </h4></label>
-        <FormControl
-            type="text"
-            value={this.state.value}
-            placeholder="Enter new email"
+          controlId="formBasicText"
+          >
+          <ControlLabel><h5>Current Password: </h5></ControlLabel>
+          <FormControl
+            type="password"
+            name="oldPassword"
+            value={this.state.oldPassword}
+            className={this.state.error?"error-form": ""}
+            placeholder="Enter your current password"
             onChange={this.handleChange}/>
-          <Button className="save-button" href="#" bsSize="xsmall">save</Button>
+
+          <ControlLabel><h5>New Password: </h5></ControlLabel>
+          <FormControl
+            type="password"
+            name="newPassword"
+            value={this.state.newPassword}
+            className={this.state.error?"error-form": ""}
+            placeholder="Enter a new password"
+            onChange={this.handleChange}/>
+          {error ? <HelpBlock className="error-message">{error}</HelpBlock> : null }
+          <Button className="save-button" href="#" bsSize="small" onClick={this.handleSubmit}>Save</Button>
           <FormControl.Feedback />
         </FormGroup>
       </form>
@@ -53,5 +66,4 @@ export class UserEmail extends Component {
     </div>
     );
   }
-
 }
