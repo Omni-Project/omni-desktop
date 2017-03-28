@@ -22,11 +22,10 @@ export default connect(
 )(function(props) {
   return (
     <div>
-      <h1>Analytics</h1>
-
+      <h1>Dream and Sleep Stats</h1>
       <Grid className="dream-grid">
+        {props.user && props.user.dreams &&
         <Row className="show-grid">
-
           <AverageHoursSlept user={props.user} />
           <SleepDebt user={props.user} />
 
@@ -34,13 +33,11 @@ export default connect(
           <DreamTypesPie dreams={props.dreams}/>
 
           <EmotionAverages dreams={props.dreams} />
-          {
-            props.user && props.user.dreams &&
+
             <WordCloud dreams={props.user.dreams} />
-
+        
+          </Row>
           }
-
-        </Row>
       </Grid>
     </div>
   )
