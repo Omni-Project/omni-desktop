@@ -1,10 +1,7 @@
-import _ from 'lodash'
-
-const positiveBgs = ['','']
-const negativeBgs = ['','']
+export const positiveBgs = ['0 -90 9','0 -90 30', '0 45 0', '0 170 0', '0 -90 0', '0 -60 0', '0 -150 0', '0 -105 0', '0 0 0', '0 -60 15', '-10 0 10']
+export const negativeBgs = ['0 170 0','0 262 0', '0 0 0', '0 -45 -15', '0 -60 0', '0 -160 0', '0 -90 0']
 
 export const  supriseAnimColor = (eVal) => {
-  console.log('eVal is', eVal)
   const g = 100 - eVal;
   const b = 180 - eVal;
   return `rgb(255,${g},${b})`
@@ -30,6 +27,11 @@ export const surpiseAnimDuration = (eVal) => {
   } else {
       return (300 + diff);
   }
+}
+
+export const generateValue = (eVal, delta, lowerBound) => {
+  const val = (eVal/100).toFixed(2)
+  return (val*delta) + lowerBound
 }
 
 export const fearScale = (eVal) => {
@@ -71,21 +73,27 @@ export const sadnessScale = (eVal) => {
   return (val*2.5) + .4
 }
 
-export const getDominant = (emotionsObj) => {
-  const dominant = _.reduce(emotionsObj, (result, value, key) => {
-    if (result.value < value) {
-      result.value = value;
-      result.emotion = key
-    }
-    return result
-  }, {emotion: '', value: 0})
-  return dominant.emotion
-}
-
-export const chooseBg = (dominant) => {
-  if(dominant === 'joy' || dominant === 'surprise'){
-    return `pos-${((Math.floor(Math.random() * 11)) + 1)}`
+export const getSkyAngle = (bg) => {
+  const [emotion, num] =  bg.split('-')
+  if (emotion==='pos'){
+    return positiveBgs[num-1]
   } else {
-    return `neg-${((Math.floor(Math.random() * 6)) + 1)}`
+    return negativeBgs[num-1]
   }
 }
+
+export const generateRandom = () => {
+  const negative = Math.random() > 0.5 ? -1 : 1
+  return (Math.random() * 50).toFixed(2) * negative
+}
+
+export const generateDisplacement = (randomize) => {
+  return randomize? [+generateRandom(), +generateRandom(), +generateRandom()] : [0,0,0]
+}
+
+export const generatePosition = (initialPos, displacement) => {
+  const [oldX, oldY, oldZ] = initialPos;
+  const [moveX, moveY, moveZ] = displacement
+  return `${oldX + moveX} ${oldY + moveY} ${oldZ + moveZ}`
+}
+

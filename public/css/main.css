@@ -10,6 +10,10 @@ body {
     padding-top: 51px
 }
 
+a {
+    color: #b4d4ee;
+}
+
 * {
     box-sizing: border-box
 }
@@ -243,6 +247,14 @@ body {
     padding: 10px;
 }
 
+.single-dream button {
+    background-color: #BD95AF;
+    border-width: 0;
+    border-radius: 3px;
+    color: #FFFFFF;
+    margin: 5px;
+    padding: 10px;
+}
 
 
 /* ANALYTICS */
@@ -311,3 +323,35 @@ body {
     margin-bottom: 8px;
     margin-top: 8px
 }
+
+/*WORD CLOUD*/
+
+#word-cloud {
+    height: 450px;
+    width: 100%;
+}
+
+
+.node circle {
+    opacity: 0;
+    fill: #242424;
+    transition: 0.5s
+}
+
+.node text {
+    fill: #a974d5;
+    stroke: none;
+}
+.node .count {
+    font-family:sans-serif;
+    fill: #C0B4CA;
+}
+
+.node.hover circle {
+    opacity: 0.5;
+}
+
+.node.active circle, .node.active.hover circle {
+    opacity:1.0;
+}
+

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {fetchAllDreams} from './dreams'
 
 const reducer = (state=null, action) => {
   switch(action.type) {
@@ -33,7 +32,6 @@ export const whoami = () =>
       .then(response => {
         const user = response.data
         dispatch(authenticated(user))
-        if (user) dispatch(fetchAllDreams(user.id))
       })
       .catch(failed => dispatch(authenticated(null)))
 

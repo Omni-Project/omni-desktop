@@ -6,12 +6,15 @@ import {browserHistory} from 'react-router'
 const GET_DREAMS = 'GET_DREAMS'
 const GET_SINGLE_DREAM = 'GET_SINGLE_DREAM'
 const RECEIVE_DREAM = 'RECEIVE_DREAM'
+const GET_PUBLIC_DREAMS = 'GET_PUBLIC_DREAMS'
+const UPDATE_DREAMS = 'UPDATE_DREAMS'
+const UPDATE_DREAM = 'UPDATE_DREAM'
 
 //REDUCER
-
 const initialState = {
   list: [],
-  selectedDream: {}
+  selectedDream: {},
+  publicDreams: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +28,20 @@ const reducer = (state = initialState, action) => {
     return newState
   case RECEIVE_DREAM:
     newState.list = [...newState.list, action.dream]
+    return newState
+  case GET_PUBLIC_DREAMS:
+    newState.publicDreams = action.publicDreams
+    return newState
+  case UPDATE_DREAMS:
+    newState.list = state.list.filter(dream => {
+      return dream.id !== action.deletedDreamId
+    })
+    return newState
+  case UPDATE_DREAM:
+    newState.list = state.list.map(dream => {
+      if(dream.id === action.updatedDream.id) return action.updatedDream
+      return dream
+    })
     return newState
   }
   return state
@@ -42,16 +59,31 @@ export const receiveDream = dream => ({
   type: RECEIVE_DREAM, dream
 })
 
-export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId) =>
+export const updateDream = updatedDream => ({
+  type: UPDATE_DREAM, updatedDream
+})
+
+export const updateDreamsList = deletedDreamId => ({
+  type: UPDATE_DREAMS, deletedDreamId
+})
+
+export const getPublicDreams = publicDreams => ({
+  type: GET_PUBLIC_DREAMS, publicDreams
+})
+
+export const receiveDreamEntry = (title, content, timeStart, timeEnd, dreamType, isPublic, date, userId, dreamId) =>
   dispatch => {
     const sleepStartHour = timeStart.getHours()
     const sleepStartMinute = timeStart.getMinutes()
     const sleepEndHour = timeEnd.getHours()
     const sleepEndMinute = timeEnd.getMinutes()
-
-    axios.post(`/api/dreams/user/${userId}`, {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date})
+    //UPDATE AND CREATE NEW DREAM BOTH USE SAME ROUTE
+    axios.post(`/api/dreams/user/${userId}`, {title, content, sleepStartHour, sleepStartMinute, sleepEndHour, sleepEndMinute, dreamType, isPublic, date, dreamId})
         .then(res => res.data)
-        .then(dream => dispatch(receiveDream(dream)))
+        .then(dream => {
+          if(dreamId) return dispatch(updateDream(dream))
+          return dispatch(receiveDream(dream))
+        })
         .then(() => browserHistory.push('/dreams/all'))
         .catch(console.error)
   }
@@ -73,5 +105,16 @@ export const fetchSingleDream = (userId, id) =>
       dispatch(selectDream(dream))
     }).catch(console.error)
   }
+
+export const deleteDream = (dreamId, userId) =>
+  dispatch => {
+    axios.delete(`/api/dreams/user/${userId}/${dreamId}`)
+    .then(res => res.data)
+    .then(() => {
+      dispatch(updateDreamsList(dreamId))
+      browserHistory.push('/dreams/all')
+    }).catch(console.error)
+  }
+
 
 export default reducer
