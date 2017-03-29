@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import Login from '../components/Login'
 import {logout} from '../reducers/auth'
 
+
 export default connect(
   (state) => {
     return {
@@ -15,21 +16,22 @@ export default connect(
     return {
       handleLogout: () => {
         dispatch(logout())
+
       }
     }
   }
 )(function(props) {
   return (
     <div style={{display: 'flex'}}>
-      { props.user ?
+
       <div>
         <Navbar user={props.user} handleLogout={props.handleLogout}/>
         <Sidebar user={props.user} />
         <div id="main-content">
         { props.children && React.cloneElement(props.children, props) }
         </div>
-      </div> : <Login />
-      }
+      </div>
+
     </div>
   )
 })

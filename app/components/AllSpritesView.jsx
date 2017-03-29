@@ -3,11 +3,15 @@ import {connect} from 'react-redux'
 import SingleDream from './SingleDream'
 import SingleSprite from './SingleSprite'
 import Environment from './Environment'
+import {generateDisplacement} from '../utils'
 
 export default connect(
   (state) => {
     return {
-      publicDreams: state.dreams.publicDreams
+      publicDreams: state.dreams.publicDreams.map(dream => {
+        dream.displacement = generateDisplacement()
+        return dream
+      })
     }
   }
 )(class extends React.Component {
@@ -25,12 +29,12 @@ export default connect(
     const publicDreams = this.props.publicDreams
     const sprites = publicDreams && publicDreams.map(dream => (
 
-    <SingleSprite
-      dream={dream}
-      key={dream.id}
-      randomizePosition={true}
-      handleClick={this.handleClick}
-    />
+      <SingleSprite
+        dream={dream}
+        key={dream.id}
+        displacement={dream.displacement}
+        handleClick={this.handleClick}
+      />
   ))
 
   return (

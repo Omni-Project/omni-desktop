@@ -12,7 +12,7 @@ export class MobileSprite extends React.Component {
       <div style={{height: "500px"}}>
         <div id="embedded">
           <Environment background={dream.background}>
-            <SingleSprite dream={dream} randomizePosition={false}/>
+            <SingleSprite dream={dream} displacement={[0,0,0]}/>
           </Environment>
         </div>
       </div>
