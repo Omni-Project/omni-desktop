@@ -14,7 +14,8 @@ import AddDreamForm from './components/AddDreamForm'
 import AllDreams from './components/AllDreams'
 import AllSpritesView from './components/AllSpritesView'
 import SingleDream from './components/SingleDream'
-import Settings from './components/Settings'
+
+import SettingsContainer from './containers/SettingsContainer'
 import MobileSprite from './components/MobileSprite'
 import AppContainer from './containers/AppContainer'
 import DreamsContainer from './containers/DreamsContainer'
@@ -82,6 +83,9 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
     .then(() => done())
     .catch(console.error)
 }
+
+
+//REACTDOM.RENDER
 function onMobileVREnter(nextRouterState, replace, done){
   const dreamId = nextRouterState.params.dreamId
   const userId = nextRouterState.params.userId
@@ -93,6 +97,7 @@ function onMobileVREnter(nextRouterState, replace, done){
     .then(() => done())
     .catch(console.error)
 }
+
 
 
 
@@ -111,7 +116,7 @@ render (
           <Route path="edit" component={EditDreamContainer} />
           <Route path=":id" component={SingleDream} onEnter={onSingleDreamEnter} />
         </Route>
-        <Route path="/settings" component={Settings} />
+        <Route path="/settings" component={SettingsContainer} />
       </Route>
     <Route path="/mobile-vr/:userId/:dreamId/:token" component={MobileSprite} onEnter={onMobileVREnter}/>
     </Router>
