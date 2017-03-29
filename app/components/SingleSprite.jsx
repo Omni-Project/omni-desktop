@@ -2,8 +2,8 @@ import 'aframe';
 import React from 'react';
 
 import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAnimDuration,
-  fearScale, fearOpacity, joyScale, joyLight, angerScale, angerAnimDuration, angerClawDegree,
-  sadnessScale, generatePosition } from '../utils'
+  fearScale, fearOpacity, joyScale, angerScale, angerAnimDuration, angerClawDegree,
+  sadnessScale, generatePosition, fearColor, joyColor, sadnessOpacityHigh, sadnessOpacityLow, chooseLightColor } from '../utils'
 
 
 export default ({ dream, handleClick, displacement }) => {
@@ -34,7 +34,7 @@ export default ({ dream, handleClick, displacement }) => {
         </a-obj-model>
 
         {/** FEAR **/}
-        <a-obj-model src="#fear" position={generatePosition([0,0,-7],displacement)} scale={renderScale(fearScale(dream.fearVal))} material={`color: black; opacity:${fearOpacity(dream.fearVal)}`}>
+        <a-obj-model src="#fear" position={generatePosition([0,0,-7],displacement)} scale={renderScale(fearScale(dream.fearVal))} material={`color: ${fearColor(dream.fearVal)}; opacity:${fearOpacity(dream.fearVal)}`}>
           {/*bobs up and down*/}
           <a-animation
             attribute="position"
@@ -48,7 +48,7 @@ export default ({ dream, handleClick, displacement }) => {
         </a-obj-model>
 
         {/** JOY **/}
-        <a-obj-model src="#joy" position={generatePosition([0,-1,-7],displacement)} scale={renderScale(joyScale(dream.joyVal))} material="color: rgb(196, 145, 51); roughness: 0; metalness: 0.3" >
+        <a-obj-model src="#joy" position={generatePosition([0,-1,-7],displacement)} scale={renderScale(joyScale(dream.joyVal))} material={`color: ${joyColor(dream.joyVal)}; roughness: 0; metalness: 0.3`} >
           {/*rotates*/}
           <a-animation
             attribute="rotation"
@@ -122,8 +122,8 @@ export default ({ dream, handleClick, displacement }) => {
             {/*changes opacity*/}
           <a-animation
             attribute="opacity"
-            from="0.5"
-            to="0.251"
+            from={`${sadnessOpacityHigh(dream.sadnessVal)}`}
+            to={`${sadnessOpacityLow(dream.sadnessVal)}`}
             dur="2000"
             easing="ease-in-out"
             direction="alternate"
@@ -133,7 +133,7 @@ export default ({ dream, handleClick, displacement }) => {
 
         {/** LIGHTS **/}
         {/*light inside of joy*/}
-        <a-entity light={`color: #94c6ff; distance: 15; intensity: ${joyLight(dream.joyVal)}; type: point`} position="0 -1 -7"></a-entity>
+        <a-entity light={`color: ${chooseLightColor(dream.dominant)}; distance: 15; intensity: 15; type: point`} position={generatePosition([0,-1,-7],displacement)}></a-entity>
 
       </a-entity>
     );

@@ -31,16 +31,18 @@ export default class VRScene extends React.Component {
         </a-assets>
 
         { this.props.children && this.props.children }
-         <a-entity text="align: center; value: Directions: \nUse the WASD keys to fly around.\nTo read a dream, position the cursor over the sprite and click with your mouse, or press the spacebar.\n\nWarning: Some dreams may contain graphic or explicit content.\n\nNow please explore!"
+        { publicView && <a-entity text="align: center; value: Directions: \nUse the WASD keys to fly around.\nTo read a dream, position the cursor over the sprite and click with your mouse, or press the spacebar.\n\nWarning: Some dreams may contain graphic or explicit content.\n\nNow please explore!"
           position="0 -3 6.5"></a-entity>
+        }
 
         {/** LIGHTS **/}
 s
         {/*purplish light*/}
-        <a-entity light="color: #ffaaff; intensity: 3" position="5 5 5"></a-entity>
+        {/*{ publicView && <a-entity light="color: #ffaaff; intensity: 3" position="5 5 5"></a-entity> }*/}
 
         {/*ambient light*/}
-        <a-entity light="color: white; type: ambient;"></a-entity>
+        {!publicView && <a-entity light="color: white; type: ambient;"></a-entity>}
+
         <a-entity position="0 -3 7" camera wasd-controls="fly: true; acceleration: 150" look-controls>
           {
             /* CURSOR */
