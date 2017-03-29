@@ -165,7 +165,7 @@ auth.post('/login/mobile', (req, res, next) => {
    User.findOne({where: {email}})
     .then(user => {
       if (!user) {
-        res.status(401).send('Login incorrect')
+        return res.status(401).send('Login incorrect')
       }
       //check password
       return user.authenticate(password)
