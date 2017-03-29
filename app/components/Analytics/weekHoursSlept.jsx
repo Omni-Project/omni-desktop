@@ -61,11 +61,11 @@ const colors = [
   cyan900
 ];
 const gridLinesColor = "#242424";
-const axisColor = "rgb(137, 137, 137)";
+const axisColor = "rgb(191, 191, 191)";
 const lineColor = "#a974d5";
 const grey900 = "#212121";
 // Typography
-const sansSerif = "'Helvetica Neue', Helvetica, sans-serif";
+const sansSerif = "'Quicksand', Helvetica, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 12;
 
