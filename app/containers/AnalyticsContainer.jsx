@@ -23,22 +23,29 @@ export default connect(
   return (
     <div>
       <h1>Dream and Sleep Stats</h1>
-      <Grid className="dream-grid">
-        {props.user && props.user.dreams &&
-        <Row className="show-grid">
-          <AverageHoursSlept user={props.user} />
-          <SleepDebt user={props.user} />
 
-          <WeekHoursSleptChart weekDreams={props.weekDreams} />
-          <DreamTypesPie dreams={props.dreams}/>
+      { props.dreams && props.dreams.length ?
+        <Grid className="dream-grid">
+          {props.user && props.user.dreams &&
+          <Row className="show-grid">
+            <AverageHoursSlept user={props.user} />
+            <SleepDebt user={props.user} />
 
-          <EmotionAverages dreams={props.dreams} />
+            <WeekHoursSleptChart weekDreams={props.weekDreams} />
+            <DreamTypesPie dreams={props.dreams}/>
 
-            <WordCloud dreams={props.user.dreams} />
-        
-          </Row>
-          }
-      </Grid>
+            <EmotionAverages dreams={props.dreams} />
+
+              <WordCloud dreams={props.user.dreams} />
+
+            </Row>
+            }
+
+        </Grid>
+        :
+        <h3 style={{color: '#c8b7d5'}}>Looks like you don't have any dreams!</h3>
+      }
+
     </div>
   )
 })

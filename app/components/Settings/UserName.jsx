@@ -1,50 +1,58 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router'
-import { Grid, Row, Col, Button, ButtonToolbar, FormControl, FormGroup } from 'react-bootstrap'
+import { Grid, Row, Col, Button, ButtonToolbar, FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 
-export class UserName extends Component {
+export default class UserName extends Component {
   constructor(props){
     super(props)
     this.state = {
-      name: props.user.name
+      name: '',
+      error: null
     }
-    this.getValidationState = this.getValidationState.bind(this);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    const newState = { name: e.target.value }
+    if (e.target.value.length < 1) {newState.error = 'Please enter a name'}
+    else {newState.error = null}
+    this.setState(Object.assign({}, newState))
+  }
+
+  handleSubmit(){
+    if (this.state.name < 1) {
+      this.setState({error: 'Please enter a name'})
+      return;
+    } else {
+      this.props.onSave("editName", "name", this.state.name)
+    }
   }
 
   render() {
     return (
-    <div style={{width: 500}}>
-    <h1>Change your name</h1>
-      <div className="settings-container">  
-      <form>
+    <div style={{width: 450}}>
+    <h4>Change your name</h4>
+      <div className="settings-container">
         <div>
-            <label className="settings-labels"><h4>Current name: </h4></label>
+            <label className="settings-labels"><h5>Current name: </h5></label>
                 <div className="settings-userinfo">
-                    {this.state.name}
+                    {this.props.user.name}
                 </div>
         </div>
+        <form>
         <FormGroup
           controlId="formBasicText"
-          validationState={this.getValidationState()}>
-          <label className="settings-labels"><h4>New name: </h4></label>
+          >
+          <ControlLabel><h5>New name: </h5></ControlLabel>
           <FormControl
             type="text"
-            value={this.state.value}
+            value={this.state.name}
+            className={this.state.error?"error-form": ""}
             placeholder="Enter new name"
             onChange={this.handleChange}/>
-          <Button className="save-button" href="#" bsSize="xsmall">save</Button>
+          {this.state.error? <HelpBlock className="error-message">{this.state.error}</HelpBlock> : null }
+          <Button className="save-button" href="#" bsSize="small" onClick={this.handleSubmit}>Save</Button>
           <FormControl.Feedback />
         </FormGroup>
       </form>
