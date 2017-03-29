@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {setServerError} from './server'
+import { browserHistory } from 'react-router'
 
 const reducer = (state=null, action) => {
   switch(action.type) {
@@ -18,13 +19,19 @@ export const login = (username, password) =>
   dispatch =>
     axios.post('/api/auth/login/local',
       {username, password})
-      .then(() => dispatch(whoami()))
+      .then(() => {
+        dispatch(whoami())
+        browserHistory.push('/')
+      })
       .catch(() => dispatch(whoami()))
 
 export const logout = () =>
   dispatch =>
     axios.post('/api/auth/logout')
-      .then(() => dispatch(whoami()))
+      .then(() => {
+        dispatch(whoami())
+        browserHistory.push('/login')
+      })
       .catch(() => dispatch(whoami()))
 
 export const whoami = () =>

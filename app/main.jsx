@@ -5,7 +5,7 @@ import {render} from 'react-dom'
 import { Provider } from 'react-redux'
 import axios from 'axios'
 import store from './store'
-import { selectDream, getPublicDreams, fetchAllDreams } from './reducers/dreams'
+import { selectDream, getPublicDreams, fetchAllDreams, getDreams } from './reducers/dreams'
 import { getWeekDreams, setUser } from './reducers/analytics'
 import { authenticated } from './reducers/auth'
 import Login from './components/Login'
@@ -47,19 +47,40 @@ function onAppEnter (nextRouterState, replace, done){
   axios.get('/api/auth/whoami')
       .then(response => {
         const user = response.data
+
+        if (!user) {
+          store.dispatch(authenticated(null))
+          browserHistory.push('/login')
+          return done();
+        }
+
         store.dispatch(authenticated(user))
         if (user) store.dispatch(fetchAllDreams(user.id))
-        return done()
       })
+      .then(() => done())
       .catch(failed => {
         store.dispatch(authenticated(null))
-        return done()
+        browserHistory.push('/login')
       })
+      .then(() => done())
 }
+
+function onLoginEnter(nextRouterState, replace, done) {
+  axios.get('/api/auth/whoami')
+    .then(response => response.data)
+    .then(user => {
+      if (user) {
+        browserHistory.push('/')
+      }
+    })
+    .then(() => done())
+}
+
 function onDreamsEnter(nextRouterState){
   const user = store.getState().auth
   store.dispatch(fetchAllDreams(user.id))
 }
+
 function onSingleDreamEnter(nextRouterState, replace, done){
   const dreamId = nextRouterState.params.id
   const user = store.getState().auth
@@ -73,6 +94,7 @@ function onSingleDreamEnter(nextRouterState, replace, done){
 
 
 function fetchAnalytics(nextRouterState, replace, done){
+
   const user = store.getState().auth;
   const getWeek = axios.get(`/api/analytics/${user.id}`).then(res => res.data)
   const getUser = axios.get(`/api/users/${user.id}`).then(res => res.data)
@@ -82,8 +104,8 @@ function fetchAnalytics(nextRouterState, replace, done){
         store.dispatch(getWeekDreams(week))
         store.dispatch(setUser(user))
       })
-    .then(done)
-    .catch(console.error)
+      .then(() => done())
+      .catch(console.error)
 }
 
 function onPublicDreamsEnter(nextRouterState, replace, done){
@@ -130,6 +152,7 @@ render (
         <Route path="/settings" component={SettingsContainer} />
       </Route>
     <Route path="/mobile-vr/:userId/:dreamId/:token" component={MobileSprite} onEnter={onMobileVREnter}/>
+    <Route path="/login" component={Login} onEnter={onLoginEnter} />
     </Router>
   </Provider>
   </MuiThemeProvider>,
