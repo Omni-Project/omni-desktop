@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap'
 import { VictoryChart, VictoryPie } from 'victory';
 
 // Typography
-const sansSerif = "'Helvetica Neue', Helvetica, sans-serif";
+const sansSerif = "'Quicksand', Helvetica, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 12;
 

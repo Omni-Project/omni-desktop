@@ -11,7 +11,7 @@ export default function({ user }) {
           <h1><CountTo to={user && user.sleepDebt} speed={2500} digits={2} /></h1>
         </div>
         <br />
-        <p style={{color: '#9c9c9c', fontStyle: 'italic'}}>Based on recommended 8 hours of sleep per night</p>
+        <p style={{color: 'rgb(191, 191, 191)', fontStyle: 'italic'}}>Based on recommended 8 hours of sleep per night</p>
     </Col>
   )
 }

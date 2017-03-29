@@ -41,7 +41,7 @@ export default class extends React.Component {
 
     return (
       <Col xs={12} md={12} className="analytics-box" >
-          <h3>Word Cloud</h3>
+          <h3>Keywords</h3>
           <div style={{display: 'flex', flexDirection: 'row'}}>
           <SelectField
             floatingLabelText="Filter by type"

@@ -11,16 +11,32 @@ body {
 }
 
 a {
-    color: #b4d4ee;
+    color: #c8d8fc;
+    transition: 0.14s
+}
+
+a:hover {
+    color: white;
+    text-decoration: none
 }
 
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
+    font-family: 'Quicksand'
 }
 
 @media (min-width: 992px) {
     .col-md-6 {
         width: 48%;
+    }
+    .col-md-12 {
+        width: 97.5%;
+    }
+    .col-md-9 {
+        width: 73%;
+    }
+    .col-md-3 {
+        width: 22%;
     }
 }
 
@@ -30,16 +46,17 @@ a {
 /* Top Navigation */
 
 .navbar-inverse {
-    background-color: #C0B4CA
+    background-color: #2c2a45;
+    border: none
 }
 
 .navbar-inverse .navbar-brand {
-    color: #242424;
+    color: white;
     transition: 0.25s
 }
 
 .navbar-inverse .navbar-brand:hover {
-    color: white;
+    color: #c8b7d5;
 }
 
 .top-nav {
@@ -50,7 +67,7 @@ a {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color:#242424;
+    color:white;
     transition: 0.25s
 }
 
@@ -59,8 +76,8 @@ a {
 .top-nav>.open>a,
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
-    color: white;
-    background-color: #C0B4CA;
+    color: #c8b7d5;
+    background-color: #2c2a45;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -88,7 +105,8 @@ a {
     overflow: hidden;
     background: url(../images/nightsky.jpg) center;
     background-size: cover;
-    z-index: 20
+    z-index: 20;
+    font-size: 19px
 }
 
 .side-nav-overlay {
@@ -106,8 +124,10 @@ a {
 .side-nav a {
     display: block;
     padding: 15px 15px;
+    margin-top: 5px;
+    margin-bottom: 8px;
     text-decoration: none;
-    color: #C0B4CA;
+    color: #c8b7d5;
     font-weight: 600;
     transition: 0.25s
 }
@@ -115,8 +135,25 @@ a {
 .side-nav a:hover, .side-nav a:active, .side-nav a:focus  {
     color: #fff;
     background-color:rgba(172, 146, 193, 0.2);
-    border-radius: 4px
+    border-radius: 3px
 }
+.add-link {
+    display: inline-block;
+    transition: 0.2s;
+    border: 1px solid #c8d8fc;
+    padding: 15px;
+    border-radius: 2px;
+    height: 52px;
+    margin-right: 10px
+}
+
+.add-link:hover, .add-link:active, .add-link:focus  {
+    border-color:white;
+    color: #fff;
+    text-decoration: none;
+}
+
+
 
 
 
@@ -165,7 +202,8 @@ a {
 }
 
 #main-content h1 {
-    color: #b4d4ee
+    color: #c8d8fc;
+    display: inline-block
 }
 
 /* ALL DREAMS */
@@ -174,15 +212,15 @@ a {
 }
 .dream-box {
     min-height: 200px;
-    background-color: #383838;
+    background-color: #333333;
     border-radius: 2px;
     /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
-    margin: 8px;
-    padding: 15px;
+    margin: 9px;
+    padding: 20px;
 }
 
 .dream-box, .analytics-box h3, .single-dream h3 {
-    color: #C0B4CA
+    color: #c8b7d5
 }
 
 .dream-box h5, .single-dream, h5 {
@@ -199,14 +237,14 @@ a {
 }
 
 .single-dream {
-    background-color: #3A3A3A;
+    background-color: #333;
     border-radius: 4px;
     margin: 5px;
     padding: 15px;
 }
 
 .single-dream h4 {
-    color: #b4d4ee
+    color: #c8d8fc
 }
 
 .sprite-view {
@@ -224,7 +262,7 @@ a {
 }
 
 .login-container h5 {
-    color: #b4d4ee;
+    color: #c8d8fc;
     font-size: 1.5em;
 
 }
@@ -232,7 +270,7 @@ a {
 .login-container input {
     border-radius: 3px;
     border: 1px solid #efefef;
-    background-color: #3A3A3A;
+    background-color: #333;
     margin: 5px;
     padding: 10px;
     color: #FFFFFF
@@ -260,11 +298,11 @@ a {
 /* ANALYTICS */
 
 .analytics-box {
-    height: 100%;
-    background-color: #383838;
+    min-height: 252px;
+    background-color: #333333;
     border-radius: 2px;
     /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
-    margin: 5px;
+    margin: 7px;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -301,13 +339,13 @@ a {
 /* SETTINGS */
 .settings-container {
     border-radius: 3px;
-    background-color: #3A3A3A;
+    background-color: #333;
     margin: 5px;
     padding: 10px;
 }
 
 .settings-labels {
-    color: #C0B4CA;
+    color: #c8b7d5;
 }
 
 .settings-userinfo {
@@ -348,7 +386,7 @@ a {
 }
 .node .count {
     font-family:sans-serif;
-    fill: #C0B4CA;
+    fill: #c8b7d5;
 }
 
 .node.hover circle {
@@ -359,3 +397,12 @@ a {
     opacity:1.0;
 }
 
+h1 {
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+
+
+p {
+    font-family: "Open Sans"
+}
