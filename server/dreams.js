@@ -45,9 +45,23 @@ module.exports = require('express').Router()
     .then(data => res.send(data))
     .catch(next)
   })
-  .get('/user/:id/:dreamId', selfOnly('get dreams'), (req, res, next) => {
+  //this route does not have selfOnly on it since some dreams are public!
+  .get('/user/:id/:dreamId', (req, res, next) => {
     Dream.findById(req.params.dreamId)
-    .then(data => res.send(data))
+    .then(dream => {
+      //check if dream is public!
+      if(dream.isPublic) {
+        res.send(dream)
+      }
+      else{
+        //check if the user requesting dream is the dream's author
+        if (+req.params.id !== +req.user.id) {
+          return res.status(403).send(`You can only request dream yourself.`)
+        } else {
+          res.send(dream)
+        }
+      }
+    })
     .catch(next)
   })
   .get('/user/:id', selfOnly('get dreams'), (req, res, next) => {
