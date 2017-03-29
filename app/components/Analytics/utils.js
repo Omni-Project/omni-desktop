@@ -6,7 +6,7 @@ export let generateWordCloud = function(wordMap) {
       canvasHeight = 500,
       padding = { top: 20, right: 20, bottom: 20, left: 20 },
       //CHANGES SIZE OF CANVAS
-      maxRadius = 50
+      maxRadius = 45
 
   const width = canvasWidth - padding.left - padding.right;
   const height = canvasHeight - padding.top - padding.bottom;
@@ -99,7 +99,7 @@ export let generateWordCloud = function(wordMap) {
       nodeEnter.append('text')
           .attr('class', 'word-cloud-label')
           .text(textContent)
-          .style('font-size', (d) => Math.max(8, rScale(count(d) / 5)) + 'px')
+          .style('font-size', (d) => Math.max(8, rScale(count(d) / 4.5)) + 'px')
           .style('cursor', 'pointer')
           .attr('transform', function(d) {
               var w = ( this.getBBox ? this.getBBox() : this.getBoundingClientRect() ).width

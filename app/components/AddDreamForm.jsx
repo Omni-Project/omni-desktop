@@ -37,7 +37,7 @@ export default class AddDreamForm extends React.Component {
 render () {
   return (
 
-  <div style={{width: '600px'}}>
+  <div style={{width: '600px', marginBottom: '60px'}}>
     <h1>Add a Dream</h1>
     <DatePicker
       floatingLabelText="Dream Date"
@@ -95,9 +95,10 @@ render () {
       checked={this.state.isPublic}
       labelPosition="left"
       onCheck={this.handleCheckChange}
+      labelStyle={{fontFamily: 'Quicksand'}}
     />
     <br />
-    <RaisedButton label="Save" primary={true} onTouchTap={() => this.props.handleSubmit(this.state)} />
+    <RaisedButton label="Save" primary={true} onTouchTap={() => this.props.handleSubmit(this.state)} style={{width: '200px'}}/>
   </div>
 
   )

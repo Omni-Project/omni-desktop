@@ -11,6 +11,7 @@ export default function({ user }) {
         <div id="analytics-circle">
           <h1><CountTo to={user && user.averageSleep} speed={2500} digits={2} /></h1>
         </div>
+        <p></p>
     </Col>
   )
 }

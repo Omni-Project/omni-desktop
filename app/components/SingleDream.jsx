@@ -24,7 +24,7 @@ export default ({ selectedDream, privateView }) => {
 
         <Row className="show-grid">
           {/*DREAM TITLE AND CONTENT*/}
-          <Col xs={12} md={8} className="single-dream">
+          <Col xs={12} md={9} className="single-dream">
             <h5>{date.toLocaleString(locale, options)}</h5>
             <h3>{selectedDream.title}</h3>
             <p>{selectedDream.content}</p>
@@ -32,7 +32,7 @@ export default ({ selectedDream, privateView }) => {
 
             {/*UPDATE AND DELETE LINKS*/}
             <a href="#" onClick={(evt) => props.handleEdit(evt)}>Edit</a> |
-            <a href="#" onClick={(evt) => props.handleDreamDelete(evt, dream.id)}>Delete</a>
+            <a href="#" onClick={(evt) => props.handleDreamDelete(evt, dream.id)}> Delete</a>
           </Col>
 
           {/*DREAM KEYWORDS*/}
