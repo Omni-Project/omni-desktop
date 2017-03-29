@@ -153,44 +153,6 @@ a:hover {
     text-decoration: none;
 }
 
-
-
-
-
-/*.loginContainer {
-    opacity: 0.85;
-    margin-top: 50%;
-    -webkit-box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
-}
-
-.loaderContainer {
-    top: 250px;
-    left: 50%;
-    position: absolute;
-}*/
-
-/*#chartHeading {
-    text-align: center;
-    margin-top: 5%;
-    color: white;
-    font-size: 2.1em;
-    font-family: 'Roboto', sans-serif;
-}
-
-.victoryTitle {
-    text-align: center;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-}
-
-#barchart > svg {
-    margin-top: -10%;
-    margin-left: -5%;
-
-}*/
-
 #main-content {
     padding: 75px 55px 30px 275px;
     position: fixed;
@@ -219,31 +181,35 @@ a:hover {
     padding: 20px;
 }
 
-.dream-box, .analytics-box h3, .single-dream h3 {
+.dream-box, .analytics-box h3, .single-dream h3, .help-box h3 {
     color: #c8b7d5
 }
 
-.dream-box h5, .single-dream, h5 {
+.dream-box h5, .single-dream, .help-box, h5 {
     color: #9c9a9a
 }
 
-.dream-box p, .single-dream p {
+.dream-box p, .single-dream p, .help-box p {
     color: #efefef
 }
 
-.dream-box .dream-type, .single-dream .dream-type {
+.dream-box .dream-type, .single-dream .dream-type, .help-box .tip{
     color: #9c9a9a;
     font-style: italic
 }
 
-.single-dream {
+.help-box ul {
+   padding-left: 1.2em;
+}
+
+.single-dream, .help-box {
     background-color: #333;
     border-radius: 4px;
     margin: 5px;
     padding: 15px;
 }
 
-.single-dream h4 {
+.single-dream h4, .help-box h4 {
     color: #c8d8fc
 }
 
