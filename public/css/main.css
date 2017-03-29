@@ -212,7 +212,7 @@ a:hover {
 }
 .dream-box {
     min-height: 200px;
-    background-color: #383838;
+    background-color: #333333;
     border-radius: 2px;
     /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
     margin: 9px;
@@ -237,7 +237,7 @@ a:hover {
 }
 
 .single-dream {
-    background-color: #3A3A3A;
+    background-color: #333;
     border-radius: 4px;
     margin: 5px;
     padding: 15px;
@@ -270,7 +270,7 @@ a:hover {
 .login-container input {
     border-radius: 3px;
     border: 1px solid #efefef;
-    background-color: #3A3A3A;
+    background-color: #333;
     margin: 5px;
     padding: 10px;
     color: #FFFFFF
@@ -299,7 +299,7 @@ a:hover {
 
 .analytics-box {
     min-height: 252px;
-    background-color: #383838;
+    background-color: #333333;
     border-radius: 2px;
     /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
     margin: 7px;
@@ -335,7 +335,7 @@ a:hover {
 /* SETTINGS */
 .settings-container {
     border-radius: 3px;
-    background-color: #3A3A3A;
+    background-color: #333;
     margin: 5px;
     padding: 10px;
 }
