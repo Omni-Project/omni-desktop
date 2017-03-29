@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import axios from 'axios'
 import store from './store'
 import { selectDream, getPublicDreams, fetchAllDreams } from './reducers/dreams'
-import { fetchWeekAnalytics, fetchUser } from './reducers/analytics'
+import { getWeekDreams, setUser } from './reducers/analytics'
 import { authenticated } from './reducers/auth'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
@@ -70,11 +70,22 @@ function onSingleDreamEnter(nextRouterState, replace, done){
     .then(() => done())
     .catch(console.error)
 }
-function fetchAnalytics(nextRouterState){
-  const user = store.getState().auth
-  store.dispatch(fetchWeekAnalytics(user.id))
-  store.dispatch(fetchUser(user.id))
+
+
+function fetchAnalytics(nextRouterState, replace, done){
+  const user = store.getState().auth;
+  const getWeek = axios.get(`/api/analytics/${user.id}`).then(res => res.data)
+  const getUser = axios.get(`/api/users/${user.id}`).then(res => res.data)
+
+  Promise.all([getWeek, getUser])
+      .then(([week, user]) => {
+        store.dispatch(getWeekDreams(week))
+        store.dispatch(setUser(user))
+      })
+    .then(done)
+    .catch(console.error)
 }
+
 function onPublicDreamsEnter(nextRouterState, replace, done){
   //had to put axios call here so we can use the done function that comes with onEnter hooks.
   axios.get(`/api/dreams/public/`)
