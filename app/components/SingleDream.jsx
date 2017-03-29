@@ -43,6 +43,8 @@ export default ({ selectedDream, privateView }) => {
             <ul>
               {selectedDream.keywords && selectedDream.keywords.map(word => <li key={word}>{word}</li>)}
             </ul>
+            <h4>Dominant Emotion</h4>
+            <p>{selectedDream.dominant}</p>
             <h4>Dominant Persona</h4>
             <p>{selectedDream.persona}</p>
           </Col>
