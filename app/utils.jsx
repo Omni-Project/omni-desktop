@@ -87,8 +87,8 @@ export const generateRandom = () => {
   return (Math.random() * 50).toFixed(2) * negative
 }
 
-export const generateDisplacement = (randomize) => {
-  return randomize? [+generateRandom(), +generateRandom(), +generateRandom()] : [0,0,0]
+export const generateDisplacement = () => {
+  return [+generateRandom(), +generateRandom(), +generateRandom()]
 }
 
 export const generatePosition = (initialPos, displacement) => {

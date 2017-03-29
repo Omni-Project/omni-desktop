@@ -3,12 +3,11 @@ import React from 'react';
 
 import { supriseAnimColor, metalness, surpiseAnimScale, renderScale , surpiseAnimDuration,
   fearScale, fearOpacity, joyScale, joyLight, angerScale, angerAnimDuration, angerClawDegree,
-  sadnessScale, generateDisplacement, generatePosition } from '../utils'
+  sadnessScale, generatePosition } from '../utils'
 
 
-export default ({ dream, handleClick, randomizePosition }) => {
+export default ({ dream, handleClick, displacement }) => {
 
-    const displacement = generateDisplacement(randomizePosition)
     return (
       <a-entity onClick={() => handleClick(dream)}>
 
