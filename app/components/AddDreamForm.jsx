@@ -40,11 +40,11 @@ render () {
   const dreamToUpdate = this.props.dreamToUpdate
   return (
     <Grid className="dream-grid">
-      <h1>Add a Dream</h1>
+      <h1>{dreamToUpdate? "Edit Dream" : "Add a Dream"}</h1>
       <Row className="show-grid">
         <Col sm={12} md={8} style={{marginRight: '3%'}} >
           <div>
-            <h1>{dreamToUpdate? "Edit Dream" : "Add a Dream"}</h1>
+
             <DatePicker
               floatingLabelText="Dream Date"
               hintText="Dream Date"

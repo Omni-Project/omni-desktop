@@ -8,6 +8,7 @@ import store from './store'
 import { selectDream, getPublicDreams, fetchAllDreams, getDreams } from './reducers/dreams'
 import { getWeekDreams, setUser } from './reducers/analytics'
 import { authenticated } from './reducers/auth'
+import { setServerError } from './reducers/server'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import AddDreamForm from './components/AddDreamForm'
@@ -46,19 +47,21 @@ function onAppEnter (nextRouterState, replace, done){
 //fixes id errors we were having in other onEnter hooks (user not on state yet, but hook being called with store.getState().auth)
   axios.get('/api/auth/whoami')
       .then(response => {
-        const user = response.data
-
+        const user = response.data.user
+        const authError = response.data.flash
         if (!user) {
+          store.dispatch(setServerError(authError))
           store.dispatch(authenticated(null))
           browserHistory.push('/login')
           return done();
         }
-
+        store.dispatch(setServerError(null))
         store.dispatch(authenticated(user))
         if (user) store.dispatch(fetchAllDreams(user.id))
       })
       .then(() => done())
       .catch(failed => {
+        store.dispatch(setServerError(failed.data.flash))
         store.dispatch(authenticated(null))
         browserHistory.push('/login')
       })
@@ -67,7 +70,7 @@ function onAppEnter (nextRouterState, replace, done){
 
 function onLoginEnter(nextRouterState, replace, done) {
   axios.get('/api/auth/whoami')
-    .then(response => response.data)
+    .then(response => response.data.user)
     .then(user => {
       if (user) {
         browserHistory.push('/')

@@ -103,13 +103,13 @@ passport.use(new (require('passport-local').Strategy) (
       .then(user => {
         if (!user) {
           debug('authenticate user(email: "%s") did fail: no such user', email)
-          return done(null, false, { message: 'Login incorrect' })
+          return done(null, false, { message: 'Email incorrect!' })
         }
         return user.authenticate(password)
           .then(ok => {
             if (!ok) {
               debug('authenticate user(email: "%s") did fail: bad password')
-              return done(null, false, { message: 'Login incorrect' })
+              return done(null, false, { message: 'Password incorrect!' })
             }
             debug('authenticate user(email: "%s") did ok: user.id=%d', email, user.id)
             done(null, user)
@@ -119,7 +119,11 @@ passport.use(new (require('passport-local').Strategy) (
   }
 ))
 //desktop app - checks authenticated or not
-auth.get('/whoami', (req, res) => res.send(req.user))
+auth.get('/whoami', (req, res) => {
+  const flash = req.flash('error')[0]
+  const response = {user: req.user, flash: flash}
+  res.send(response)
+})
 
 //mobile app - checks validity of token
 auth.get('/verify', (req, res, next) => {
@@ -154,7 +158,9 @@ auth.get('/verify', (req, res, next) => {
 })
 
 // POST requests for local login:
-auth.post('/login/local', passport.authenticate('local', { successRedirect: '/' }))
+auth.post('/login/local', passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true }))
 
 //POST request for mobile authentication which does not user sessions.
 //Generates a JWT to be stored on the app and authenticate future requests.
@@ -171,7 +177,7 @@ auth.post('/login/mobile', (req, res, next) => {
       return user.authenticate(password)
         .then(ok => {
           if (!ok) {
-            res.status(401).send('Login incorrect')
+            return res.status(401).send('Login incorrect')
           }
           //once user is authenticated, issue a token.
           const token = jwt.sign({id:user.id}, env.JWT_SECRET, {

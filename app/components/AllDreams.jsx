@@ -15,7 +15,7 @@ export default function(props) {
       </div>
     <Grid className="dream-grid">
     <Row className="show-grid">
-      {props.dreams && props.dreams.map(dream => <DreamPreview dream={dream} key={dream.id}/>)}
+      {props.dreams.length ? props.dreams.map(dream => <DreamPreview dream={dream} key={dream.id}/>) : <h3 style={{color: '#c8b7d5'}}>Looks like you don't have any dreams!</h3>}
     </Row>
 
   </Grid>
