@@ -3,7 +3,7 @@ import { Grid, Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router'
 import SpriteScene from './SpriteScene'
 
-export default ({ selectedDream, privateView }) => {
+export default ({ selectedDream, privateView, handleEdit, handleDreamDelete }) => {
 
   const date = new Date(selectedDream.date)
   const locale = "en-us"
@@ -31,8 +31,8 @@ export default ({ selectedDream, privateView }) => {
             <p className="dream-type">{selectedDream.dreamType}</p>
 
             {/*UPDATE AND DELETE LINKS*/}
-            <a href="#" onClick={(evt) => props.handleEdit(evt)}>Edit</a> |
-            <a href="#" onClick={(evt) => props.handleDreamDelete(evt, dream.id)}> Delete</a>
+            <a href="#" onClick={(evt) => handleEdit(evt)}>Edit</a> |
+            <a href="#" onClick={(evt) => handleDreamDelete(evt, selectedDream.id)}> Delete</a>
           </Col>
 
           {/*DREAM KEYWORDS*/}

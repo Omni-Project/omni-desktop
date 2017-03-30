@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, RaisedButton, SelectField, Checkbox, MenuItem, TimePicker, DatePicker } from 'material-ui';
 import { Grid, Row, Col } from 'react-bootstrap'
+import {browserHistory} from 'react-router'
 
 export default class AddDreamForm extends React.Component {
   constructor(props) {
@@ -36,12 +37,14 @@ export default class AddDreamForm extends React.Component {
   }
 
 render () {
+  const dreamToUpdate = this.props.dreamToUpdate
   return (
     <Grid className="dream-grid">
       <h1>Add a Dream</h1>
       <Row className="show-grid">
         <Col sm={12} md={8} style={{marginRight: '3%'}} >
           <div>
+            <h1>{dreamToUpdate? "Edit Dream" : "Add a Dream"}</h1>
             <DatePicker
               floatingLabelText="Dream Date"
               hintText="Dream Date"
@@ -102,9 +105,12 @@ render () {
             />
             <br />
             <RaisedButton label="Save" primary={true} onTouchTap={() => this.props.handleSubmit(this.state)} style={{width: '200px'}}/>
+            {dreamToUpdate && <RaisedButton label="Cancel" primary={true} onTouchTap={() => browserHistory.goBack()} style={{width: '200px', margin: '10px'}}/>}
           </div>
         </Col>
-        <Col sm={12} md={4} className="help-box">
+
+        { !dreamToUpdate &&
+        <Col sm={12} md={3} className="help-box">
          <h4>Stuck?</h4>
             <p>Here are some questions to help you get started...</p>
             <ul>
@@ -117,6 +123,7 @@ render () {
             <p>Be sure to mention how you felt at various points in your dream, as this will help our <a href="https://indico.io/product">natural language processing api</a> analyze your dream for emotions.</p>
             <p className="tip">For example: <i>Then I saw my best friend. This made me feel very happy at the time!</i></p>
         </Col>
+        }
       </Row>
     </Grid>
   )
