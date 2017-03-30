@@ -121,7 +121,8 @@ passport.use(new (require('passport-local').Strategy) (
 //desktop app - checks authenticated or not
 auth.get('/whoami', (req, res) => {
   const flash = req.flash('error')[0]
-  const response = {user: req.user, flash: flash}
+  const response = {user: req.user || "", flash: flash || ""}
+  console.log(response)
   res.send(response)
 })
 
