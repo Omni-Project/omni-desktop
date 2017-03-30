@@ -48,7 +48,6 @@ function onAppEnter (nextRouterState, replace, done){
   axios.get('/api/auth/whoami')
       .then(response => {
         const user = response.data.user
-        console.log(response)
         const authError = response.data.flash
         if (!user) {
           store.dispatch(setServerError(authError))

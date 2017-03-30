@@ -31,8 +31,8 @@ export default ({ selectedDream, privateView, handleEdit, handleDreamDelete }) =
             <p className="dream-type">{selectedDream.dreamType}</p>
 
             {/*UPDATE AND DELETE LINKS*/}
-            <a href="#" onClick={(evt) => handleEdit(evt)}>Edit</a> |
-            <a href="#" onClick={(evt) => handleDreamDelete(evt, selectedDream.id)}> Delete</a>
+            {privateView && <div><a href="#" onClick={(evt) => handleEdit(evt)}>Edit</a> <span> | </span>
+            <a href="#" onClick={(evt) => handleDreamDelete(evt, selectedDream.id)}>Delete</a></div>}
           </Col>
 
           {/*DREAM KEYWORDS*/}

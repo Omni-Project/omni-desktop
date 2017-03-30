@@ -34,7 +34,7 @@ export class Login extends Component {
     }
     return (
       <div className="login-container">
-        <img src="/images/logo.png"/>
+        <img src="/images/logo.png" style={{marginRight: "50px"}}/>
         <form onSubmit={signupBool? signupHandler : loginHandler}>
           {signupBool? <input name="name" placeholder="Name" /> : null}
           <input name="username" placeholder="Email" />
