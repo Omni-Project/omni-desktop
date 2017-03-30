@@ -31,7 +31,7 @@ export class Login extends Component {
     }
     return (
       <div className="login-container">
-        <img src="/images/logo.jpg"/>
+        <img src="/images/logo.png"/>
         <form onSubmit={signupBool? signupHandler : loginHandler}>
           {signupBool? <input name="name" placeholder="Name" /> : null}
           <input name="username" placeholder="Email" />
@@ -39,7 +39,8 @@ export class Login extends Component {
           <button type="submit" value="Login">{signupBool? "Sign Up" : "Login"}</button>
         </form>
         {this.state.error? <span className="error-message">Please fill out all fields!</span> : null }
-        {signupBool? null : <button type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
+        <br />
+        {signupBool? null : <button className="sign-up" type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
       </div>
     )
   }

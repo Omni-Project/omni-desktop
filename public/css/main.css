@@ -38,6 +38,12 @@ a:hover {
     .col-md-3 {
         width: 22%;
     }
+    .col-md-8 {
+        width: 63%;
+    }
+    .col-md-4 {
+        width: 32%;
+    }
 }
 
 
@@ -173,12 +179,52 @@ a:hover {
     width: 100%;
 }
 .dream-box {
-    min-height: 200px;
+    height: 230px;
     background-color: #333333;
     border-radius: 2px;
-    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;*/
+    overflow: hidden;
     margin: 9px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center
+}
+
+.dream-box-overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: rgb(29, 29, 29);
+    transition: .25s;
+    color: #dcdcdc;
+    border-radius: 2px;
+    top: 100%;
+    left: 0;
+    padding: 20px 50px;
+    text-align: left;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7%;
+  cursor: pointer*/
+}
+
+.dream-box:hover .dream-box-overlay {
+  top: 0;
+  left: 0
+}
+
+.dream-box h3 {
+    font-size: 35px
+}
+
+.dream-box h5 {
+    font-size: 20px
+}
+
+.dream-box p {
+    font-size: 16px
 }
 
 .dream-box, .analytics-box h3, .single-dream h3, .help-box h3 {
@@ -189,7 +235,7 @@ a:hover {
     color: #9c9a9a
 }
 
-.dream-box p, .single-dream p, .help-box p {
+.single-dream p, .help-box p {
     color: #efefef
 }
 
@@ -207,6 +253,10 @@ a:hover {
     border-radius: 4px;
     margin: 5px;
     padding: 15px;
+}
+
+.help-box {
+    padding: 30px 40px;
 }
 
 .single-dream h4, .help-box h4 {
@@ -234,21 +284,37 @@ a:hover {
 }
 
 .login-container input {
-    border-radius: 3px;
-    border: 1px solid #efefef;
-    background-color: #333;
+    border-radius: 2px;
+    border: 1px solid #c3c3c3;
+    background-color: #242424;
     margin: 5px;
-    padding: 10px;
-    color: #FFFFFF
+    padding: 15px;
+    color: white;
 }
+
+
 
 .login-container button {
     background-color: #BD95AF;
     border-width: 0;
-    border-radius: 3px;
+    border-radius: 2px;
     color: #FFFFFF;
     margin: 5px;
-    padding: 10px;
+    font-weight: bold;
+    padding: 16px 38px;
+    transition: 0.2s;
+}
+
+.login-container button:hover {
+    background-color: #927187;;
+}
+
+.login-container .sign-up {
+    background-color: #7f9bd8
+}
+
+.login-container .sign-up:hover {
+    background-color: #637eb9
 }
 
 .single-dream button {
@@ -293,7 +359,10 @@ a:hover {
 
 .error-form {
     border-color: #a974d5;
-    border-width: 2px
+    border-width: 2px;
+}
+.settings-container input {
+    margin-bottom: 15px;
 }
 
 #embedded {
@@ -304,10 +373,11 @@ a:hover {
 
 /* SETTINGS */
 .settings-container {
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: #333;
     margin: 5px;
-    padding: 10px;
+    padding: 20px 40px;
+
 }
 
 .settings-labels {
@@ -316,13 +386,31 @@ a:hover {
 
 .settings-userinfo {
     color: #FFFFFF;
-    border-bottom: 1px #242424 solid;
+}
+
+.settings-info {
+    font-size: 16px;
+    display: inline
 }
 
 .edit-button {
     position: relative;
     right: -3%;
-    margin-bottom: 8px
+    margin-bottom: 8px;
+    background-color: #333333;
+    padding: 10px 20px;
+    color: #c8d8fc;
+    border-color: #c8d8fc;
+}
+
+.edit-button:hover, .edit-button:active, .edit-button:focus  {
+    border-color:white;
+    color: #fff;
+    background-color: #333333;
+}
+
+.edit-button:active:focus {
+    background-color: #333333;
 }
 
 .save-button {

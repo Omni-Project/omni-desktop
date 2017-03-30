@@ -38,10 +38,10 @@ export default class AddDreamForm extends React.Component {
 render () {
   return (
     <Grid className="dream-grid">
+      <h1>Add a Dream</h1>
       <Row className="show-grid">
-        <Col sm={12} md={8}>
+        <Col sm={12} md={8} style={{marginRight: '3%'}} >
           <div>
-            <h1>Add a Dream</h1>
             <DatePicker
               floatingLabelText="Dream Date"
               hintText="Dream Date"
@@ -104,16 +104,17 @@ render () {
             <RaisedButton label="Save" primary={true} onTouchTap={() => this.props.handleSubmit(this.state)} style={{width: '200px'}}/>
           </div>
         </Col>
-        <Col sm={12} md={3} className="help-box">
+        <Col sm={12} md={4} className="help-box">
          <h4>Stuck?</h4>
             <p>Here are some questions to help you get started...</p>
             <ul>
               <li>Write down the fragments you <em>do</em> remember - they don't have to make sense or be in order!</li>
               <li>Do you remember any specific people? Shapes? Colors? Places? Jot those down!</li>
-              <li>Do you remember any specific emotion or feeling that you experienced after you woke up? Writing this down can help trigger some images!</li>
+              <li>Do you remember experiencing any specific emotion or feeling after you woke up? Writing them down can help trigger some images.</li>
             </ul>
+            <br />
           <h4>A word about emotion analysis...</h4>
-            <p>Be sure to mention how you felt at various points in your dream, as this will help our <a href="https://indico.io/product">natural language processing api</a> analyze your dream for emotions!</p>
+            <p>Be sure to mention how you felt at various points in your dream, as this will help our <a href="https://indico.io/product">natural language processing api</a> analyze your dream for emotions.</p>
             <p className="tip">For example: <i>Then I saw my best friend. This made me feel very happy at the time!</i></p>
         </Col>
       </Row>
