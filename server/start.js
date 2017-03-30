@@ -6,6 +6,7 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
+const flash = require('connect-flash') //for auth error logging
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 // Bones has a symlink from node_modules/APP to the root of the app.
@@ -44,8 +45,11 @@ module.exports = app
   .use(bodyParser.json())
 
   // Authentication middleware
+  .use(flash())
   .use(passport.initialize())
   .use(passport.session())
+
+
 
   // Serve static files from ../public
   .use(express.static(resolve(__dirname, '..', 'public')))

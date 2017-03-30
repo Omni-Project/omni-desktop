@@ -37,8 +37,10 @@ export const logout = () =>
 export const whoami = () =>
   dispatch =>
     axios.get('/api/auth/whoami')
-      .then(response => {
-        const user = response.data
+      .then(response => response.data)
+      .then(res => {
+        if(res.flash) dispatch(setServerError(res.flash))
+        const user = res.data.user
         dispatch(authenticated(user))
       })
       .catch(failed => dispatch(authenticated(null)))

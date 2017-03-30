@@ -10,6 +10,7 @@ export class Login extends Component {
     }
   }
   render (){
+    const authError = this.props.authError
     const signupBool = this.state.signup
     const signupHandler = (evt) => {
       evt.preventDefault()
@@ -38,7 +39,8 @@ export class Login extends Component {
           <input name="password" type="password" placeholder="Password"/>
           <button type="submit" value="Login">{signupBool? "Sign Up" : "Login"}</button>
         </form>
-        {this.state.error? <span className="error-message">Please fill out all fields!</span> : null }
+        {this.state.error? <span className="error-message">Please fill out all fields!</span> : authError? <span className="error-message">{authError}</span> : null  }
+
         {signupBool? null : <button type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
       </div>
     )
@@ -49,6 +51,6 @@ import {login, signup} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
 
 export default connect (
-  state => ({}),
+  state => ({authError: state.server}),
   {login, signup},
 ) (Login)
