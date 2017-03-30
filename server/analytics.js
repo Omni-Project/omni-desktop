@@ -14,7 +14,6 @@ module.exports = require('express').Router()
 	.get('/:userId', (req, res, next) => {
     const today = new Date();
     const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 8);
-    console.log('in desktop route', req.params.userId)
 
     Dream.findAll({
       where: {
