@@ -58,7 +58,7 @@ export default class UserPassword extends Component {
             placeholder="Enter a new password"
             onChange={this.handleChange}/>
           {error ? <HelpBlock className="error-message">{error}</HelpBlock> : null }
-          <Button className="save-button" href="#" bsSize="small" onClick={this.handleSubmit}>Save</Button>
+          <Button className="edit-button" onClick={this.handleSubmit}>Save</Button>
           <FormControl.Feedback />
         </FormGroup>
       </form>

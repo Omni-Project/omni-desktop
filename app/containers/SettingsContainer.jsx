@@ -40,26 +40,26 @@ export class Settings extends Component {
             <div className="settings-container">
             {/*NAME*/}
                 <div>
-                    <label className="settings-labels"><h4>Name: </h4></label>
+                    <label className="settings-labels"><h3>Name: </h3></label>
                     <div className="settings-userinfo">
-                        {this.state.editName? <UserName user={user} onSave={this.onSave}/> : user.name}
-                    <Button className="edit-button" name="editName" href="#" bsSize="xsmall" onClick={this.handleClick}>{this.state.editName? "Cancel" : "Edit"}</Button>
+                        {this.state.editName? <UserName user={user} onSave={this.onSave} /> : <p className="settings-info">{user.name}</p>}
+                    <Button className="edit-button" name="editName" href="#" onClick={this.handleClick}>{this.state.editName? "Cancel" : "Edit"}</Button>
                     </div>
                 </div>
             {/*EMAIL*/}
                 <div>
-                    <label className="settings-labels"><h4>Email: </h4></label>
+                    <label className="settings-labels"><h3>Email: </h3></label>
                     <div className="settings-userinfo">
-                        {this.state.editEmail? <UserEmail user={user} onSave={this.onSave}/> : user.email}
-                    <Button className="edit-button" name="editEmail" href="#" bsSize="xsmall" onClick={this.handleClick}>{this.state.editEmail? "Cancel" : "Edit"}</Button>
+                        {this.state.editEmail? <UserEmail user={user} onSave={this.onSave}/> : <p className="settings-info">{user.email}</p>}
+                    <Button className="edit-button" name="editEmail" href="#" onClick={this.handleClick}>{this.state.editEmail? "Cancel" : "Edit"}</Button>
                     </div>
                 </div>
              {/*PASSWORD*/}
                 <div>
-                    <label className="settings-labels"><h4>Password: </h4></label>
+                    <label className="settings-labels"><h3>Password: </h3></label>
                     <div className="settings-userinfo">
-                        {this.state.editPass? <UserPassword user={user} onSave={this.onSave} serverError={this.props.serverError}/> : "********"}
-                    <Button className="edit-button" name="editPass" href="#" bsSize="xsmall" onClick={this.handleClick}>{this.state.editPass? "Close" : "Edit"}</Button>
+                        {this.state.editPass? <UserPassword user={user} onSave={this.onSave} serverError={this.props.serverError}/> : <p className="settings-info">*******</p>}
+                    <Button className="edit-button" name="editPass" href="#" onClick={this.handleClick}>{this.state.editPass? "Close" : "Edit"}</Button>
                     </div>
                 </div>
             </div>
