@@ -52,7 +52,7 @@ export default class UserName extends Component {
             placeholder="Enter a new email"
             onChange={this.handleChange}/>
           {this.state.error? <HelpBlock className="error-message">{this.state.error}</HelpBlock> : null }
-          <Button className="save-button" href="#" bsSize="small" onClick={this.handleSubmit}>Save</Button>
+          <Button className="edit-button" onClick={this.handleSubmit}>Save</Button>
           <FormControl.Feedback />
         </FormGroup>
       </form>

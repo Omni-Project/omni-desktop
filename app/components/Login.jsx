@@ -19,6 +19,7 @@ export class Login extends Component {
       }
       else {
         this.props.signup(evt.target.name.value, evt.target.username.value, evt.target.password.value)
+        this.setState({error: false})
       }
     }
     const loginHandler = (evt) => {
@@ -28,20 +29,23 @@ export class Login extends Component {
       }
       else {
         this.props.login(evt.target.username.value, evt.target.password.value)
+        this.setState({error: false})
       }
     }
     return (
       <div className="login-container">
-        <img src="/images/logo.jpg"/>
+        <img src="/images/logo.png"/>
         <form onSubmit={signupBool? signupHandler : loginHandler}>
           {signupBool? <input name="name" placeholder="Name" /> : null}
           <input name="username" placeholder="Email" />
           <input name="password" type="password" placeholder="Password"/>
           <button type="submit" value="Login">{signupBool? "Sign Up" : "Login"}</button>
         </form>
-        {this.state.error? <span className="error-message">Please fill out all fields!</span> : authError? <span className="error-message">{authError}</span> : null  }
 
-        {signupBool? null : <button type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
+        {this.state.error? <span className="error-message">Please fill out all fields!</span> : authError? <span className="error-message">{authError}</span> : null  }
+        <br />
+        {signupBool? null : <button className="sign-up" type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
+
       </div>
     )
   }
@@ -53,4 +57,4 @@ import {connect} from 'react-redux'
 export default connect (
   state => ({authError: state.server}),
   {login, signup},
-) (Login)
+)(Login)

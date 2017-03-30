@@ -12,7 +12,7 @@ export default function Navbar(props) {
                   <span className ="icon-bar"></span>
                   <span className ="icon-bar"></span>
               </button>
-              <a className ="navbar-brand" href="/">DreamScape</a>
+              <a className ="navbar-brand" href="/">Omni</a>
           </div>
 
           <div className ="collapse navbar-collapse navbar-ex1-collapse">
