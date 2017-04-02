@@ -110,7 +110,7 @@ render () {
         </Col>
 
         { !dreamToUpdate &&
-        <Col sm={12} md={3} className="help-box">
+        <Col sm={12} md={4} className="help-box">
          <h4>Stuck?</h4>
             <p>Here are some questions to help you get started...</p>
             <ul>

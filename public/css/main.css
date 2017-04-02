@@ -65,6 +65,10 @@ a:hover {
     color: #c8b7d5;
 }
 
+.navbar-brand {
+    padding: 6px 10px;
+}
+
 .top-nav {
     padding: 0 15px;
 }

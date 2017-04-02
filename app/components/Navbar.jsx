@@ -12,7 +12,7 @@ export default function Navbar(props) {
                   <span className ="icon-bar"></span>
                   <span className ="icon-bar"></span>
               </button>
-              <a className ="navbar-brand" href="/">Omni</a>
+              <a className ="navbar-brand" href="/"><img style={{height: '100%'}} src="/images/bwlogo.png" /></a>
           </div>
 
           <div className ="collapse navbar-collapse navbar-ex1-collapse">
