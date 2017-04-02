@@ -28,7 +28,7 @@ export default class extends React.Component {
     let dreams = this.state.dreams
     let map = {};
 
-    const dreamKeywords = dreams.reduce((acc, curr) => acc.concat(curr.keywords), [])
+    const dreamKeywords = dreams.reduce((acc, curr) => acc.concat(curr.keywords), []).slice(0, 50)
 
     dreamKeywords.forEach(word => {
         map[word] = map[word] ? map[word] += 1 : 1
