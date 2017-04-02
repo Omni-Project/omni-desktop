@@ -120,8 +120,6 @@ function onPublicDreamsEnter(nextRouterState, replace, done){
     .catch(console.error)
 }
 
-
-//REACTDOM.RENDER
 function onMobileVREnter(nextRouterState, replace, done){
   const dreamId = nextRouterState.params.dreamId
   const userId = nextRouterState.params.userId
@@ -134,9 +132,18 @@ function onMobileVREnter(nextRouterState, replace, done){
     .catch(console.error)
 }
 
+function mobileVRDemoEnter(nextRouterState, replace, done){
+
+  //TEST ROUTE FOR MOBILE VR DEMO
+  axios.get(`/api/dreams/user/1/39`)
+    .then(res => res.data)
+    .then(dream => store.dispatch(selectDream(dream)))
+    .then(() => done())
+    .catch(console.error)
+}
 
 
-
+//REACTDOM.RENDER
 render (
   <MuiThemeProvider muiTheme={muiTheme}>
   <Provider store={store}>
@@ -156,6 +163,8 @@ render (
       </Route>
     <Route path="/mobile-vr/:userId/:dreamId/:token" component={MobileSprite} onEnter={onMobileVREnter}/>
     <Route path="/login" component={Login} onEnter={onLoginEnter} />
+    <Route path="/demo" component={MobileSprite}  onEnter={mobileVRDemoEnter} />
+
     </Router>
   </Provider>
   </MuiThemeProvider>,
