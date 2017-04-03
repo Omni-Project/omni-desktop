@@ -9,11 +9,13 @@ export class MobileSprite extends React.Component {
   render () {
     const dream = this.props.dream
     return (
-
+      <div style={{height: "500px"}}>
+        <div id="embedded">
           <Environment background={dream.background}>
             <SingleSprite dream={dream} displacement={[0,0,0]}/>
           </Environment>
-
+        </div>
+      </div>
     );
   }
 }
