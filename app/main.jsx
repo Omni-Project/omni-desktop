@@ -135,7 +135,7 @@ function onMobileVREnter(nextRouterState, replace, done){
 function mobileVRDemoEnter(nextRouterState, replace, done){
 
   //TEST ROUTE FOR MOBILE VR DEMO
-  axios.get(`/api/dreams/user/1/39`)
+  axios.get(`/api/dreams/user/2/25`)
     .then(res => res.data)
     .then(dream => store.dispatch(selectDream(dream)))
     .then(() => done())
