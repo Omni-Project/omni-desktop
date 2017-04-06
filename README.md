@@ -11,9 +11,9 @@ We invite you to experience Omni for yourself [here](http://omni-project.herokua
 
 ### The Team
 Omni was built with love at the Grace Hopper Program at Fullstack Academy. 
-The team consists of Laura Jeong, Chlow Hwang and Aly Khayrulina.
+The team consists of [Laura Jeong](https://github.com/ellejeong), [Chloe Hwang](https://github.com/chloehwang) and [Aly Khayrulina](https://github.com/akhaya).
 
 ### Special thanks to...
-[Jason Podmore](https://www.flickr.com/photos/143320437@N03/) and his amazing 360 background that provided dream-like atmopshere for very sprite.
-[Poetic Hybrid's 3D Models](https://sketchfab.com/poetichybrids/models) - they provided the basis for a lot of our emotion models. 
+-  [Jason Podmore](https://www.flickr.com/photos/143320437@N03/) and his amazing 360 background that provided dream-like atmopshere for very sprite.
+-  [Poetic Hybrid's 3D Models](https://sketchfab.com/poetichybrids/models) - they provided the basis for a lot of our emotion models. 
                 
