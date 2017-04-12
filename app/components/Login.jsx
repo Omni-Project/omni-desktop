@@ -6,7 +6,9 @@ export class Login extends Component {
     super(props)
     this.state = {
       signup: false,
-      error: false
+      error: false,
+      email:'',
+      password:''
     }
   }
   render (){
@@ -37,15 +39,15 @@ export class Login extends Component {
         <img src="/images/logo.png" style={{marginRight: "50px"}}/>
         <form onSubmit={signupBool? signupHandler : loginHandler}>
           {signupBool? <input name="name" placeholder="Name" /> : null}
-          <input name="username" placeholder="Email" />
-          <input name="password" type="password" placeholder="Password"/>
+          <input name="username" placeholder="Email" value={this.state.email} onChange={(evt) => this.setState({email:evt.target.value})}/>
+          <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={(evt) => this.setState({password:evt.target.value})}/>
           <button type="submit" value="Login">{signupBool? "Sign Up" : "Login"}</button>
         </form>
 
         {this.state.error? <span className="error-message">Please fill out all fields!</span> : authError? <span className="error-message">{authError}</span> : null  }
         <br />
         {signupBool? null : <button className="sign-up" type="submit" value="Signup" onClick={() => {this.setState({signup: true, error: false})}}>Sign Up!</button>}
-
+        {signupBool? null : <button className="sign-up" type="submit" value="Demo" onClick={() => {this.setState({email: `jane@example.gov`, password: `1234`})}}>Demo Login</button>}
       </div>
     )
   }
